@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bách Ngân - Landing Page</title>
+    <!-- Tailwind CSS (CDN for Design Prototyping) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel & Josefin Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Feather Icons for UI consistency (no emojis) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP for Cinematic Scroll Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Tailwind Config injected for Design System compliance -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0C0A09', // Deep Obsidian
+                        secondary: '#292524', // Industrial Grey
+                        accent: '#EAB308', // Safety Yellow
+                        slatebg: '#0C0A09',
+                        textmain: '#F5F5F4', // Stone 100
+                        textmuted: '#A8A29E', // Stone 400
+                        bordercolor: '#44403C' // Stone 700
+                    },
+                    fontFamily: {
+                        heading: ['"DM Sans"', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'hero': 'clamp(4rem, 12vw, 10rem)',
+                    },
+                    letterSpacing: {
+                        'tight-hero': '-0.04em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base typography setup */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #0C0A09;
+            color: #F5F5F4;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-heading {
+            font-family: '"DM Sans"', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Smooth scroll handled by GSAP/Lenis architecture typically, but native fallback */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* A11y: focus rings */
+        *:focus-visible {
+            outline: 2px solid #EAB308;
+            outline-offset: 4px;
+        }
+
+        /* Prevent image drag */
+        img {
+            user-select: none;
+        }
+
+        /* Utility classes for animations */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .lucide {
+            stroke-width: 1.5;
+        }
+
+        /* Grain overlay for industrial cinematic feel */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col selection:bg-accent selection:text-primary">
+    <div class="noise-overlay"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full top-0 left-0 right-0 z-50 bg-primary/80 backdrop-blur-xl border-b border-bordercolor transition-all duration-500"
+        id="main-nav">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <div class="flex items-center gap-4 cursor-pointer group">
+                <i data-lucide="zap"
+                    class="w-8 h-8 text-accent group-hover:scale-110 transition-transform duration-500"></i>
+                <span class="font-heading font-black text-2xl tracking-widest uppercase text-textmain">BÁCH NGÂN</span>
+            </div>
+            <div class="hidden md:flex items-center gap-10 font-bold text-xs tracking-widest uppercase">
+                <a href="#projects"
+                    class="text-textmuted hover:text-textmain transition-colors duration-300">Projects</a>
+                <a href="#services"
+                    class="text-textmuted hover:text-textmain transition-colors duration-300">Services</a>
+                <a href="#about" class="text-textmuted hover:text-textmain transition-colors duration-300">Company
+                    Profile</a>
+            </div>
+            <button
+                class="bg-transparent border border-bordercolor text-textmain px-8 py-3 rounded-none font-bold text-xs tracking-widest uppercase hover:border-textmain transition-colors duration-300 flex items-center gap-3 group">
+                <span class="relative">
+                    0912.874.868
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full"></span>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Cinematic Dark Mode) -->
+    <header class="relative min-h-[100vh] flex flex-col justify-center px-6 overflow-hidden pt-24" id="hero">
+        <div class="max-w-7xl mx-auto w-full relative z-10 flex flex-col">
+
+            <div class="overflow-hidden mb-6 reveal-text">
+                <p
+                    class="hero-el uppercase tracking-[0.3em] font-bold text-accent text-sm md:text-base border-l-2 border-accent pl-4">
+                    Architecture & Engineering</p>
+            </div>
+
+            <div class="overflow-hidden reveal-text mb-2">
+                <h1
+                    class="hero-el font-heading font-black text-[clamp(3rem,8vw,8rem)] leading-[0.9] tracking-tighter text-textmain uppercase">
+                    Structural
+                </h1>
+            </div>
+            <div class="overflow-hidden reveal-text mb-8">
+                <h1
+                    class="hero-el font-heading font-black text-[clamp(3rem,8vw,8rem)] leading-[0.9] tracking-tighter text-textmuted uppercase ml-[5%] md:ml-[10%]">
+                    <span class="text-accent">Excellence</span>
+                </h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mt-12">
+                <div class="md:col-span-5 md:col-start-8">
+                    <p
+                        class="hero-el text-lg text-textmuted font-light leading-relaxed mb-10 border-t border-bordercolor pt-6">
+                        Công ty cổ phần giải pháp cơ điện và xây dựng Bách Ngân. Quy hoạch, thiết kế dân dụng – công
+                        nghiệp, thi công xây lắp và nội thất với độ chính xác kỹ thuật tuyệt đối.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 items-center">
+                        <button
+                            class="hero-el bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-yellow-400 transition-colors duration-300 w-full sm:w-auto flex items-center justify-center gap-3 group">
+                            Explore Works
+                            <i data-lucide="arrow-right"
+                                class="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industrial Grid Background & Paralax Elements -->
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none hero-bg"
+            style="background-image: linear-gradient(#292524 1px, transparent 1px), linear-gradient(90deg, #292524 1px, transparent 1px); background-size: 100px 100px;">
+        </div>
+
+        <div
+            class="absolute bottom-10 left-10 z-10 flex items-center gap-4 text-textmuted text-xs font-bold tracking-widest uppercase origin-left -rotate-90 md:rotate-0 md:transform-none">
+            <span class="w-12 h-[1px] bg-bordercolor"></span>
+            Scroll to discover
+        </div>
+    </header>
+
+    <!-- FEATURES / CAPABILITIES SECTION (Scroll Sequence) -->
+    <section class="py-32 bg-secondary px-6 relative overflow-hidden" id="services">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-6 section-header">
+                <div class="overflow-hidden reveal-text">
+                    <h2
+                        class="font-heading text-5xl lg:text-7xl font-black text-textmain leading-none uppercase tracking-tighter">
+                        Core <br /><span class="text-textmuted">Capabilities</span>
+                    </h2>
+                </div>
+                <p class="text-textmuted max-w-sm text-sm font-light leading-relaxed border-l border-accent pl-6">
+                    Delivering precision and excellence across the full spectrum of development, from urban planning to
+                    interior finishes.</p>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-px bg-bordercolor border border-bordercolor p-px relative parallax-grid">
+
+                <!-- Card 1 -->
+                <div
+                    class="feature-card bg-primary p-12 hover:bg-white hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 bg-accent opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-opacity duration-700">
+                    </div>
+                    <div
+                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
+                        <i data-lucide="map" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Quy hoạch</h3>
+                    <p
+                        class="text-textmuted group-hover:text-textmain font-light leading-relaxed max-w-xs transition-colors duration-500">
+                        Urban planning and large-scale architectural strategy ensuring sustainable integration.</p>
+                    <div class="mt-8 overflow-hidden">
+                        <span
+                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
+                            More</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="feature-card bg-primary p-12 hover:bg-accent hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
+                    <div
+                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
+                        <i data-lucide="home" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Thiết kế dân dụng</h3>
+                    <p
+                        class="text-textmuted group-hover:text-primary/70 font-light leading-relaxed max-w-xs transition-colors duration-500">
+                        Civil and industrial design balancing structural integrity with modern aesthetics.</p>
+                    <div class="mt-8 overflow-hidden">
+                        <span
+                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
+                            More</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="feature-card bg-primary p-12 hover:bg-accent hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
+                    <div
+                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
+                        <i data-lucide="hammer" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Thi công xây lắp</h3>
+                    <p
+                        class="text-textmuted group-hover:text-primary/70 font-light leading-relaxed max-w-xs transition-colors duration-500">
+                        Precision construction and MEP installations executing blueprints flawlessly.</p>
+                    <div class="mt-8 overflow-hidden">
+                        <span
+                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
+                            More</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="feature-card bg-primary p-12 hover:bg-white hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
+                    <div
+                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
+                        <i data-lucide="sofa" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Thi công nội thất</h3>
+                    <p
+                        class="text-textmuted group-hover:text-textmain font-light leading-relaxed max-w-xs transition-colors duration-500">
+                        High-end interior fit-outs that elevate the final user experience and comfort.</p>
+                    <div class="mt-8 overflow-hidden">
+                        <span
+                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
+                            More</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="py-40 bg-primary text-textmain relative overflow-hidden px-6 border-t border-bordercolor"
+        id="about">
+        <div class="max-w-4xl mx-auto text-center relative z-10 contact-content">
+            <div
+                class="w-16 h-16 bg-secondary mx-auto mb-12 flex items-center justify-center rotate-45 border border-bordercolor">
+                <i data-lucide="mail" class="w-6 h-6 text-accent -rotate-45"></i>
+            </div>
+            <h2 class="font-heading text-5xl md:text-7xl font-black mb-8 uppercase tracking-tighter">Initiate
+                <br /><span class="text-textmuted">Dialogue</span></h2>
+            <div class="h-px w-24 bg-accent mx-auto mb-10"></div>
+            <p class="text-textmuted mb-16 text-lg font-light leading-relaxed max-w-xl mx-auto">
+                Số 19, tổ 3 Tình Quang, phường Giang Biên, thành phố Hà Nội.<br /><br />
+                <span class="text-textmain font-medium">bachngan.design@gmail.com</span>
+            </p>
+            <a href="mailto:bachngan.design@gmail.com"
+                class="inline-flex bg-transparent border border-bordercolor text-textmain px-12 py-6 text-sm font-bold uppercase tracking-widest hover:border-accent hover:text-accent transition-all duration-500 items-center justify-center gap-4 group">
+                Contact Engineering
+                <i data-lucide="arrow-up-right"
+                    class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"></i>
+            </a>
+        </div>
+
+        <!-- Large Architectural Lines -->
+        <div class="absolute top-0 right-[20%] w-px h-full bg-bordercolor/50"></div>
+        <div class="absolute top-0 left-[20%] w-px h-full bg-bordercolor/50"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer
+        class="bg-primary py-12 border-t border-bordercolor text-center text-xs text-textmuted font-bold tracking-widest uppercase">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p>&copy; 2026 Bách Ngân Engineering. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-textmain transition-colors duration-300">Privacy</a>
+                <a href="#" class="hover:text-textmain transition-colors duration-300">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Scripts -->
+    <script>
+        lucide.createIcons();
+
+        // GSAP Animations
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Initial Hero Reveal
+            const tl = gsap.timeline();
+
+            tl.fromTo(".hero-el",
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.2 }
+            );
+
+            // 2. Parallax background
+            gsap.to(".hero-bg", {
+                y: "30%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // 3. Section Header Reveals
+            gsap.utils.toArray('.section-header h2').forEach(header => {
+                gsap.fromTo(header,
+                    { y: 100, opacity: 0 },
+                    {
+                        y: 0, opacity: 1, duration: 1, ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: header,
+                            start: "top 85%",
+                        }
+                    }
+                );
+            });
+
+            // 4. Staggered Feature Cards
+            gsap.fromTo(".feature-card",
+                { y: 50, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: ".parallax-grid",
+                        start: "top 80%",
+                    }
+                }
+            );
+
+            // 5. Contact Section Reveal
+            gsap.fromTo(".contact-content",
+                { scale: 0.95, opacity: 0 },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: "#about",
+                        start: "top 70%",
+                    }
+                }
+            );
+
+            // 6. Navbar effects on scroll
+            const nav = document.getElementById('main-nav');
+            ScrollTrigger.create({
+                start: "top -100",
+                onUpdate: (self) => {
+                    if (self.direction === 1) {
+                        nav.style.transform = "translateY(-100%)";
+                    } else {
+                        nav.style.transform = "translateY(0%)";
+                        nav.style.background = "rgba(12, 10, 9, 0.95)";
+                    }
+                },
+                onLeaveBack: () => {
+                    nav.style.background = "rgba(12, 10, 9, 0.8)";
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

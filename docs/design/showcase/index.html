@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bách Ngân - Design System Showcase Hub</title>
+    <!-- Tailwind CSS (CDN for Design Prototyping) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0C0A09', // Deep Obsidian
+                        secondary: '#292524', // Industrial Grey
+                        accent: '#EAB308', // Safety Yellow
+                        slatebg: '#0C0A09',
+                        textmain: '#F5F5F4', // Stone 100
+                        textmuted: '#A8A29E', // Stone 400
+                        bordercolor: '#44403C' // Stone 700
+                    },
+                    fontFamily: {
+                        heading: ['"DM Sans"', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'hero': 'clamp(4rem, 12vw, 10rem)',
+                    },
+                    letterSpacing: {
+                        'tight-hero': '-0.04em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #0C0A09;
+            color: #F5F5F4;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-heading {
+            font-family: '"DM Sans"', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        *:focus-visible {
+            outline: 2px solid #EAB308;
+            outline-offset: 4px;
+        }
+
+        .lucide {
+            stroke-width: 1.5;
+        }
+    </style>
+</head>
+
+<body class="antialiased min-h-screen flex bg-primary text-textmain selection:bg-accent selection:text-primary">
+
+    <!-- Sidebar / Navigation -->
+    <aside class="w-64 bg-secondary border-r border-bordercolor fixed h-full overflow-y-auto z-20">
+        <div class="p-6 border-b border-bordercolor flex gap-3 items-center">
+            <i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+            <span class="font-heading font-black text-xl uppercase tracking-widest text-textmain">DS Hub</span>
+        </div>
+        <nav class="p-4 space-y-2 font-medium text-sm">
+            <a href="#tokens" class="block w-full text-left px-4 py-2 rounded bg-bordercolor text-textmain">Token
+                Library</a>
+            <a href="#components"
+                class="block w-full text-left px-4 py-2 rounded text-textmuted hover:bg-bordercolor hover:text-textmain transition-colors">Component
+                Gallery</a>
+            <a href="#layouts"
+                class="block w-full text-left px-4 py-2 rounded text-textmuted hover:bg-bordercolor hover:text-textmain transition-colors">Composite
+                Layouts</a>
+            <a href="#screens"
+                class="block w-full text-left px-4 py-2 rounded text-textmuted hover:bg-bordercolor hover:text-textmain transition-colors">Screen
+                Inventory</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 flex-1 p-10 bg-primary min-h-screen">
+        <header class="mb-12">
+            <h1 class="font-heading text-5xl font-black mb-2 uppercase tracking-tight">Design System Hub</h1>
+            <p class="text-textmuted text-lg tracking-wide uppercase">Bách Ngân Engineering & Construction</p>
+        </header>
+
+        <!-- Section: Tokens -->
+        <section id="tokens" class="mb-16">
+            <h2
+                class="font-heading text-2xl font-bold mb-6 border-b border-bordercolor pb-2 uppercase tracking-wider text-accent">
+                1. Token Library</h2>
+
+            <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Color Palette</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+                <div class="rounded-none border border-bordercolor overflow-hidden bg-secondary">
+                    <div class="h-24 bg-primary border-b border-bordercolor"></div>
+                    <div class="p-3 text-xs">
+                        <div class="font-bold text-textmain">Primary</div>
+                        <div class="text-textmuted">#0C0A09 (Obsidian)</div>
+                    </div>
+                </div>
+                <div class="rounded-none border border-bordercolor overflow-hidden bg-secondary">
+                    <div class="h-24 bg-secondary border-b border-bordercolor"></div>
+                    <div class="p-3 text-xs">
+                        <div class="font-bold text-textmain">Secondary</div>
+                        <div class="text-textmuted">#292524 (Industrial)</div>
+                    </div>
+                </div>
+                <div class="rounded-none border border-bordercolor overflow-hidden bg-secondary">
+                    <div class="h-24 bg-accent border-b border-bordercolor"></div>
+                    <div class="p-3 text-xs">
+                        <div class="font-bold text-textmain">Accent (CTA)</div>
+                        <div class="text-textmuted">#EAB308 (Safety Yellow)</div>
+                    </div>
+                </div>
+                <div class="rounded-none border border-bordercolor overflow-hidden bg-secondary">
+                    <div class="h-24 bg-textmain border-b border-bordercolor"></div>
+                    <div class="p-3 text-xs">
+                        <div class="font-bold text-primary">Text Main</div>
+                        <div class="text-textmuted">#F5F5F4</div>
+                    </div>
+                </div>
+                <div class="rounded-none border border-bordercolor overflow-hidden bg-secondary">
+                    <div class="h-24 bg-bordercolor border-b border-bordercolor"></div>
+                    <div class="p-3 text-xs">
+                        <div class="font-bold text-textmain">Border</div>
+                        <div class="text-textmuted">#44403C</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Typography</h3>
+            <div class="bg-secondary p-8 rounded-none border border-bordercolor space-y-8">
+                <div>
+                    <div class="text-xs text-textmuted mb-2 uppercase tracking-widest">Heading Font: DM Sans</div>
+                    <h1 class="font-heading text-6xl font-black uppercase tracking-tight">Industrial Strength</h1>
+                </div>
+                <div class="border-t border-bordercolor pt-6">
+                    <div class="text-xs text-textmuted mb-2 uppercase tracking-widest">Body Font: Inter</div>
+                    <p class="text-lg font-light leading-relaxed max-w-3xl text-textmuted">The quick brown fox jumps
+                        over the lazy dog. Designed for readability in
+                        complex technical documentation and high-contrast environments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Components -->
+        <section id="components" class="mb-16">
+            <h2
+                class="font-heading text-2xl font-bold mb-6 border-b border-bordercolor pb-2 uppercase tracking-wider text-accent">
+                2. Component Gallery</h2>
+
+            <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Buttons (States)</h3>
+            <div class="bg-primary p-8 rounded-none border border-bordercolor flex flex-wrap gap-8 items-center">
+                <!-- Ghost/Outline Button -->
+                <div class="space-y-3 text-center">
+                    <div class="text-xs text-textmuted uppercase tracking-widest">Ghost (Default)</div>
+                    <button
+                        class="bg-transparent border border-bordercolor text-textmain px-8 py-4 font-bold uppercase tracking-widest text-sm hover:border-textmain transition-colors duration-300">Explore
+                        Work</button>
+                </div>
+                <div class="space-y-3 text-center">
+                    <div class="text-xs text-textmuted uppercase tracking-widest">Accent (Hover Target)</div>
+                    <button
+                        class="bg-accent text-primary px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-yellow-400 transition-colors duration-300">Contact
+                        Us</button>
+                </div>
+                <div class="space-y-3 text-center">
+                    <div class="text-xs text-textmuted uppercase tracking-widest">Disabled</div>
+                    <button
+                        class="bg-secondary text-textmuted px-8 py-4 font-bold uppercase tracking-widest text-sm cursor-not-allowed opacity-50 border border-bordercolor"
+                        disabled>Under Maint.</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Screens -->
+        <section id="screens" class="mb-16">
+            <h2
+                class="font-heading text-2xl font-bold mb-6 border-b border-bordercolor pb-2 uppercase tracking-wider text-accent">
+                5. Screen Inventory</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../screens/landing/index.html"
+                    class="group block border border-bordercolor bg-secondary hover:border-accent transition-colors duration-300">
+                    <div
+                        class="aspect-video bg-primary flex items-center justify-center text-bordercolor group-hover:text-accent transition-colors duration-500 overflow-hidden relative">
+                        <div
+                            class="absolute inset-0 bg-accent/5 group-hover:bg-accent/10 transition-colors duration-500">
+                        </div>
+                        <i data-lucide="monitor"
+                            class="w-12 h-12 relative z-10 group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+                    <div class="p-6 border-t border-bordercolor">
+                        <h3
+                            class="font-heading font-bold text-xl mb-2 text-textmain uppercase tracking-wide group-hover:text-accent transition-colors">
+                            Landing Page</h3>
+                        <p class="text-sm text-textmuted font-light">Cinematic, dark mode, scroll-driven interactive
+                            experience.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

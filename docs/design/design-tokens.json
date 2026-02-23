@@ -1,0 +1,25 @@
+{
+    "semantic": {
+        "color": {
+            "primary": "#0C0A09",
+            "secondary": "#292524",
+            "accent": "#EAB308",
+            "background": "#0C0A09",
+            "textMain": "#F5F5F4",
+            "textMuted": "#A8A29E",
+            "border": "#44403C"
+        },
+        "typography": {
+            "family": {
+                "heading": "DM Sans, sans-serif",
+                "body": "Inter, sans-serif"
+            },
+            "size": {
+                "hero": "clamp(4rem, 12vw, 10rem)"
+            },
+            "letterSpacing": {
+                "tightHero": "-0.04em"
+            }
+        }
+    }
+}
