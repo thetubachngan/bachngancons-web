@@ -1,111 +1,108 @@
-import { motion } from 'framer-motion'
-import { ArrowRight, Phone } from 'lucide-react'
-import Button from '../components/Button'
-import CounterStat from '../components/CounterStat'
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
-    return (
-        <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-24">
-            {/* Ambient gradient background */}
-            <div className="absolute inset-0">
-                <div
-                    className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] opacity-20"
-                    style={{
-                        background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
-                        animation: 'ambient-gradient 8s ease-in-out infinite',
-                    }}
-                />
-                <div
-                    className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[120px] opacity-10"
-                    style={{
-                        background: 'radial-gradient(circle, var(--color-accent) 0%, transparent 70%)',
-                        animation: 'ambient-gradient 8s ease-in-out infinite 4s',
-                    }}
-                />
-                {/* Hero beam */}
-                <div
-                    className="absolute top-0 left-0 h-full w-32 opacity-5"
-                    style={{
-                        background: 'linear-gradient(90deg, transparent, var(--color-accent), transparent)',
-                        animation: 'hero-beam 8s linear infinite',
-                    }}
-                />
+  return (
+    <header
+      className="relative min-h-[100vh] flex flex-col justify-center px-6 overflow-hidden pt-24"
+      id="hero"
+    >
+      <div className="max-w-7xl mx-auto w-full relative z-10">
+        <div
+          className="bg-secondary border border-bordercolor overflow-hidden relative hero-el"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(12,10,9,0.85), rgba(12,10,9,0.95)), linear-gradient(#292524 1px, transparent 1px), linear-gradient(90deg, #292524 1px, transparent 1px)",
+            backgroundSize: "cover, 80px 80px, 80px 80px",
+          }}
+        >
+          {/* SVG Background Container */}
+          <div
+            id="hero-svg-container"
+            className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center"
+          >
+            <img src="/src/assets/svg/hero-bg.svg" className="w-full h-full object-cover opacity-30" alt="" />
+          </div>
+          
+          <div className="p-8 md:p-16 relative z-10">
+            <p className="uppercase tracking-[0.3em] font-bold text-accent text-xs md:text-sm border-l-2 border-accent pl-4 mb-8 animate-slide-left">
+              Thiết kế & Thi công trọn gói
+            </p>
+            <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-black text-textmain leading-[1.1] md:leading-[0.95] mb-3">
+              Kiến Tạo Tổ Ấm
+            </h1>
+            <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-black text-textmuted leading-[1.1] md:leading-[0.95] mb-8">
+              Chìa Khóa <span className="text-accent">Trao Tay</span>
+            </h1>
+            <p className="text-textmuted max-w-lg text-sm md:text-base font-light leading-relaxed mb-10 border-t border-bordercolor pt-6">
+              Thiết kế & thi công trọn gói nhà ở, nội thất với sự minh bạch
+              tuyệt đối. Bảo hành 5 năm, kỹ sư giám sát trực tiếp, báo cáo tiến
+              độ hàng ngày.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <a
+                href="#contact"
+                className="bg-accent text-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-widest hover:bg-yellow-400 transition-colors duration-300 flex items-center justify-center gap-3 group"
+              >
+                Nhận báo giá miễn phí{" "}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+              </a>
+              <a
+                href="#portfolio"
+                className="bg-transparent border border-bordercolor text-textmain px-8 py-4 text-center text-sm font-bold uppercase tracking-widest hover:border-textmain transition-colors duration-300 flex items-center justify-center"
+              >
+                Xem công trình →
+              </a>
             </div>
-
-            {/* Grid overlay */}
-            <div className="absolute inset-0 opacity-[0.03]"
-                style={{
-                    backgroundImage: 'linear-gradient(var(--color-text-muted) 1px, transparent 1px), linear-gradient(90deg, var(--color-text-muted) 1px, transparent 1px)',
-                    backgroundSize: '60px 60px'
-                }}
-            />
-
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                {/* Badge */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--radius-pill)] border border-[var(--color-border)] bg-[var(--color-surface)] text-sm text-[var(--color-text-muted)] mb-10"
-                >
-                    <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
-                    Hơn 10 năm kinh nghiệm xây dựng tại Hà Nội
-                </motion.div>
-
-                {/* Headline */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.1 }}
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8"
-                    style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.04em' }}
-                >
-                    Kiến tạo tổ ấm
-                    <br />
-                    <span className="text-[var(--color-accent)]">Chìa khóa trao tay</span>
-                </motion.h1>
-
-                {/* Subheadline */}
-                <motion.p
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
-                    className="max-w-2xl mx-auto text-base sm:text-lg text-[var(--color-text-muted)] mb-12 leading-relaxed"
-                >
-                    Thiết kế & thi công trọn gói nhà ở, nội thất với sự minh bạch tuyệt đối.
-                    Bảo hành 5 năm, kỹ sư giám sát trực tiếp, báo cáo tiến độ hàng ngày.
-                </motion.p>
-
-                {/* CTAs */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.3 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
-                >
-                    <Button size="lg" href="#contact">
-                        <Phone size={18} />
-                        Nhận báo giá miễn phí
-                    </Button>
-                    <Button variant="secondary" size="lg" href="#portfolio">
-                        Xem công trình đã thực hiện
-                        <ArrowRight size={18} />
-                    </Button>
-                </motion.div>
-
-                {/* Stats */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.4 }}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto pt-10 border-t border-[var(--color-border)]"
-                >
-                    <CounterStat end={400} suffix="m²" label="Diện tích đã thi công" />
-                    <CounterStat end={50} suffix="+" label="Công trình hoàn thành" />
-                    <CounterStat end={5} suffix=" năm" label="Bảo hành công trình" />
-                    <CounterStat end={10} suffix="+" label="Năm kinh nghiệm" />
-                </motion.div>
+            {/* Metrics Bar */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-bordercolor pt-8">
+              <div
+                className="text-center animate-count"
+                style={{ animationDelay: "0.1s" }}
+              >
+                <div className="text-2xl md:text-3xl font-black text-accent font-heading">
+                  400m²+
+                </div>
+                <div className="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">
+                  Diện tích thi công
+                </div>
+              </div>
+              <div
+                className="text-center animate-count"
+                style={{ animationDelay: "0.3s" }}
+              >
+                <div className="text-2xl md:text-3xl font-black text-accent font-heading">
+                  50+
+                </div>
+                <div className="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">
+                  Công trình hoàn thành
+                </div>
+              </div>
+              <div
+                className="text-center animate-count"
+                style={{ animationDelay: "0.5s" }}
+              >
+                <div className="text-2xl md:text-3xl font-black text-accent font-heading">
+                  5 năm
+                </div>
+                <div className="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">
+                  Bảo hành
+                </div>
+              </div>
+              <div
+                className="text-center animate-count"
+                style={{ animationDelay: "0.7s" }}
+              >
+                <div className="text-2xl md:text-3xl font-black text-accent font-heading">
+                  10+
+                </div>
+                <div className="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">
+                  Năm kinh nghiệm
+                </div>
+              </div>
             </div>
-        </section>
-    )
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }

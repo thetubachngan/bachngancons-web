@@ -1,71 +1,72 @@
-import SectionWrapper from '../components/SectionWrapper'
-import { ArrowRight, BookOpen } from 'lucide-react'
-import Button from '../components/Button'
-
-const articles = [
-    {
-        category: 'Kỹ thuật thi công',
-        title: 'Hướng dẫn cắt đầu cọc bê tông 150×150',
-        excerpt: 'Quy trình chuẩn cắt đầu cọc bê tông cốt thép, đảm bảo chất lượng nền móng vững chắc cho công trình.',
-        readTime: '5 phút đọc',
-    },
-    {
-        category: 'Vật liệu xây dựng',
-        title: 'Sỏi tự nhiên vs Đá nghiền: chọn đúng cho bê tông',
-        excerpt: 'So sánh chi tiết ưu nhược điểm của sỏi tự nhiên và đá nghiền, giúp bạn chọn đúng cốt liệu cho từng loại bê tông.',
-        readTime: '7 phút đọc',
-    },
-    {
-        category: 'Kiến thức nền móng',
-        title: '4 loại móng phổ biến: chọn đúng cho đất nhà bạn',
-        excerpt: 'Móng đơn, móng băng, móng bè, móng cọc — hiểu rõ đặc điểm từng loại để chọn phương án phù hợp.',
-        readTime: '6 phút đọc',
-    },
-]
+import { ArrowRight, Wrench, Layers, Home } from "lucide-react";
 
 export default function KnowledgeHub() {
-    return (
-        <SectionWrapper id="knowledge">
-            <div className="text-center mb-12">
-                <span className="text-[var(--color-accent)] text-sm font-semibold uppercase tracking-wider">Blog</span>
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-6 mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
-                    Kiến thức xây dựng
-                </h2>
-                <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">
-                    Chia sẻ kinh nghiệm thực tế từ đội ngũ kỹ sư Bách Ngân, giúp bạn hiểu rõ hơn về quy trình xây dựng.
-                </p>
-            </div>
+  return (
+    <section className="py-24 bg-secondary px-6" id="knowledge">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 section-header">
+          <div>
+            <h2 className="font-heading text-4xl md:text-5xl font-black text-textmain mb-2">Kiến Thức Xây Dựng</h2>
+            <p className="text-textmuted text-sm font-light">Trang bị kiến thức để xây nhà không còn là nỗi lo.</p>
+          </div>
+          <button className="text-sm font-bold uppercase tracking-widest text-accent hover:text-yellow-400 transition-colors flex items-center gap-2">
+            Xem thêm bài viết <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                {articles.map((article, i) => (
-                    <div
-                        key={i}
-                        className="group bg-[var(--color-surface)] border border-[var(--color-border)] rounded-[var(--radius-large)] overflow-hidden hover:border-[var(--color-accent)]/30 transition-colors duration-300"
-                    >
-                        {/* Thumbnail placeholder */}
-                        <div className="h-44 bg-gradient-to-br from-stone-800 to-stone-900 relative flex items-center justify-center">
-                            <BookOpen size={32} className="text-[var(--color-accent)]/20" />
-                        </div>
-                        <div className="p-6">
-                            <span className="text-xs text-[var(--color-accent)] font-semibold uppercase tracking-wider">
-                                {article.category}
-                            </span>
-                            <h3 className="text-base font-semibold text-[var(--color-text-main)] mt-4 mb-4 leading-snug group-hover:text-[var(--color-accent)] transition-colors">
-                                {article.title}
-                            </h3>
-                            <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-5">
-                                {article.excerpt}
-                            </p>
-                            <div className="flex items-center justify-between">
-                                <span className="text-xs text-[var(--color-text-muted)]">{article.readTime}</span>
-                                <Button variant="ghost" size="sm">
-                                    Đọc thêm <ArrowRight size={14} />
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 feature-grid">
+          {/* Article 1 */}
+          <article className="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item">
+            <div className="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
+              <Wrench className="w-10 h-10 text-bordercolor group-hover:scale-110 transition-transform duration-700" />
             </div>
-        </SectionWrapper>
-    )
+            <div className="p-6">
+              <div className="text-xs text-accent uppercase tracking-widest font-bold mb-3">Kỹ thuật thi công</div>
+              <h3 className="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                Hướng dẫn cắt đầu cọc bê tông 150×150
+              </h3>
+              <p className="text-textmuted text-sm font-light line-clamp-3 mb-6">Đảm bảo chất lượng móng cọc với kỹ thuật cắt đầu cọc đúng chuẩn, không gây nứt vỡ cọc bê tông cốt thép.</p>
+              <span className="text-xs uppercase tracking-widest font-bold text-textmain pb-1 border-b border-textmain cursor-pointer">
+                Đọc thêm
+              </span>
+            </div>
+          </article>
+
+          {/* Article 2 */}
+          <article className="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item">
+            <div className="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
+              <Layers className="w-10 h-10 text-bordercolor group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="p-6">
+              <div className="text-xs text-accent uppercase tracking-widest font-bold mb-3">Vật liệu xây dựng</div>
+              <h3 className="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                Sỏi tự nhiên vs Đá nghiền: Chọn đúng cho bê tông
+              </h3>
+              <p className="text-textmuted text-sm font-light line-clamp-3 mb-6">Phân tích ưu nhược điểm của sỏi và đá dăm trong cấp phối bê tông để bạn đưa ra lựa chọn vật liệu tốt nhất.</p>
+              <span className="text-xs uppercase tracking-widest font-bold text-textmain pb-1 border-b border-textmain cursor-pointer">
+                Đọc thêm
+              </span>
+            </div>
+          </article>
+
+          {/* Article 3 */}
+          <article className="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item">
+            <div className="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
+              <Home className="w-10 h-10 text-bordercolor group-hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="p-6">
+              <div className="text-xs text-accent uppercase tracking-widest font-bold mb-3">Kiến thức nền móng</div>
+              <h3 className="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                4 loại móng phổ biến: Chọn đúng cho đất nhà bạn
+              </h3>
+              <p className="text-textmuted text-sm font-light line-clamp-3 mb-6">Móng đơn, móng băng, móng bè hay móng cọc? Hướng dẫn chọn loại móng phù hợp với địa chất để tiết kiệm chi phí.</p>
+              <span className="text-xs uppercase tracking-widest font-bold text-textmain pb-1 border-b border-textmain cursor-pointer">
+                Đọc thêm
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
 }

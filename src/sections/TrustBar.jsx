@@ -1,25 +1,38 @@
-import { Shield, Award, Building2, Hammer, CheckCircle, Star } from 'lucide-react'
-
-const items = [
-    { icon: <Shield size={24} />, label: 'ISO 9001:2015' },
-    { icon: <Award size={24} />, label: 'Top 100 Nhà thầu uy tín' },
-    { icon: <Building2 size={24} />, label: '50+ Công trình hoàn thành' },
-    { icon: <Hammer size={24} />, label: 'Chứng chỉ Năng lực XD' },
-    { icon: <CheckCircle size={24} />, label: 'Bảo hành 5 năm' },
-    { icon: <Star size={24} />, label: '10+ Năm kinh nghiệm' },
-]
+import { CheckCircle, Shield, HardHat } from "lucide-react";
 
 export default function TrustBar() {
-    return (
-        <section className="py-10 border-y border-[var(--color-border)] overflow-hidden bg-[var(--color-surface)]">
-            <div className="animate-marquee flex gap-12 whitespace-nowrap">
-                {[...items, ...items].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 text-[var(--color-text-muted)]">
-                        <span className="text-[var(--color-accent)]">{item.icon}</span>
-                        <span className="text-sm font-medium">{item.label}</span>
-                    </div>
-                ))}
-            </div>
-        </section>
-    )
+  return (
+    <section className="py-8 bg-primary border-b border-bordercolor overflow-hidden" id="trustbar">
+      <div className="max-w-7xl mx-auto px-6 mb-4 text-center">
+        <p className="text-xs text-textmuted uppercase tracking-widest font-bold">
+          Đối tác & Chứng nhận tiêu biểu
+        </p>
+      </div>
+      <div className="relative w-full overflow-hidden flex whitespace-nowrap bg-secondary/50 py-4 opacity-70 hover:opacity-100 transition-opacity">
+        <div className="animate-marquee flex items-center gap-16 px-8 text-textmuted font-heading text-xl font-bold uppercase">
+          <span className="flex items-center">
+            <CheckCircle className="inline w-6 h-6 mr-2 text-accent" /> ISO 9001:2015
+          </span>
+          <span>⭐ Top 10 Nhà thầu uy tín Hà Nội</span>
+          <span className="flex items-center">
+            <Shield className="inline w-6 h-6 mr-2 text-accent" /> Cam kết 100% vật tư chính hãng
+          </span>
+          <span className="flex items-center">
+            <HardHat className="inline w-6 h-6 mr-2 text-accent" /> Giám sát 24/7
+          </span>
+          {/* Duplicate for seamless loop */}
+          <span className="flex items-center">
+            <CheckCircle className="inline w-6 h-6 mr-2 text-accent" /> ISO 9001:2015
+          </span>
+          <span>⭐ Top 10 Nhà thầu uy tín Hà Nội</span>
+          <span className="flex items-center">
+            <Shield className="inline w-6 h-6 mr-2 text-accent" /> Cam kết 100% vật tư chính hãng
+          </span>
+          <span className="flex items-center">
+            <HardHat className="inline w-6 h-6 mr-2 text-accent" /> Giám sát 24/7
+          </span>
+        </div>
+      </div>
+    </section>
+  );
 }

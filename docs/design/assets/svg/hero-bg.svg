@@ -1,0 +1,9 @@
+<svg viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full opacity-30 text-accent">
+    <!-- Abstract structural lines representing a house/building frame -->
+    <path class="anim-draw stroke-current" d="M0 900 L300 900 L500 600 L700 800 L1000 800" stroke-width="1.5" stroke-dasharray="2500" stroke-dashoffset="2500"/>
+    <path class="anim-draw stroke-current" d="M200 1000 L200 700 L500 400 L800 650 L800 1000" stroke-width="1" stroke-dasharray="2500" stroke-dashoffset="2500"/>
+    <path class="anim-draw stroke-current opacity-50" d="M500 1000 L500 400" stroke-width="1" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+    <circle class="anim-draw stroke-current" cx="500" cy="400" r="15" stroke-width="2" fill="none" stroke-dasharray="100" stroke-dashoffset="100"/>
+    <circle class="anim-draw fill-current" cx="500" cy="400" r="6" stroke="none" opacity="0"/>
+    <line class="anim-draw stroke-current opacity-30" x1="200" y1="700" x2="800" y2="700" stroke-width="1" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+</svg>

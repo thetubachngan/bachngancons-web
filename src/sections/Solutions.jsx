@@ -1,89 +1,64 @@
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import SectionWrapper from '../components/SectionWrapper'
-import { ShieldCheck, Palette, FileText, Landmark, Package, UserCheck } from 'lucide-react'
-
-const commitments = [
-    {
-        icon: <ShieldCheck size={32} />,
-        title: 'Bảo hành 5 năm',
-        description: 'Hệ thống bảo hành toàn diện cho toàn bộ hạng mục thi công, cam kết xử lý trong 48h.',
-    },
-    {
-        icon: <Palette size={32} />,
-        title: 'Miễn phí tư vấn thiết kế',
-        description: 'Tư vấn công năng, thẩm mỹ, phong thủy hoàn toàn miễn phí trước khi ký hợp đồng.',
-    },
-    {
-        icon: <FileText size={32} />,
-        title: 'Hồ sơ thủ tục đầy đủ',
-        description: 'Hỗ trợ đăng ký thi công, giấy phép xây dựng, nghiệm thu công trình theo quy định.',
-    },
-    {
-        icon: <Landmark size={32} />,
-        title: 'Hỗ trợ vay vốn',
-        description: 'Tư vấn và hỗ trợ thủ tục vay vốn ngân hàng để xây dựng nhà ở.',
-    },
-    {
-        icon: <Package size={32} />,
-        title: 'Cam kết vật tư',
-        description: 'Đúng chủng loại, đúng thương hiệu như đã thỏa thuận trong hợp đồng. Không thay thế.',
-    },
-    {
-        icon: <UserCheck size={32} />,
-        title: 'Giám sát hàng ngày',
-        description: 'Kỹ sư giám sát trực tiếp tại công trình, báo cáo tiến độ online cho gia chủ mỗi ngày.',
-    },
-]
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
-        opacity: 1,
-        y: 0,
-        transition: { delay: i * 0.1, duration: 0.5, ease: [0.4, 0, 0.2, 1] },
-    }),
-}
+import { ShieldCheck, PencilRuler, FileText, Landmark, PackageCheck, Eye } from "lucide-react";
 
 export default function Solutions() {
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: '-100px' })
+  return (
+    <section className="py-24 bg-secondary px-6 relative" id="services">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 section-header">
+          <div>
+            <p className="text-accent text-sm font-bold uppercase tracking-widest mb-4">Giải Pháp Của Chúng Tôi</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-black text-textmain">6 Cam Kết Của Bách Ngân</h2>
+          </div>
+          <p className="text-textmuted max-w-sm text-sm font-light leading-relaxed border-l border-accent pl-6">
+            Chúng tôi giải quyết mọi nỗi lo của bạn bằng sự minh bạch và chuyên nghiệp tuyệt đối.
+          </p>
+        </div>
 
-    return (
-        <SectionWrapper id="solutions" dark>
-            <div className="text-center mb-12">
-                <span className="text-[var(--color-accent)] text-sm font-semibold uppercase tracking-wider">Tại sao chọn chúng tôi?</span>
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-6 mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
-                    6 cam kết của Bách Ngân
-                </h2>
-                <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">
-                    Mỗi cam kết là lời hứa bằng hành động, được bảo đảm bằng hợp đồng rõ ràng.
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 feature-grid">
+          <div className="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+            <div className="flex items-center gap-3 mb-4">
+              <ShieldCheck className="w-6 h-6 text-accent" />
+              <h3 className="font-heading text-lg font-bold">Bảo hành 5 năm</h3>
             </div>
-
-            <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-                {commitments.map((item, i) => (
-                    <motion.div
-                        key={i}
-                        custom={i}
-                        initial="hidden"
-                        animate={isInView ? 'visible' : 'hidden'}
-                        variants={cardVariants}
-                        className="bg-[var(--color-primary)] border border-[var(--color-border)] rounded-[var(--radius-large)] p-8 hover:border-[var(--color-accent)]/50 transition-colors duration-300"
-                        whileHover={{ y: -4 }}
-                    >
-                        <div className="flex items-start gap-4">
-                            <div className="flex-shrink-0 w-14 h-14 rounded-[var(--radius-card)] bg-[var(--color-accent)]/10 flex items-center justify-center text-[var(--color-accent)]">
-                                {item.icon}
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-semibold text-[var(--color-text-main)] mb-4">{item.title}</h3>
-                                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">{item.description}</p>
-                            </div>
-                        </div>
-                    </motion.div>
-                ))}
+            <p className="text-textmuted text-sm font-light leading-relaxed">Hệ thống bảo hành toàn diện, hỗ trợ sửa chữa nhanh chóng sau bàn giao.</p>
+          </div>
+          <div className="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+            <div className="flex items-center gap-3 mb-4">
+              <PencilRuler className="w-6 h-6 text-accent" />
+              <h3 className="font-heading text-lg font-bold">Miễn phí tư vấn thiết kế</h3>
             </div>
-        </SectionWrapper>
-    )
+            <p className="text-textmuted text-sm font-light leading-relaxed">Tư vấn công năng, phong thủy, thẩm mỹ hoàn toàn miễn phí.</p>
+          </div>
+          <div className="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+            <div className="flex items-center gap-3 mb-4">
+              <FileText className="w-6 h-6 text-accent" />
+              <h3 className="font-heading text-lg font-bold">Hồ sơ thủ tục đầy đủ</h3>
+            </div>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Đăng ký thi công, hồ sơ nghiệm thu, thủ tục pháp lý trọn gói.</p>
+          </div>
+          <div className="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+            <div className="flex items-center gap-3 mb-4">
+              <Landmark className="w-6 h-6 text-accent" />
+              <h3 className="font-heading text-lg font-bold">Hỗ trợ vay vốn</h3>
+            </div>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Hướng dẫn thủ tục vay ngân hàng, hỗ trợ giấy tờ cần thiết.</p>
+          </div>
+          <div className="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+            <div className="flex items-center gap-3 mb-4">
+              <PackageCheck className="w-6 h-6 text-accent" />
+              <h3 className="font-heading text-lg font-bold">Cam kết vật tư</h3>
+            </div>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Đúng chủng loại đã thỏa thuận trong hợp đồng, kiểm tra trước mắt gia chủ.</p>
+          </div>
+          <div className="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+            <div className="flex items-center gap-3 mb-4">
+              <Eye className="w-6 h-6 text-accent" />
+              <h3 className="font-heading text-lg font-bold">Giám sát hàng ngày</h3>
+            </div>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Kỹ sư giám sát trực tiếp tại công trường, báo cáo tiến độ online.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

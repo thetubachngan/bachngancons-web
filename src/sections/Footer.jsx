@@ -1,106 +1,74 @@
-import { Phone, Mail, MapPin, Facebook, MessageCircle } from 'lucide-react'
-
-const quickLinks = [
-    { label: 'Trang chủ', href: '#hero' },
-    { label: 'Dịch vụ', href: '#solutions' },
-    { label: 'Công trình', href: '#portfolio' },
-    { label: 'Quy trình', href: '#process' },
-    { label: 'Kiến thức', href: '#knowledge' },
-    { label: 'Liên hệ', href: '#contact' },
-]
-
-const services = [
-    'Xây nhà trọn gói',
-    'Thiết kế kiến trúc',
-    'Thi công nội thất',
-    'Cải tạo & sửa chữa',
-    'Thi công thương mại',
-]
+import { Zap, Facebook, Youtube, Map } from "lucide-react";
 
 export default function Footer() {
-    return (
-        <footer className="bg-[var(--color-primary)] border-t border-[var(--color-border)]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                    {/* Brand */}
-                    <div className="sm:col-span-2 lg:col-span-1">
-                        <div className="flex items-center gap-3 mb-4">
-                            <img src="/logo.png" alt="Bách Ngân" className="h-10 w-auto" />
-                            <div>
-                                <div className="font-semibold text-[var(--color-text-main)]">BÁCH NGÂN</div>
-                                <div className="text-xs text-[var(--color-text-muted)]">Construction</div>
-                            </div>
-                        </div>
-                        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-4">
-                            Công ty CP Giải pháp Cơ điện và Xây dựng Bách Ngân — Kiến tạo tổ ấm, chìa khóa trao tay.
-                        </p>
-                        {/* Social links */}
-                        <div className="flex gap-3">
-                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors"
-                                aria-label="Facebook">
-                                <Facebook size={16} />
-                            </a>
-                            <a href="https://zalo.me/0858651818" target="_blank" rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-full border border-[var(--color-border)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors"
-                                aria-label="Zalo">
-                                <MessageCircle size={16} />
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-[var(--color-text-main)] uppercase tracking-wider mb-4">Liên kết nhanh</h4>
-                        <ul className="flex flex-col gap-2">
-                            {quickLinks.map((link) => (
-                                <li key={link.label}>
-                                    <a href={link.href} className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Services */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-[var(--color-text-main)] uppercase tracking-wider mb-4">Dịch vụ</h4>
-                        <ul className="flex flex-col gap-2">
-                            {services.map((item) => (
-                                <li key={item} className="text-sm text-[var(--color-text-muted)]">{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Contact */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-[var(--color-text-main)] uppercase tracking-wider mb-4">Liên hệ</h4>
-                        <div className="flex flex-col gap-3">
-                            <a href="tel:0858651818" className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">
-                                <Phone size={14} /> 085.865.1818
-                            </a>
-                            <a href="mailto:bachngancons@gmail.com" className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors">
-                                <Mail size={14} /> bachngancons@gmail.com
-                            </a>
-                            <div className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-                                <MapPin size={14} className="flex-shrink-0 mt-0.5" />
-                                <span>Số 19, tổ 3 Tình Quang, Việt Hưng, Hà Nội</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Bottom bar */}
-                <div className="pt-8 border-t border-[var(--color-border)] flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-[var(--color-text-muted)]">
-                        © 2026 Bách Ngân Construction. All rights reserved.
-                    </p>
-                    <p className="text-xs text-[var(--color-text-muted)]">
-                        Thiết kế & phát triển bởi Bách Ngân Team
-                    </p>
-                </div>
+  return (
+    <footer className="bg-primary pt-20 pb-12 border-t border-bordercolor">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2 mb-6">
+              <img src="/logo_light.png" alt="Bách Ngân Construction" className="h-12 w-auto" />
             </div>
-        </footer>
-    )
+            <p className="text-textmuted text-sm font-light leading-relaxed mb-6">
+              Công ty Cổ phần Giải pháp Cơ điện và Xây dựng Bách Ngân. <br />
+              Kiến tạo không gian, dựng xây niềm tin bền vững.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
+                <Youtube className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Liên kết nhanh</h4>
+            <ul className="space-y-4">
+              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Trang chủ</a></li>
+              <li><a href="#services" className="text-textmuted text-sm hover:text-accent transition-colors">Dịch vụ</a></li>
+              <li><a href="#portfolio" className="text-textmuted text-sm hover:text-accent transition-colors">Công trình</a></li>
+              <li><a href="#knowledge" className="text-textmuted text-sm hover:text-accent transition-colors">Kiến thức</a></li>
+              <li><a href="#contact" className="text-textmuted text-sm hover:text-accent transition-colors">Liên hệ</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Dịch vụ</h4>
+            <ul className="space-y-4">
+              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Xây nhà trọn gói</a></li>
+              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Thiết kế kiến trúc</a></li>
+              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Thi công nội thất</a></li>
+              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Thi công nhà xưởng</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Bản đồ</h4>
+            <div className="w-full h-48 bg-secondary border border-bordercolor overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.360155685718!2d105.92200831533224!3d21.058273985982054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135a9ccf702758f%3A0xc07ce9a4fba7ba2c!2zMTkgdOG7lSAzIFTDrG5oIFF1YW5nLCBWaeG7h3QgSMawbmcsIExvbmcgQmnDqm4sIEjDoCBO4buZaSwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1703222046830!5m2!1sen!2s" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Bách Ngân Construction Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-8 border-t border-bordercolor flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-textmuted font-bold tracking-widest uppercase">
+          <p>&copy; 2026 Bách Ngân Construction. All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-textmain transition-colors duration-300">Privacy</a>
+            <a href="#" className="hover:text-textmain transition-colors duration-300">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

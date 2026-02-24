@@ -1,63 +1,66 @@
-import SectionWrapper from '../components/SectionWrapper'
-import Card from '../components/Card'
-import { DollarSign, Package, TrendingUp, Clock, Shield, AlertTriangle } from 'lucide-react'
-
-const painPoints = [
-    {
-        icon: <DollarSign size={32} />,
-        title: 'Báo giá mập mờ, chi phí ẩn',
-        description: 'Nhiều nhà thầu đưa giá thấp ban đầu rồi phát sinh chi phí liên tục trong quá trình thi công.',
-    },
-    {
-        icon: <Package size={32} />,
-        title: 'Vật tư bị thay đổi kém chất lượng',
-        description: 'Vật tư cam kết trong hợp đồng bị thay thế bằng loại rẻ hơn, ảnh hưởng chất lượng công trình.',
-    },
-    {
-        icon: <TrendingUp size={32} />,
-        title: 'Phát sinh chi phí không kiểm soát',
-        description: 'Hạng mục phát sinh liên tục mà không có sự đồng ý của gia chủ, đội chi phí lên 20-30%.',
-    },
-    {
-        icon: <Clock size={32} />,
-        title: 'Tiến độ trễ, không ai giám sát',
-        description: 'Không có kỹ sư giám sát trực tiếp, thợ thi công tự ý, tiến độ bị chậm hàng tháng.',
-    },
-    {
-        icon: <Shield size={32} />,
-        title: 'Không có bảo hành đàng hoàng',
-        description: 'Bảo hành chỉ trên giấy, khi công trình có vấn đề thì không liên hệ được nhà thầu.',
-    },
-    {
-        icon: <AlertTriangle size={32} />,
-        title: 'Thi công thiếu chuyên nghiệp',
-        description: 'Đội ngũ thiếu tay nghề, không có quy trình chuẩn, chất lượng công trình không đồng đều.',
-    },
-]
+import { Banknote, Box, TrendingUp, Clock, ShieldOff, AlertTriangle } from "lucide-react";
 
 export default function PainPoints() {
-    return (
-        <SectionWrapper id="pain-points">
-            <div className="text-center mb-12">
-                <span className="text-[var(--color-accent)] text-sm font-semibold uppercase tracking-wider">Bạn có đang lo lắng?</span>
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-6 mb-8" style={{ fontFamily: 'var(--font-heading)' }}>
-                    Nỗi lo khi xây nhà
-                </h2>
-                <p className="text-[var(--color-text-muted)] max-w-2xl mx-auto text-lg">
-                    Những vấn đề mà hầu hết chủ nhà đều gặp phải khi tìm đơn vị thi công. Bách Ngân hiểu và cam kết giải quyết triệt để.
-                </p>
-            </div>
+  return (
+    <section className="py-24 bg-primary px-6 relative" id="pain-points">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-16 text-center max-w-2xl mx-auto section-header">
+          <p className="text-accent text-sm font-bold uppercase tracking-widest mb-4">Thực trạng ngành xây dựng</p>
+          <h2 className="font-heading text-4xl md:text-5xl font-black text-textmain mb-6">Nỗi Lo Khi Xây Nhà</h2>
+          <div className="h-px w-24 bg-bordercolor mx-auto"></div>
+        </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-                {painPoints.map((item, i) => (
-                    <Card
-                        key={i}
-                        icon={item.icon}
-                        title={item.title}
-                        description={item.description}
-                    />
-                ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-bordercolor border border-bordercolor feature-grid">
+          {/* Pain Point Cards */}
+          <div className="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+            <div className="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+              <Banknote className="w-6 h-6" />
             </div>
-        </SectionWrapper>
-    )
+            <h3 className="font-heading text-xl font-bold mb-2">Báo giá mập mờ</h3>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Chi phí ẩn, không rõ ràng. Khách hàng không biết khoản nào phát sinh.</p>
+          </div>
+
+          <div className="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+            <div className="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+              <Box className="w-6 h-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold mb-2">Vật tư kém chất lượng</h3>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Tráo đổi vật liệu, sử dụng hàng kém so với cam kết ban đầu.</p>
+          </div>
+
+          <div className="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+            <div className="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+              <TrendingUp className="w-6 h-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold mb-2">Phát sinh không kiểm soát</h3>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Chi phí tăng liên tục, không được thông báo hay ký duyệt trước.</p>
+          </div>
+
+          <div className="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+            <div className="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+              <Clock className="w-6 h-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold mb-2">Tiến độ trễ</h3>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Không ai giám sát, chậm tiến độ, ảnh hưởng kế hoạch gia đình.</p>
+          </div>
+
+          <div className="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+            <div className="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+              <ShieldOff className="w-6 h-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold mb-2">Không bảo hành</h3>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Sau bàn giao "mất hút", không hỗ trợ khi phát sinh sự cố.</p>
+          </div>
+
+          <div className="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+            <div className="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+              <AlertTriangle className="w-6 h-6" />
+            </div>
+            <h3 className="font-heading text-xl font-bold mb-2">Thiếu chuyên nghiệp</h3>
+            <p className="text-textmuted text-sm font-light leading-relaxed">Thi công cẩu thả, không có quy trình, không báo cáo cho gia chủ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
