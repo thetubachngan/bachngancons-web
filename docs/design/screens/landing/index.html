@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -33,8 +33,8 @@
                         bordercolor: '#44403C'
                     },
                     fontFamily: {
-                        heading: ['Playfair Display', 'serif'],
-                        body: ['Inter', 'sans-serif'],
+                        heading: ['Cormorant Garamond', 'serif'],
+                        body: ['Be Vietnam Pro', 'sans-serif'],
                     },
                     fontSize: {
                         'hero': 'clamp(4rem, 12vw, 10rem)',
@@ -49,7 +49,7 @@
 
     <style>
         body {
-            font-family: "Inter", sans-serif;
+            font-family: "Be Vietnam Pro", sans-serif;
             background-color: #0C0A09;
             color: #F5F5F4;
             overflow-x: hidden;
@@ -63,7 +63,7 @@
         h5,
         h6,
         .font-heading {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             letter-spacing: -0.02em;
         }
 
@@ -261,6 +261,8 @@
         <div class="max-w-7xl mx-auto w-full relative z-10">
             <div class="bg-secondary border border-bordercolor overflow-hidden relative hero-el"
                 style="background-image: linear-gradient(rgba(12,10,9,0.85), rgba(12,10,9,0.95)), linear-gradient(#292524 1px, transparent 1px), linear-gradient(90deg, #292524 1px, transparent 1px); background-size: cover, 80px 80px, 80px 80px;">
+                <!-- SVG Background Container -->
+                <div id="hero-svg-container" class="absolute inset-0 z-0 pointer-events-none"></div>
                 <div class="p-8 md:p-16 relative z-10">
                     <p
                         class="uppercase tracking-[0.3em] font-bold text-accent text-xs md:text-sm border-l-2 border-accent pl-4 mb-8 animate-slide-left">
@@ -571,8 +573,10 @@
                 <h2 class="font-heading text-4xl md:text-5xl font-black text-textmain mb-6">Quy Trình Thi Công</h2>
             </div>
 
-            <div class="bg-secondary border border-bordercolor p-8 md:p-12 feature-grid">
-                <div class="relative space-y-0">
+            <div class="bg-secondary border border-bordercolor p-8 md:p-12 feature-grid relative overflow-hidden">
+                <!-- SVG Background Container -->
+                <div id="process-svg-container" class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center mix-blend-screen opacity-50"></div>
+                <div class="relative space-y-0 z-10">
                     <div
                         class="timeline-line absolute left-[23px] top-[48px] bottom-0 w-[2px] bg-bordercolor hidden md:block z-0">
                     </div>
@@ -847,14 +851,28 @@
                                 class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors">
                             <input type="tel" placeholder="Số điện thoại *" required
                                 class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors">
-                            <select
-                                class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmuted focus:border-accent focus:outline-none transition-colors">
-                                <option value="" disabled selected>Loại công trình dự kiến</option>
-                                <option>Xây mới nhà phố</option>
-                                <option>Xây mới biệt thự</option>
-                                <option>Cải tạo & Nội thất</option>
-                                <option>Công trình thương mại</option>
-                            </select>
+                            <!-- Custom Dropdown -->
+                            <div class="relative w-full custom-dropdown group/dropdown">
+                                <input type="hidden" id="project_type" name="project_type" value="">
+                                <button type="button" class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmuted hover:border-accent focus:border-accent focus:outline-none transition-all duration-300 flex justify-between items-center dropdown-toggle">
+                                    <span class="dropdown-selected transition-colors">Loại công trình dự kiến</span>
+                                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 dropdown-icon"></i>
+                                </button>
+                                <ul class="absolute z-50 w-full left-0 bg-secondary border-x border-b border-bordercolor mt-0 hidden dropdown-menu shadow-2xl opacity-0 translate-y-2 transition-all duration-300">
+                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Xây mới nhà phố <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    </li>
+                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Xây mới biệt thự <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    </li>
+                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Cải tạo & Nội thất <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    </li>
+                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Công trình thương mại <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    </li>
+                                </ul>
+                            </div>
                             <input type="text" placeholder="Diện tích dự kiến (m²)"
                                 class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors">
                             <textarea placeholder="Ghi chú thêm (Vị trí, phong cách mong muốn...)" rows="3"
@@ -991,8 +1009,109 @@
     <script>
         lucide.createIcons();
 
+        // Load External SVGs
+        async function loadSVG(url, containerId) {
+            try {
+                const response = await fetch(url);
+                if (response.ok) {
+                    const svgText = await response.text();
+                    document.getElementById(containerId).innerHTML = svgText;
+                }
+            } catch (e) {
+                console.warn("SVG loading error:", e);
+            }
+        }
+        
+        // Custom Dropdown Logic
+        const dropdown = document.querySelector('.custom-dropdown');
+        if(dropdown) {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            const items = dropdown.querySelectorAll('.dropdown-item');
+            const selectedText = dropdown.querySelector('.dropdown-selected');
+            const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+            const icon = dropdown.querySelector('.dropdown-icon');
+
+            toggle.addEventListener('click', (e) => {
+                const isOpen = !menu.classList.contains('hidden');
+                
+                if (isOpen) {
+                    menu.style.opacity = '0';
+                    menu.style.transform = 'translateY(8px)';
+                    icon.style.transform = 'rotate(0deg)';
+                    setTimeout(() => menu.classList.add('hidden'), 300);
+                } else {
+                    menu.classList.remove('hidden');
+                    // Trigger reflow
+                    void menu.offsetWidth;
+                    menu.style.opacity = '1';
+                    menu.style.transform = 'translateY(0)';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const value = item.textContent.trim();
+                    selectedText.textContent = value;
+                    selectedText.classList.remove('text-textmuted');
+                    selectedText.classList.add('text-textmain');
+                    hiddenInput.value = value;
+                    
+                    // Reset checks
+                    items.forEach(i => i.querySelector('i').style.opacity = '0');
+                    item.querySelector('i').style.opacity = '1';
+
+                    // Close menu
+                    menu.style.opacity = '0';
+                    menu.style.transform = 'translateY(8px)';
+                    icon.style.transform = 'rotate(0deg)';
+                    setTimeout(() => menu.classList.add('hidden'), 300);
+                });
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target) && !menu.classList.contains('hidden')) {
+                    menu.style.opacity = '0';
+                    menu.style.transform = 'translateY(8px)';
+                    icon.style.transform = 'rotate(0deg)';
+                    setTimeout(() => menu.classList.add('hidden'), 300);
+                }
+            });
+        }
+
         // GSAP Animations
         document.addEventListener("DOMContentLoaded", (event) => {
+            // Load SVGs then init SVG animations
+            Promise.all([
+                loadSVG('../../assets/svg/hero-bg.svg', 'hero-svg-container'),
+                loadSVG('../../assets/svg/process-bg.svg', 'process-svg-container')
+            ]).then(() => {
+                gsap.utils.toArray('.anim-draw').forEach(path => {
+                    gsap.to(path, {
+                        strokeDashoffset: 0,
+                        duration: 3,
+                        ease: "power3.inOut",
+                        scrollTrigger: {
+                            trigger: path.closest('section'),
+                            start: "top 75%",
+                        }
+                    });
+                });
+                gsap.utils.toArray('circle.fill-current').forEach(circle => {
+                    gsap.to(circle, {
+                        opacity: 1,
+                        duration: 1,
+                        delay: 2.5,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: circle.closest('section'),
+                            start: "top 75%",
+                        }
+                    });
+                });
+            });
             gsap.registerPlugin(ScrollTrigger);
 
             // 1. Initial Hero Reveal
