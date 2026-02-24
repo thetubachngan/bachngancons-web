@@ -20,7 +20,7 @@ export default function Hero() {
             id="hero-svg-container"
             className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center"
           >
-            <img src="/trust-foundation.svg" className="w-full h-full object-cover opacity-30" alt="Trust Foundation Animation" />
+            <img src="/trust-foundation.svg" className="w-full h-full object-contain opacity-70" alt="Trust Foundation Animation" />
           </div>
 
           <div className="p-8 md:p-16 relative z-10">

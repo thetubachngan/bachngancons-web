@@ -4,7 +4,7 @@ export default function Solutions() {
   return (
     <section className="py-24 bg-secondary px-6 relative" id="services">
       <div className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-        <img src="/space-harmony.svg" alt="Space Harmony Animation" className="w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] object-contain opacity-20 mix-blend-screen" />
+        <img src="/space-harmony.svg" alt="Space Harmony Animation" className="w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] object-contain opacity-60" />
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 section-header">
