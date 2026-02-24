@@ -4,38 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bách Ngân - Landing Page</title>
-    <!-- Tailwind CSS (CDN for Design Prototyping) -->
+    <title>Bách Ngân Construction — Thiết Kế & Thi Công Trọn Gói Nhà Ở, Nội Thất</title>
+    <meta name="description"
+        content="Công ty CP giải pháp cơ điện và xây dựng Bách Ngân. Thiết kế, thi công trọn gói nhà ở dân dụng & nội thất tại Hà Nội. Bảo hành 5 năm. Hotline: 085.865.1818">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cinzel & Josefin Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- Feather Icons for UI consistency (no emojis) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- GSAP for Cinematic Scroll Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-    <!-- Tailwind Config injected for Design System compliance -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0C0A09', // Deep Obsidian
-                        secondary: '#292524', // Industrial Grey
-                        accent: '#EAB308', // Safety Yellow
+                        primary: '#0C0A09',
+                        secondary: '#292524',
+                        accent: '#EAB308',
                         slatebg: '#0C0A09',
-                        textmain: '#F5F5F4', // Stone 100
-                        textmuted: '#A8A29E', // Stone 400
-                        bordercolor: '#44403C' // Stone 700
+                        textmain: '#F5F5F4',
+                        textmuted: '#A8A29E',
+                        bordercolor: '#44403C'
                     },
                     fontFamily: {
-                        heading: ['"DM Sans"', 'sans-serif'],
+                        heading: ['Playfair Display', 'serif'],
                         body: ['Inter', 'sans-serif'],
                     },
                     fontSize: {
@@ -50,12 +48,12 @@
     </script>
 
     <style>
-        /* Base typography setup */
         body {
             font-family: "Inter", sans-serif;
             background-color: #0C0A09;
             color: #F5F5F4;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         h1,
@@ -65,36 +63,157 @@
         h5,
         h6,
         .font-heading {
-            font-family: '"DM Sans"', sans-serif;
+            font-family: 'Playfair Display', serif;
             letter-spacing: -0.02em;
         }
 
-        /* Smooth scroll handled by GSAP/Lenis architecture typically, but native fallback */
-        html {
-            scroll-behavior: smooth;
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
-        /* A11y: focus rings */
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 2px #EAB308);
+            }
+
+            50% {
+                opacity: 0.5;
+                filter: drop-shadow(0 0 10px #EAB308);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-draw {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s ease-in-out forwards;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-count {
+            animation: countUp 0.6s ease-out both;
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.5s ease-out both;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .animate-marquee {
+            display: inline-flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
         *:focus-visible {
             outline: 2px solid #EAB308;
             outline-offset: 4px;
-        }
-
-        /* Prevent image drag */
-        img {
-            user-select: none;
-        }
-
-        /* Utility classes for animations */
-        .reveal-text {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
 
         .lucide {
             stroke-width: 1.5;
         }
 
-        /* Grain overlay for industrial cinematic feel */
+        .section-title {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* FAQ Accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-chevron {
+            transition: transform 0.3s ease;
+        }
+
         .noise-overlay {
             position: fixed;
             top: 0;
@@ -112,221 +231,758 @@
 <body class="antialiased min-h-screen flex flex-col selection:bg-accent selection:text-primary">
     <div class="noise-overlay"></div>
 
-    <!-- NAVIGATION -->
+    <!-- NAVIGATION (Based on PRD & Showcase) -->
     <nav class="fixed w-full top-0 left-0 right-0 z-50 bg-primary/80 backdrop-blur-xl border-b border-bordercolor transition-all duration-500"
         id="main-nav">
-        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-            <div class="flex items-center gap-4 cursor-pointer group">
+        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer group">
                 <i data-lucide="zap"
-                    class="w-8 h-8 text-accent group-hover:scale-110 transition-transform duration-500"></i>
-                <span class="font-heading font-black text-2xl tracking-widest uppercase text-textmain">BÁCH NGÂN</span>
+                    class="w-6 h-6 md:w-8 md:h-8 text-accent group-hover:scale-110 transition-transform duration-500"></i>
+                <span class="font-heading font-black text-xl md:text-2xl tracking-widest uppercase text-textmain">Bách
+                    Ngân</span>
             </div>
             <div class="hidden md:flex items-center gap-10 font-bold text-xs tracking-widest uppercase">
-                <a href="#projects"
-                    class="text-textmuted hover:text-textmain transition-colors duration-300">Projects</a>
-                <a href="#services"
-                    class="text-textmuted hover:text-textmain transition-colors duration-300">Services</a>
-                <a href="#about" class="text-textmuted hover:text-textmain transition-colors duration-300">Company
-                    Profile</a>
+                <a href="#services" class="text-textmuted hover:text-textmain transition-colors duration-300">Dịch
+                    vụ</a>
+                <a href="#portfolio" class="text-textmuted hover:text-textmain transition-colors duration-300">Công
+                    trình</a>
+                <a href="#knowledge" class="text-textmuted hover:text-textmain transition-colors duration-300">Kiến
+                    thức</a>
             </div>
             <button
-                class="bg-transparent border border-bordercolor text-textmain px-8 py-3 rounded-none font-bold text-xs tracking-widest uppercase hover:border-textmain transition-colors duration-300 flex items-center gap-3 group">
-                <span class="relative">
-                    0912.874.868
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full"></span>
-                </span>
+                class="bg-accent border border-accent text-primary px-4 md:px-8 py-2 md:py-3 font-bold text-xs tracking-widest uppercase hover:bg-yellow-400 transition-colors duration-300 flex items-center gap-2">
+                Báo giá <i data-lucide="arrow-right" class="w-4 h-4 hidden md:block"></i>
             </button>
         </div>
     </nav>
 
-    <!-- HERO SECTION (Cinematic Dark Mode) -->
+    <!-- 1. HERO SECTION -->
     <header class="relative min-h-[100vh] flex flex-col justify-center px-6 overflow-hidden pt-24" id="hero">
-        <div class="max-w-7xl mx-auto w-full relative z-10 flex flex-col">
-
-            <div class="overflow-hidden mb-6 reveal-text">
-                <p
-                    class="hero-el uppercase tracking-[0.3em] font-bold text-accent text-sm md:text-base border-l-2 border-accent pl-4">
-                    Architecture & Engineering</p>
-            </div>
-
-            <div class="overflow-hidden reveal-text mb-2">
-                <h1
-                    class="hero-el font-heading font-black text-[clamp(3rem,8vw,8rem)] leading-[0.9] tracking-tighter text-textmain uppercase">
-                    Structural
-                </h1>
-            </div>
-            <div class="overflow-hidden reveal-text mb-8">
-                <h1
-                    class="hero-el font-heading font-black text-[clamp(3rem,8vw,8rem)] leading-[0.9] tracking-tighter text-textmuted uppercase ml-[5%] md:ml-[10%]">
-                    <span class="text-accent">Excellence</span>
-                </h1>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mt-12">
-                <div class="md:col-span-5 md:col-start-8">
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="bg-secondary border border-bordercolor overflow-hidden relative hero-el"
+                style="background-image: linear-gradient(rgba(12,10,9,0.85), rgba(12,10,9,0.95)), linear-gradient(#292524 1px, transparent 1px), linear-gradient(90deg, #292524 1px, transparent 1px); background-size: cover, 80px 80px, 80px 80px;">
+                <div class="p-8 md:p-16 relative z-10">
                     <p
-                        class="hero-el text-lg text-textmuted font-light leading-relaxed mb-10 border-t border-bordercolor pt-6">
-                        Công ty cổ phần giải pháp cơ điện và xây dựng Bách Ngân. Quy hoạch, thiết kế dân dụng – công
-                        nghiệp, thi công xây lắp và nội thất với độ chính xác kỹ thuật tuyệt đối.
+                        class="uppercase tracking-[0.3em] font-bold text-accent text-xs md:text-sm border-l-2 border-accent pl-4 mb-8 animate-slide-left">
+                        Thiết kế & Thi công trọn gói</p>
+                    <h1
+                        class="font-heading text-4xl md:text-6xl lg:text-7xl font-black text-textmain leading-[1.1] md:leading-[0.95] mb-3">
+                        Kiến Tạo Tổ Ấm</h1>
+                    <h1
+                        class="font-heading text-4xl md:text-6xl lg:text-7xl font-black text-textmuted leading-[1.1] md:leading-[0.95] mb-8">
+                        Chìa Khóa <span class="text-accent">Trao Tay</span></h1>
+                    <p
+                        class="text-textmuted max-w-lg text-sm md:text-base font-light leading-relaxed mb-10 border-t border-bordercolor pt-6">
+                        Thiết kế & thi công trọn gói nhà ở, nội thất với sự minh bạch tuyệt đối. Bảo hành 5 năm, kỹ sư
+                        giám sát trực tiếp, báo cáo tiến độ hàng ngày.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-6 items-center">
-                        <button
-                            class="hero-el bg-accent text-primary px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-yellow-400 transition-colors duration-300 w-full sm:w-auto flex items-center justify-center gap-3 group">
-                            Explore Works
-                            <i data-lucide="arrow-right"
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="#contact"
+                            class="bg-accent text-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-widest hover:bg-yellow-400 transition-colors duration-300 flex items-center justify-center gap-3 group">
+                            Nhận báo giá miễn phí <i data-lucide="arrow-right"
                                 class="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300"></i>
-                        </button>
+                        </a>
+                        <a href="#portfolio"
+                            class="bg-transparent border border-bordercolor text-textmain px-8 py-4 text-center text-sm font-bold uppercase tracking-widest hover:border-textmain transition-colors duration-300">
+                            Xem công trình →
+                        </a>
+                    </div>
+                    <!-- Metrics Bar -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-bordercolor pt-8">
+                        <div class="text-center animate-count" style="animation-delay:0.1s">
+                            <div class="text-2xl md:text-3xl font-black text-accent font-heading">400m²+</div>
+                            <div class="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Diện tích
+                                thi công</div>
+                        </div>
+                        <div class="text-center animate-count" style="animation-delay:0.3s">
+                            <div class="text-2xl md:text-3xl font-black text-accent font-heading">50+</div>
+                            <div class="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Công trình
+                                hoàn thành</div>
+                        </div>
+                        <div class="text-center animate-count" style="animation-delay:0.5s">
+                            <div class="text-2xl md:text-3xl font-black text-accent font-heading">5 năm</div>
+                            <div class="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Bảo hành
+                            </div>
+                        </div>
+                        <div class="text-center animate-count" style="animation-delay:0.7s">
+                            <div class="text-2xl md:text-3xl font-black text-accent font-heading">10+</div>
+                            <div class="text-[10px] md:text-xs text-textmuted uppercase tracking-wider mt-1">Năm kinh
+                                nghiệm</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Industrial Grid Background & Paralax Elements -->
-        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none hero-bg"
-            style="background-image: linear-gradient(#292524 1px, transparent 1px), linear-gradient(90deg, #292524 1px, transparent 1px); background-size: 100px 100px;">
-        </div>
-
-        <div
-            class="absolute bottom-10 left-10 z-10 flex items-center gap-4 text-textmuted text-xs font-bold tracking-widest uppercase origin-left -rotate-90 md:rotate-0 md:transform-none">
-            <span class="w-12 h-[1px] bg-bordercolor"></span>
-            Scroll to discover
         </div>
     </header>
 
-    <!-- FEATURES / CAPABILITIES SECTION (Scroll Sequence) -->
-    <section class="py-32 bg-secondary px-6 relative overflow-hidden" id="services">
+    <!-- 2. TRUST BAR -->
+    <section class="py-8 bg-primary border-b border-bordercolor overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 mb-4 text-center">
+            <p class="text-xs text-textmuted uppercase tracking-widest font-bold">Đối tác & Chứng nhận tiêu biểu</p>
+        </div>
+        <div
+            class="relative w-full overflow-hidden flex whitespace-nowrap bg-secondary/50 py-4 opacity-70 hover:opacity-100 transition-opacity">
+            <div
+                class="animate-marquee flex items-center gap-16 px-8 text-textmuted font-heading text-xl font-bold uppercase">
+                <span><i data-lucide="check-circle" class="inline w-6 h-6 mr-2 text-accent"></i> ISO 9001:2015</span>
+                <span>⭐ Top 10 Nhà thầu uy tín Hà Nội</span>
+                <span><i data-lucide="shield" class="inline w-6 h-6 mr-2 text-accent"></i> Cam kết 100% vật tư chính
+                    hãng</span>
+                <span><i data-lucide="hard-hat" class="inline w-6 h-6 mr-2 text-accent"></i> Giám sát 24/7</span>
+                <!-- Duplicate for seamless loop -->
+                <span><i data-lucide="check-circle" class="inline w-6 h-6 mr-2 text-accent"></i> ISO 9001:2015</span>
+                <span>⭐ Top 10 Nhà thầu uy tín Hà Nội</span>
+                <span><i data-lucide="shield" class="inline w-6 h-6 mr-2 text-accent"></i> Cam kết 100% vật tư chính
+                    hãng</span>
+                <span><i data-lucide="hard-hat" class="inline w-6 h-6 mr-2 text-accent"></i> Giám sát 24/7</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PAIN POINTS -->
+    <section class="py-24 bg-primary px-6 relative" id="pain-points">
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-6 section-header">
-                <div class="overflow-hidden reveal-text">
-                    <h2
-                        class="font-heading text-5xl lg:text-7xl font-black text-textmain leading-none uppercase tracking-tighter">
-                        Core <br /><span class="text-textmuted">Capabilities</span>
-                    </h2>
+            <div class="mb-16 text-center max-w-2xl mx-auto section-header">
+                <p class="text-accent text-sm font-bold uppercase tracking-widest mb-4">Thực trạng ngành xây dựng</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-black text-textmain mb-6">Nỗi Lo Khi Xây Nhà</h2>
+                <div class="h-px w-24 bg-bordercolor mx-auto"></div>
+            </div>
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-bordercolor border border-bordercolor feature-grid">
+                <!-- Pain Point Cards -->
+                <div class="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+                    <div
+                        class="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+                        <i data-lucide="banknote" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Báo giá mập mờ</h3>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Chi phí ẩn, không rõ ràng. Khách hàng
+                        không biết khoản nào phát sinh.</p>
+                </div>
+                <div class="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+                    <div
+                        class="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+                        <i data-lucide="box" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Vật tư kém chất lượng</h3>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Tráo đổi vật liệu, sử dụng hàng kém so
+                        với cam kết ban đầu.</p>
+                </div>
+                <div class="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+                    <div
+                        class="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Phát sinh không kiểm soát</h3>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Chi phí tăng liên tục, không được thông
+                        báo hay ký duyệt trước.</p>
+                </div>
+                <div class="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+                    <div
+                        class="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+                        <i data-lucide="clock" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Tiến độ trễ</h3>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Không ai giám sát, chậm tiến độ, ảnh
+                        hưởng kế hoạch gia đình.</p>
+                </div>
+                <div class="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+                    <div
+                        class="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+                        <i data-lucide="shield-off" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Không bảo hành</h3>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Sau bàn giao "mất hút", không hỗ trợ
+                        khi phát sinh sự cố.</p>
+                </div>
+                <div class="bg-primary p-8 hover:bg-secondary transition-colors duration-300 group card-item">
+                    <div
+                        class="w-12 h-12 bg-secondary text-accent flex items-center justify-center mb-6 border border-bordercolor group-hover:bg-accent group-hover:text-primary transition-colors">
+                        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-2">Thiếu chuyên nghiệp</h3>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Thi công cẩu thả, không có quy trình,
+                        không báo cáo cho gia chủ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SOLUTIONS (6 CAM KẾT) -->
+    <section class="py-24 bg-secondary px-6 relative" id="services">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 section-header">
+                <div>
+                    <p class="text-accent text-sm font-bold uppercase tracking-widest mb-4">Giải Pháp Của Chúng Tôi</p>
+                    <h2 class="font-heading text-4xl md:text-5xl font-black text-textmain">6 Cam Kết Của Bách Ngân</h2>
                 </div>
                 <p class="text-textmuted max-w-sm text-sm font-light leading-relaxed border-l border-accent pl-6">
-                    Delivering precision and excellence across the full spectrum of development, from urban planning to
-                    interior finishes.</p>
+                    Chúng tôi giải quyết mọi nỗi lo của bạn bằng sự minh bạch và chuyên nghiệp tuyệt đối.
+                </p>
             </div>
 
-            <!-- Bento Grid Layout -->
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-px bg-bordercolor border border-bordercolor p-px relative parallax-grid">
-
-                <!-- Card 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 feature-grid">
                 <div
-                    class="feature-card bg-primary p-12 hover:bg-white hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
-                    <div
-                        class="absolute top-0 right-0 w-32 h-32 bg-accent opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-opacity duration-700">
+                    class="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+                    <div class="flex items-center gap-3 mb-4"><i data-lucide="shield-check"
+                            class="w-6 h-6 text-accent"></i>
+                        <h3 class="font-heading text-lg font-bold">Bảo hành 5 năm</h3>
                     </div>
-                    <div
-                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
-                        <i data-lucide="map" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Quy hoạch</h3>
-                    <p
-                        class="text-textmuted group-hover:text-textmain font-light leading-relaxed max-w-xs transition-colors duration-500">
-                        Urban planning and large-scale architectural strategy ensuring sustainable integration.</p>
-                    <div class="mt-8 overflow-hidden">
-                        <span
-                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
-                            More</span>
-                    </div>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Hệ thống bảo hành toàn diện, hỗ trợ sửa
+                        chữa nhanh chóng sau bàn giao.</p>
                 </div>
-
-                <!-- Card 2 -->
                 <div
-                    class="feature-card bg-primary p-12 hover:bg-accent hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
-                    <div
-                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
-                        <i data-lucide="home" class="w-8 h-8"></i>
+                    class="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+                    <div class="flex items-center gap-3 mb-4"><i data-lucide="pencil-ruler"
+                            class="w-6 h-6 text-accent"></i>
+                        <h3 class="font-heading text-lg font-bold">Miễn phí tư vấn thiết kế</h3>
                     </div>
-                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Thiết kế dân dụng</h3>
-                    <p
-                        class="text-textmuted group-hover:text-primary/70 font-light leading-relaxed max-w-xs transition-colors duration-500">
-                        Civil and industrial design balancing structural integrity with modern aesthetics.</p>
-                    <div class="mt-8 overflow-hidden">
-                        <span
-                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
-                            More</span>
-                    </div>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Tư vấn công năng, phong thủy, thẩm mỹ
+                        hoàn toàn miễn phí.</p>
                 </div>
-
-                <!-- Card 3 -->
                 <div
-                    class="feature-card bg-primary p-12 hover:bg-accent hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
-                    <div
-                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
-                        <i data-lucide="hammer" class="w-8 h-8"></i>
+                    class="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+                    <div class="flex items-center gap-3 mb-4"><i data-lucide="file-text"
+                            class="w-6 h-6 text-accent"></i>
+                        <h3 class="font-heading text-lg font-bold">Hồ sơ thủ tục đầy đủ</h3>
                     </div>
-                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Thi công xây lắp</h3>
-                    <p
-                        class="text-textmuted group-hover:text-primary/70 font-light leading-relaxed max-w-xs transition-colors duration-500">
-                        Precision construction and MEP installations executing blueprints flawlessly.</p>
-                    <div class="mt-8 overflow-hidden">
-                        <span
-                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
-                            More</span>
-                    </div>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Đăng ký thi công, hồ sơ nghiệm thu, thủ
+                        tục pháp lý trọn gói.</p>
                 </div>
-
-                <!-- Card 4 -->
                 <div
-                    class="feature-card bg-primary p-12 hover:bg-white hover:text-primary transition-all duration-700 cursor-pointer group relative overflow-hidden">
-                    <div
-                        class="w-16 h-16 bg-secondary text-textmuted group-hover:bg-primary group-hover:text-accent flex items-center justify-center rounded-none mb-12 transition-colors duration-500 border border-bordercolor">
-                        <i data-lucide="sofa" class="w-8 h-8"></i>
+                    class="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+                    <div class="flex items-center gap-3 mb-4"><i data-lucide="landmark" class="w-6 h-6 text-accent"></i>
+                        <h3 class="font-heading text-lg font-bold">Hỗ trợ vay vốn</h3>
                     </div>
-                    <h3 class="font-heading text-3xl font-black mb-4 uppercase tracking-tight">Thi công nội thất</h3>
-                    <p
-                        class="text-textmuted group-hover:text-textmain font-light leading-relaxed max-w-xs transition-colors duration-500">
-                        High-end interior fit-outs that elevate the final user experience and comfort.</p>
-                    <div class="mt-8 overflow-hidden">
-                        <span
-                            class="inline-block translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 font-bold text-xs uppercase tracking-widest text-primary border-b border-primary pb-1">Read
-                            More</span>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Hướng dẫn thủ tục vay ngân hàng, hỗ trợ
+                        giấy tờ cần thiết.</p>
+                </div>
+                <div
+                    class="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+                    <div class="flex items-center gap-3 mb-4"><i data-lucide="package-check"
+                            class="w-6 h-6 text-accent"></i>
+                        <h3 class="font-heading text-lg font-bold">Cam kết vật tư</h3>
                     </div>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Đúng chủng loại đã thỏa thuận trong hợp
+                        đồng, kiểm tra trước mắt gia chủ.</p>
+                </div>
+                <div
+                    class="bg-primary p-8 border border-bordercolor hover:border-accent transition-colors duration-300 group card-item">
+                    <div class="flex items-center gap-3 mb-4"><i data-lucide="eye" class="w-6 h-6 text-accent"></i>
+                        <h3 class="font-heading text-lg font-bold">Giám sát hàng ngày</h3>
+                    </div>
+                    <p class="text-textmuted text-sm font-light leading-relaxed">Kỹ sư giám sát trực tiếp tại công
+                        trường, báo cáo tiến độ online.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT CTA -->
-    <section class="py-40 bg-primary text-textmain relative overflow-hidden px-6 border-t border-bordercolor"
-        id="about">
-        <div class="max-w-4xl mx-auto text-center relative z-10 contact-content">
-            <div
-                class="w-16 h-16 bg-secondary mx-auto mb-12 flex items-center justify-center rotate-45 border border-bordercolor">
-                <i data-lucide="mail" class="w-6 h-6 text-accent -rotate-45"></i>
+    <!-- 5. PORTFOLIO -->
+    <section class="py-24 bg-primary px-6 border-b border-bordercolor" id="portfolio">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 text-center max-w-2xl mx-auto section-header">
+                <p class="text-accent text-sm font-bold uppercase tracking-widest mb-4">Các Dự Án Tiêu Biểu</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-black text-textmain mb-6">Công Trình Đã Thực Hiện</h2>
+                <div class="h-px w-24 bg-bordercolor mx-auto"></div>
             </div>
-            <h2 class="font-heading text-5xl md:text-7xl font-black mb-8 uppercase tracking-tighter">Initiate
-                <br /><span class="text-textmuted">Dialogue</span></h2>
-            <div class="h-px w-24 bg-accent mx-auto mb-10"></div>
-            <p class="text-textmuted mb-16 text-lg font-light leading-relaxed max-w-xl mx-auto">
-                Số 19, tổ 3 Tình Quang, phường Giang Biên, thành phố Hà Nội.<br /><br />
-                <span class="text-textmain font-medium">bachngan.design@gmail.com</span>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 feature-grid">
+                <!-- Project 1 -->
+                <div class="group cursor-pointer card-item">
+                    <div class="relative overflow-hidden border border-bordercolor aspect-[4/3] bg-secondary mb-4">
+                        <div
+                            class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500 z-10">
+                        </div>
+                        <!-- Placeholder div for image -->
+                        <div
+                            class="w-full h-full bg-secondary flex items-center justify-center text-bordercolor group-hover:scale-105 transition-transform duration-700">
+                            <i data-lucide="image" class="w-12 h-12"></i>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-heading text-2xl font-bold mb-2 group-hover:text-accent transition-colors line-clamp-1">
+                        Nhà phố Tây Tựu</h3>
+                    <p class="text-textmuted text-sm mb-4">Hà Nội • 400m² • Xây mới trọn gói</p>
+                    <span
+                        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-textmain group-hover:text-accent transition-colors">
+                        Xem chi tiết <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group cursor-pointer card-item">
+                    <div class="relative overflow-hidden border border-bordercolor aspect-[4/3] bg-secondary mb-4">
+                        <div
+                            class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500 z-10">
+                        </div>
+                        <div
+                            class="w-full h-full bg-secondary flex items-center justify-center text-bordercolor group-hover:scale-105 transition-transform duration-700">
+                            <i data-lucide="image" class="w-12 h-12"></i>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-heading text-2xl font-bold mb-2 group-hover:text-accent transition-colors line-clamp-1">
+                        Nội thất Ngô Quyền</h3>
+                    <p class="text-textmuted text-sm mb-4">Hải Phòng • Nội thất toàn bộ</p>
+                    <span
+                        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-textmain group-hover:text-accent transition-colors">
+                        Xem chi tiết <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group cursor-pointer card-item">
+                    <div class="relative overflow-hidden border border-bordercolor aspect-[4/3] bg-secondary mb-4">
+                        <div
+                            class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500 z-10">
+                        </div>
+                        <div
+                            class="w-full h-full bg-secondary flex items-center justify-center text-bordercolor group-hover:scale-105 transition-transform duration-700">
+                            <i data-lucide="image" class="w-12 h-12"></i>
+                        </div>
+                    </div>
+                    <h3
+                        class="font-heading text-2xl font-bold mb-2 group-hover:text-accent transition-colors line-clamp-1">
+                        Cafe Phúc</h3>
+                    <p class="text-textmuted text-sm mb-4">Thi công thương mại</p>
+                    <span
+                        class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-textmain group-hover:text-accent transition-colors">
+                        Xem chi tiết <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button
+                    class="bg-transparent border border-bordercolor text-textmain px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-textmain transition-colors duration-300 inline-block">
+                    Xem toàn bộ dự án
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PROCESS -->
+    <section class="py-24 bg-primary px-6" id="process">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-16 text-center section-header">
+                <p class="text-accent text-sm font-bold uppercase tracking-widest mb-4">Minh Bạch Trong Từng Bước</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-black text-textmain mb-6">Quy Trình Thi Công</h2>
+            </div>
+
+            <div class="bg-secondary border border-bordercolor p-8 md:p-12 feature-grid">
+                <div class="relative space-y-0">
+                    <div
+                        class="timeline-line absolute left-[23px] top-[48px] bottom-0 w-[2px] bg-bordercolor hidden md:block z-0">
+                    </div>
+
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row gap-6 pb-10 relative z-10 card-item">
+                        <div class="flex gap-6 md:w-full">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-accent text-primary flex items-center justify-center font-black text-lg shrink-0">
+                                    1</div>
+                                <div class="w-[2px] flex-1 bg-bordercolor mt-2 md:hidden"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-heading text-xl font-bold mb-1">Khảo sát & Tư vấn miễn phí</h3>
+                                <p class="text-textmuted text-sm font-light">Đội ngũ kỹ sư đến tận nơi khảo sát hiện
+                                    trạng, tư vấn phương án tối ưu.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col md:flex-row gap-6 pb-10 relative z-10 card-item">
+                        <div class="flex gap-6 md:w-full">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary border border-bordercolor text-textmain flex items-center justify-center font-black text-lg shrink-0">
+                                    2</div>
+                                <div class="w-[2px] flex-1 bg-bordercolor mt-2 md:hidden"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-heading text-xl font-bold mb-1">Thiết kế & Báo giá chi tiết</h3>
+                                <p class="text-textmuted text-sm font-light">Bản vẽ 3D, báo giá từng hạng mục, không
+                                    phát sinh ẩn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row gap-6 pb-10 relative z-10 card-item">
+                        <div class="flex gap-6 md:w-full">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary border border-bordercolor text-textmain flex items-center justify-center font-black text-lg shrink-0">
+                                    3</div>
+                                <div class="w-[2px] flex-1 bg-bordercolor mt-2 md:hidden"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-heading text-xl font-bold mb-1">Ký hợp đồng & Thanh toán theo giai đoạn
+                                </h3>
+                                <p class="text-textmuted text-sm font-light">"Làm tới đâu, trả tiền tới đó" — mọi phát
+                                    sinh phải ký duyệt.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col md:flex-row gap-6 pb-10 relative z-10 card-item">
+                        <div class="flex gap-6 md:w-full">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary border border-bordercolor text-textmain flex items-center justify-center font-black text-lg shrink-0">
+                                    4</div>
+                                <div class="w-[2px] flex-1 bg-bordercolor mt-2 md:hidden"></div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-heading text-xl font-bold mb-1">Thi công — Giám sát — Báo cáo hàng ngày
+                                </h3>
+                                <p class="text-textmuted text-sm font-light">KS giám sát trực tiếp công trường, gửi
+                                    ảnh/video tiến độ cho gia chủ.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="flex flex-col md:flex-row gap-6 relative z-10 card-item">
+                        <div class="flex gap-6 md:w-full">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-primary border border-bordercolor text-textmain flex items-center justify-center font-black text-lg shrink-0">
+                                    5</div>
+                            </div>
+                            <div class="pt-2">
+                                <h3 class="font-heading text-xl font-bold mb-1">Nghiệm thu & Bàn giao — Bảo hành 5 năm
+                                </h3>
+                                <p class="text-textmuted text-sm font-light">Nghiệm thu từng hạng mục, bàn giao chìa
+                                    khóa, bảo hành dài hạn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. KNOWLEDGE HUB -->
+    <section class="py-24 bg-secondary px-6" id="knowledge">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 section-header">
+                <div>
+                    <h2 class="font-heading text-4xl md:text-5xl font-black text-textmain mb-2">Kiến Thức Xây Dựng</h2>
+                    <p class="text-textmuted text-sm font-light">Trang bị kiến thức để xây nhà không còn là nỗi lo.</p>
+                </div>
+                <a href="#"
+                    class="text-sm font-bold uppercase tracking-widest text-accent hover:text-yellow-400 transition-colors flex items-center gap-2">
+                    Xem thêm bài viết <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 feature-grid">
+                <!-- Article 1 -->
+                <article
+                    class="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item">
+                    <div
+                        class="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
+                        <i data-lucide="wrench"
+                            class="w-10 h-10 text-bordercolor group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-xs text-accent uppercase tracking-widest font-bold mb-3">Kỹ thuật thi công
+                        </div>
+                        <h3
+                            class="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                            Hướng dẫn cắt đầu cọc bê tông 150×150</h3>
+                        <p class="text-textmuted text-sm font-light line-clamp-3 mb-6">Đảm bảo chất lượng móng cọc với
+                            kỹ thuật cắt đầu cọc đúng chuẩn, không gây nứt vỡ cọc bê tông cốt thép.</p>
+                        <span
+                            class="text-xs uppercase tracking-widest font-bold text-textmain pb-1 border-b border-textmain">Đọc
+                            thêm</span>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article
+                    class="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item">
+                    <div
+                        class="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
+                        <i data-lucide="layers"
+                            class="w-10 h-10 text-bordercolor group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-xs text-accent uppercase tracking-widest font-bold mb-3">Vật liệu xây dựng
+                        </div>
+                        <h3
+                            class="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                            Sỏi tự nhiên vs Đá nghiền: Chọn đúng cho bê tông</h3>
+                        <p class="text-textmuted text-sm font-light line-clamp-3 mb-6">Phân tích ưu nhược điểm của sỏi
+                            và đá dăm trong cấp phối bê tông để bạn đưa ra lựa chọn vật liệu tốt nhất.</p>
+                        <span
+                            class="text-xs uppercase tracking-widest font-bold text-textmain pb-1 border-b border-textmain">Đọc
+                            thêm</span>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article
+                    class="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item">
+                    <div
+                        class="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
+                        <i data-lucide="home"
+                            class="w-10 h-10 text-bordercolor group-hover:scale-110 transition-transform duration-700"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-xs text-accent uppercase tracking-widest font-bold mb-3">Kiến thức nền móng
+                        </div>
+                        <h3
+                            class="font-heading text-xl font-bold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+                            4 loại móng phổ biến: Chọn đúng cho đất nhà bạn</h3>
+                        <p class="text-textmuted text-sm font-light line-clamp-3 mb-6">Móng đơn, móng băng, móng bè hay
+                            móng cọc? Hướng dẫn chọn loại móng phù hợp với địa chất để tiết kiệm chi phí.</p>
+                        <span
+                            class="text-xs uppercase tracking-widest font-bold text-textmain pb-1 border-b border-textmain">Đọc
+                            thêm</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. TESTIMONIALS -->
+    <section class="py-24 bg-primary px-6 border-b border-bordercolor">
+        <div class="max-w-4xl mx-auto text-center section-header">
+            <i data-lucide="quote" class="w-12 h-12 text-accent/20 mx-auto mb-8"></i>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-black text-textmain leading-tight mb-8">
+                "Mỗi không gian sống là một câu chuyện. Và chúng tôi đã cùng gia chủ viết nên câu chuyện ấy bằng sự tỉ
+                mỉ trong từng chi tiết."
+            </h2>
+            <div class="h-px w-24 bg-bordercolor mx-auto mb-8"></div>
+            <p class="text-sm uppercase tracking-widest font-bold text-textmuted">Phản hồi từ khách hàng dự án Tây Tựu
             </p>
-            <a href="mailto:bachngan.design@gmail.com"
-                class="inline-flex bg-transparent border border-bordercolor text-textmain px-12 py-6 text-sm font-bold uppercase tracking-widest hover:border-accent hover:text-accent transition-all duration-500 items-center justify-center gap-4 group">
-                Contact Engineering
-                <i data-lucide="arrow-up-right"
-                    class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"></i>
-            </a>
         </div>
-
-        <!-- Large Architectural Lines -->
-        <div class="absolute top-0 right-[20%] w-px h-full bg-bordercolor/50"></div>
-        <div class="absolute top-0 left-[20%] w-px h-full bg-bordercolor/50"></div>
     </section>
 
-    <!-- FOOTER -->
-    <footer
-        class="bg-primary py-12 border-t border-bordercolor text-center text-xs text-textmuted font-bold tracking-widest uppercase">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p>&copy; 2026 Bách Ngân Engineering. All rights reserved.</p>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-textmain transition-colors duration-300">Privacy</a>
-                <a href="#" class="hover:text-textmain transition-colors duration-300">Terms</a>
+    <!-- 9. FAQ -->
+    <section class="py-24 bg-primary px-6" id="faq">
+        <div class="max-w-3xl mx-auto">
+            <div class="mb-16 text-center section-header">
+                <h2 class="font-heading text-4xl font-black text-textmain mb-4">Câu Hỏi Thường Gặp</h2>
+                <div class="h-px w-24 bg-accent mx-auto"></div>
+            </div>
+
+            <div class="space-y-px bg-bordercolor border border-bordercolor feature-grid">
+                <div class="faq-item bg-primary cursor-pointer hover:bg-secondary/50 transition-colors"
+                    onclick="this.classList.toggle('open')">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="font-heading text-lg font-bold pr-8">Chi phí xây nhà trọn gói được tính như thế nào?
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-accent faq-chevron shrink-0"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-textmuted text-sm font-light leading-relaxed">Chi phí được tính theo m²
+                            xây dựng, bao gồm nhân công, vật tư, giám sát. Báo giá chi tiết từng hạng mục, không phát
+                            sinh ẩn.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-primary cursor-pointer hover:bg-secondary/50 transition-colors"
+                    onclick="this.classList.toggle('open')">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="font-heading text-lg font-bold pr-8">Thời gian thi công trung bình là bao lâu?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-accent faq-chevron shrink-0"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-textmuted text-sm font-light leading-relaxed">Tùy quy mô, nhà 3-4 tầng
+                            phần thô từ 3-4 tháng, hoàn thiện trọn gói 5-7 tháng. Cam kết đúng tiến độ hợp đồng.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-primary cursor-pointer hover:bg-secondary/50 transition-colors"
+                    onclick="this.classList.toggle('open')">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="font-heading text-lg font-bold pr-8">Bách Ngân thi công ở khu vực nào?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-accent faq-chevron shrink-0"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-textmuted text-sm font-light leading-relaxed">Chúng tôi nhận thiết kế
+                            và thi công trọn gói chủ yếu tại Hà Nội và các tỉnh lân cận miền Bắc.</p>
+                    </div>
+                </div>
+                <div class="faq-item bg-primary cursor-pointer hover:bg-secondary/50 transition-colors"
+                    onclick="this.classList.toggle('open')">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="font-heading text-lg font-bold pr-8">Bảo hành công trình bao gồm những gì?</h3>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-accent faq-chevron shrink-0"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="px-6 pb-6 text-textmuted text-sm font-light leading-relaxed">Bảo hành 5 năm toàn diện:
+                            kết cấu, chống thấm, hệ thống điện nước. Hỗ trợ sửa chữa nhanh trong 24h.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FINAL CTA -->
+    <section class="py-24 md:py-32 bg-secondary border-t border-bordercolor overflow-hidden relative" id="contact">
+        <!-- Large Architectural Lines -->
+        <div class="absolute top-0 right-[20%] w-px h-full bg-bordercolor/50 hidden lg:block"></div>
+        <div class="absolute top-0 left-[20%] w-px h-full bg-bordercolor/50 hidden lg:block"></div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10 contact-content">
+            <div class="bg-primary border border-bordercolor overflow-hidden shadow-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-8 md:p-12 border-b md:border-b-0 md:border-r border-bordercolor">
+                        <h2 class="font-heading text-3xl md:text-4xl font-black mb-3">Bắt Đầu Xây Tổ Ấm Của Bạn</h2>
+                        <p class="text-textmuted text-sm mb-10 font-light">Để lại thông tin, kỹ sư Bách Ngân sẽ liên hệ
+                            tư vấn và báo giá miễn phí trong 24h.</p>
+
+                        <!-- Form Implementation for React -->
+                        <form class="space-y-5"
+                            onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Yêu cầu đang được gửi đi...');">
+                            <input type="text" placeholder="Họ và tên *" required
+                                class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors">
+                            <input type="tel" placeholder="Số điện thoại *" required
+                                class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors">
+                            <select
+                                class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmuted focus:border-accent focus:outline-none transition-colors">
+                                <option value="" disabled selected>Loại công trình dự kiến</option>
+                                <option>Xây mới nhà phố</option>
+                                <option>Xây mới biệt thự</option>
+                                <option>Cải tạo & Nội thất</option>
+                                <option>Công trình thương mại</option>
+                            </select>
+                            <input type="text" placeholder="Diện tích dự kiến (m²)"
+                                class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors">
+                            <textarea placeholder="Ghi chú thêm (Vị trí, phong cách mong muốn...)" rows="3"
+                                class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors resize-none"></textarea>
+                            <button type="submit"
+                                class="w-full bg-accent text-primary py-4 font-bold uppercase tracking-widest text-sm hover:bg-yellow-400 transition-colors duration-300">
+                                Gửi yêu cầu tư vấn
+                            </button>
+                        </form>
+                    </div>
+                    <div class="p-8 md:p-12 flex flex-col justify-between bg-primary relative overflow-hidden">
+                        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+
+                        <div class="space-y-8 relative z-10">
+                            <div class="flex items-start gap-4"><i data-lucide="phone"
+                                    class="w-6 h-6 text-accent mt-0.5 shrink-0"></i>
+                                <div>
+                                    <div class="font-bold text-sm uppercase tracking-widest mb-1">Hotline tư vấn</div>
+                                    <div class="text-textmain md:text-lg font-medium">0912.874.868</div>
+                                    <div class="text-textmain md:text-lg font-medium">085.865.1818</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4"><i data-lucide="mail"
+                                    class="w-6 h-6 text-accent mt-0.5 shrink-0"></i>
+                                <div>
+                                    <div class="font-bold text-sm uppercase tracking-widest mb-1">Email</div>
+                                    <div class="text-textmuted text-sm">bachngancons@gmail.com</div>
+                                    <div class="text-textmuted text-sm mt-1">bachngan.design@gmail.com</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4"><i data-lucide="map-pin"
+                                    class="w-6 h-6 text-accent mt-0.5 shrink-0"></i>
+                                <div>
+                                    <div class="font-bold text-sm uppercase tracking-widest mb-1">Trụ sở</div>
+                                    <div class="text-textmuted text-sm leading-relaxed">Số 19, tổ 3 Tình
+                                        Quang,<br>phường Việt Hưng, Hà Nội</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-12 pt-8 border-t border-bordercolor relative z-10">
+                            <a href="https://zalo.me/0858651818" target="_blank"
+                                class="w-full bg-[#0068FF]/10 text-[#0068FF] border border-[#0068FF]/30 py-4 font-bold uppercase tracking-widest text-sm hover:bg-[#0068FF] hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i> Chat trực tiếp qua Zalo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. FOOTER -->
+    <footer class="bg-primary pt-20 pb-12 border-t border-bordercolor">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i data-lucide="zap" class="w-6 h-6 text-accent"></i>
+                        <span class="font-heading font-black text-xl tracking-widest uppercase text-textmain">Bách
+                            Ngân</span>
+                    </div>
+                    <p class="text-textmuted text-sm font-light leading-relaxed mb-6">
+                        Công ty Cổ phần Giải pháp Cơ điện và Xây dựng Bách Ngân. <br>
+                        Kiến tạo không gian, dựng xây niềm tin bền vững.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
+                            <i data-lucide="youtube" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Liên kết nhanh</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-textmuted text-sm hover:text-accent transition-colors">Trang chủ</a>
+                        </li>
+                        <li><a href="#services" class="text-textmuted text-sm hover:text-accent transition-colors">Dịch
+                                vụ</a></li>
+                        <li><a href="#portfolio" class="text-textmuted text-sm hover:text-accent transition-colors">Công
+                                trình</a></li>
+                        <li><a href="#knowledge" class="text-textmuted text-sm hover:text-accent transition-colors">Kiến
+                                thức</a></li>
+                        <li><a href="#contact" class="text-textmuted text-sm hover:text-accent transition-colors">Liên
+                                hệ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Dịch vụ</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-textmuted text-sm hover:text-accent transition-colors">Xây nhà trọn
+                                gói</a></li>
+                        <li><a href="#" class="text-textmuted text-sm hover:text-accent transition-colors">Thiết kế kiến
+                                trúc</a></li>
+                        <li><a href="#" class="text-textmuted text-sm hover:text-accent transition-colors">Thi công nội
+                                thất</a></li>
+                        <li><a href="#" class="text-textmuted text-sm hover:text-accent transition-colors">Thi công nhà
+                                xưởng</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Bản đồ</h4>
+                    <div
+                        class="w-full h-32 bg-secondary border border-bordercolor flex items-center justify-center p-2">
+                        <div
+                            class="w-full h-full bg-primary flex flex-col items-center justify-center text-textmuted hover:text-accent transition-colors cursor-pointer">
+                            <i data-lucide="map" class="w-6 h-6 mb-2"></i>
+                            <span class="text-xs uppercase font-bold tracking-widest">Xem Google Maps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="pt-8 border-t border-bordercolor flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-textmuted font-bold tracking-widest uppercase">
+                <p>&copy; 2026 Bách Ngân Construction. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-textmain transition-colors duration-300">Privacy</a>
+                    <a href="#" class="hover:text-textmain transition-colors duration-300">Terms</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -341,28 +997,15 @@
 
             // 1. Initial Hero Reveal
             const tl = gsap.timeline();
-
             tl.fromTo(".hero-el",
-                { y: 100, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.2 }
+                { y: 50, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power4.out", delay: 0.1 }
             );
 
-            // 2. Parallax background
-            gsap.to(".hero-bg", {
-                y: "30%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#hero",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-
-            // 3. Section Header Reveals
-            gsap.utils.toArray('.section-header h2').forEach(header => {
+            // 2. Section Header Reveals
+            gsap.utils.toArray('.section-header').forEach(header => {
                 gsap.fromTo(header,
-                    { y: 100, opacity: 0 },
+                    { y: 50, opacity: 0 },
                     {
                         y: 0, opacity: 1, duration: 1, ease: "power3.out",
                         scrollTrigger: {
@@ -373,38 +1016,43 @@
                 );
             });
 
-            // 4. Staggered Feature Cards
-            gsap.fromTo(".feature-card",
-                { y: 50, opacity: 0 },
+            // 3. Staggered Feature Cards / Items
+            gsap.utils.toArray('.feature-grid').forEach(grid => {
+                const cards = grid.querySelectorAll('.card-item');
+                if (cards.length) {
+                    gsap.fromTo(cards,
+                        { y: 50, opacity: 0 },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            stagger: 0.1,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: grid,
+                                start: "top 85%",
+                            }
+                        }
+                    );
+                }
+            });
+
+            // 4. Contact Section Reveal
+            gsap.fromTo(".contact-content",
+                { y: 100, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
-                    duration: 0.8,
-                    stagger: 0.1,
-                    ease: "power2.out",
+                    duration: 1.2,
+                    ease: "power3.out",
                     scrollTrigger: {
-                        trigger: ".parallax-grid",
+                        trigger: "#contact",
                         start: "top 80%",
                     }
                 }
             );
 
-            // 5. Contact Section Reveal
-            gsap.fromTo(".contact-content",
-                { scale: 0.95, opacity: 0 },
-                {
-                    scale: 1,
-                    opacity: 1,
-                    duration: 1.2,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: "#about",
-                        start: "top 70%",
-                    }
-                }
-            );
-
-            // 6. Navbar effects on scroll
+            // 5. Navbar effects on scroll
             const nav = document.getElementById('main-nav');
             ScrollTrigger.create({
                 start: "top -100",
