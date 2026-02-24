@@ -19,8 +19,8 @@ export default function FinalCTA() {
   // 2. Lấy Token bot và điền vào TELEGRAM_BOT_TOKEN
   // 3. Lấy Chat ID bằng cách gửi tin nhắn cho bot rồi truy cập: https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates
   // 4. Điền Chat ID vào TELEGRAM_CHAT_ID
-  const TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"; 
-  const TELEGRAM_CHAT_ID = "YOUR_TELEGRAM_CHAT_ID";
+  const TELEGRAM_BOT_TOKEN = "8724706672:AAHar8HJMPHW3EpXlEi1Ma3fahF21CYP6SI";
+  const TELEGRAM_CHAT_ID = "7177776899";
 
   const [formData, setFormData] = useState({
     name: "",
@@ -38,13 +38,13 @@ export default function FinalCTA() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(isSubmitting) return;
+    if (isSubmitting) return;
 
     if (!TELEGRAM_BOT_TOKEN.includes("YOUR_") && !TELEGRAM_CHAT_ID.includes("YOUR_")) {
-         setIsSubmitting(true);
-         setSubmitStatus(null);
-         
-         const message = `
+      setIsSubmitting(true);
+      setSubmitStatus(null);
+
+      const message = `
 🔔 *Yêu cầu tư vấn mới*
 👤 *Khách hàng:* ${formData.name}
 📱 *Số điện thoại:* ${formData.phone}
@@ -52,41 +52,41 @@ export default function FinalCTA() {
 📐 *Diện tích:* ${formData.area || "Không rõ"}
 📝 *Ghi chú:* ${formData.notes || "Không có"}
          `;
-         
-         try {
-             const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify({
-                     chat_id: TELEGRAM_CHAT_ID,
-                     text: message,
-                     parse_mode: 'Markdown'
-                 })
-             });
 
-             if (response.ok) {
-                 setSubmitStatus("success");
-                 setFormData({ name: "", phone: "", area: "", notes: "" });
-                 setSelectedProject("Loại công trình dự kiến");
-             } else {
-                 setSubmitStatus("error");
-             }
-         } catch (error) {
-             console.error("Error sending message to Telegram:", error);
-             setSubmitStatus("error");
-         } finally {
-             setIsSubmitting(false);
-             
-             // Clear status message after 3 seconds
-             setTimeout(() => setSubmitStatus(null), 3000);
-         }
+      try {
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
+          })
+        });
+
+        if (response.ok) {
+          setSubmitStatus("success");
+          setFormData({ name: "", phone: "", area: "", notes: "" });
+          setSelectedProject("Loại công trình dự kiến");
+        } else {
+          setSubmitStatus("error");
+        }
+      } catch (error) {
+        console.error("Error sending message to Telegram:", error);
+        setSubmitStatus("error");
+      } finally {
+        setIsSubmitting(false);
+
+        // Clear status message after 3 seconds
+        setTimeout(() => setSubmitStatus(null), 3000);
+      }
     } else {
-         // Local simulation if config is not set
-         alert('Cảm ơn bạn! Yêu cầu đang được gửi đi...');
-         setFormData({ name: "", phone: "", area: "", notes: "" });
-         setSelectedProject("Loại công trình dự kiến");
+      // Local simulation if config is not set
+      alert('Cảm ơn bạn! Yêu cầu đang được gửi đi...');
+      setFormData({ name: "", phone: "", area: "", notes: "" });
+      setSelectedProject("Loại công trình dự kiến");
     }
   };
 
@@ -105,7 +105,7 @@ export default function FinalCTA() {
                 Để lại thông tin, kỹ sư Bách Ngân sẽ liên hệ tư vấn và báo giá miễn phí trong 24h.
               </p>
 
-              <form 
+              <form
                 className="space-y-5"
                 onSubmit={handleSubmit}
               >
@@ -113,12 +113,12 @@ export default function FinalCTA() {
                   className="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors" />
                 <input type="tel" name="phone" placeholder="Số điện thoại *" required value={formData.phone} onChange={handleInputChange}
                   className="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors" />
-                
+
                 {/* Custom Dropdown */}
                 <div className="relative w-full custom-dropdown">
                   <input type="hidden" id="project_type" name="project_type" value={selectedProject === "Loại công trình dự kiến" ? "" : selectedProject} />
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className="w-full bg-primary border border-bordercolor px-4 py-4 text-sm hover:border-accent focus:border-accent focus:outline-none transition-all duration-300 flex justify-between items-center"
                   >
@@ -127,11 +127,11 @@ export default function FinalCTA() {
                     </span>
                     <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
                   </button>
-                  <ul 
+                  <ul
                     className={`absolute z-50 w-full left-0 bg-secondary border-x border-b border-bordercolor mt-0 shadow-2xl transition-all duration-300 ${dropdownOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible'}`}
                   >
                     {projectTypes.map((type) => (
-                      <li 
+                      <li
                         key={type}
                         onClick={() => {
                           setSelectedProject(type);
@@ -150,7 +150,7 @@ export default function FinalCTA() {
                   className="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors" />
                 <textarea name="notes" placeholder="Ghi chú thêm (Vị trí, phong cách mong muốn...)" rows="3" value={formData.notes} onChange={handleInputChange}
                   className="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmain placeholder:text-textmuted focus:border-accent focus:outline-none transition-colors resize-none"></textarea>
-                
+
                 <button type="submit" disabled={isSubmitting}
                   className="w-full bg-accent text-primary py-4 font-bold uppercase tracking-widest text-sm hover:bg-yellow-400 transition-colors duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex justify-center items-center">
                   {isSubmitting ? "Đang gửi..." : "Gửi yêu cầu tư vấn"}
@@ -159,7 +159,7 @@ export default function FinalCTA() {
                 {submitStatus === "error" && <p className="text-red-500 text-sm mt-2 text-center">Có lỗi xảy ra, vui lòng thử lại sau.</p>}
               </form>
             </div>
-            
+
             <div className="p-8 md:p-12 flex flex-col justify-between bg-primary relative overflow-hidden">
               <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
 

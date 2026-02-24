@@ -8,7 +8,8 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
         <div className="flex items-center gap-3 cursor-pointer group">
-          <img src="/logo_light.png" alt="Bách Ngân Construction" className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-500" />
+          <img src="/logo_light.png" alt="Bách Ngân Construction" className="h-14 md:h-16 w-auto group-hover:scale-105 transition-transform duration-500" />
+          <span className="font-heading font-black text-2xl md:text-3xl tracking-wide text-textmain group-hover:text-accent transition-colors duration-500">Cty Bách Ngân</span>
         </div>
         <div className="hidden md:flex items-center gap-10 font-bold text-xs tracking-widest uppercase">
           <a

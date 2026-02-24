@@ -20,9 +20,9 @@ Each prompt below is a self-contained guidance file for an LLM to generate the S
 
 | # | Animation | Concept | Prompt File |
 |---|-----------|---------|-------------|
-| 1 | **Solid Foundation** | Pillar drops & settles — foundation work (Móng đơn, Băng, Bè, Cọc) | [animation-01-solid-foundation.md](./animation-01-solid-foundation.md) |
-| 2 | **Blueprint Scan** | Document scanning reveal — transparent pricing (Báo giá minh bạch) | [animation-02-blueprint-scan.md](./animation-02-blueprint-scan.md) |
-| 3 | **Growing Structure** | House builds on hover — turnkey service (Thi công trọn gói) | [animation-03-growing-structure.md](./animation-03-growing-structure.md) |
+| 1 | **Xây Dựng Phễu Niềm Tin** | Lưới tọa độ 2D dựng thành công trình 3D | [animation-01-trust-foundation.md](./animation-01-trust-foundation.md) |
+| 2 | **Hệ Thống Vận Hành** | 5 Bánh răng quay đồng bộ liên kết 5 khâu | [animation-02-operation-system.md](./animation-02-operation-system.md) |
+| 3 | **Giao Thoa Không Gian** | La kinh phong thủy, luồng gió và ánh sáng | [animation-03-space-harmony.md](./animation-03-space-harmony.md) |
 
 ### How to use
 1. Open one of the prompt files above.
