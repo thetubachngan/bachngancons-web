@@ -1,4 +1,5 @@
 export default function Animations() {
+    const v = Date.now(); // cache bust
     return (
         <>
             {/* Section Header */}
@@ -20,11 +21,15 @@ export default function Animations() {
                         </p>
                     </div>
                     <div className="bg-primary border border-bordercolor p-4 md:p-8">
-                        <img
-                            src="/trust-foundation.svg"
-                            alt="Xây Dựng Phễu Niềm Tin"
-                            className="w-full h-auto max-h-[500px] object-contain mx-auto"
-                        />
+                        <object
+                            type="image/svg+xml"
+                            data={`/trust-foundation.svg?v=${v}`}
+                            aria-label="Xây Dựng Phễu Niềm Tin"
+                            className="w-full h-auto mx-auto"
+                            style={{ minHeight: '400px', maxHeight: '550px' }}
+                        >
+                            Trình duyệt không hỗ trợ SVG
+                        </object>
                     </div>
                 </div>
             </section>
@@ -39,11 +44,15 @@ export default function Animations() {
                         </p>
                     </div>
                     <div className="bg-secondary border border-bordercolor p-4 md:p-8">
-                        <img
-                            src="/operation-system.svg"
-                            alt="Hệ Thống Vận Hành"
-                            className="w-full h-auto max-h-[400px] object-contain mx-auto"
-                        />
+                        <object
+                            type="image/svg+xml"
+                            data={`/operation-system.svg?v=${v}`}
+                            aria-label="Hệ Thống Vận Hành"
+                            className="w-full h-auto mx-auto"
+                            style={{ minHeight: '250px', maxHeight: '400px' }}
+                        >
+                            Trình duyệt không hỗ trợ SVG
+                        </object>
                     </div>
                 </div>
             </section>
@@ -58,11 +67,15 @@ export default function Animations() {
                         </p>
                     </div>
                     <div className="bg-primary border border-bordercolor p-4 md:p-8">
-                        <img
-                            src="/space-harmony.svg"
-                            alt="Giao Thoa Không Gian"
-                            className="w-full h-auto max-h-[500px] object-contain mx-auto"
-                        />
+                        <object
+                            type="image/svg+xml"
+                            data={`/space-harmony.svg?v=${v}`}
+                            aria-label="Giao Thoa Không Gian"
+                            className="w-full h-auto mx-auto"
+                            style={{ minHeight: '400px', maxHeight: '550px' }}
+                        >
+                            Trình duyệt không hỗ trợ SVG
+                        </object>
                     </div>
                 </div>
             </section>
