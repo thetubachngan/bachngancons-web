@@ -8,10 +8,6 @@ export default function Process() {
         </div>
 
         <div className="bg-secondary border border-bordercolor p-8 md:p-12 feature-grid relative overflow-hidden">
-          {/* SVG Background Container */}
-          <div id="process-svg-container" className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center">
-            <img src="/operation-system.svg" alt="Operation System Animation" className="w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] object-contain opacity-70" />
-          </div>
           <div className="relative space-y-0 z-10">
             <div className="timeline-line absolute left-[23px] top-[48px] bottom-0 w-[2px] bg-bordercolor hidden md:block z-0"></div>
 

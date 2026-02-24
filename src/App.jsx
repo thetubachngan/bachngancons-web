@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/Navbar'
 import Hero from './sections/Hero'
 import TrustBar from './sections/TrustBar'
+import Animations from './sections/Animations'
 import PainPoints from './sections/PainPoints'
 import Solutions from './sections/Solutions'
 import Portfolio from './sections/Portfolio'
@@ -63,19 +64,19 @@ export default function App() {
 
     // 4. Contact Section Reveal
     gsap.utils.toArray('.contact-content').forEach(contact => {
-       gsap.fromTo(contact,
-         { y: 100, opacity: 0 },
-         {
-             y: 0,
-             opacity: 1,
-             duration: 1.2,
-             ease: "power3.out",
-             scrollTrigger: {
-                 trigger: "#contact",
-                 start: "top 80%",
-             }
-         }
-       );
+      gsap.fromTo(contact,
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: "#contact",
+            start: "top 80%",
+          }
+        }
+      );
     });
 
     // 5. Navbar effects on scroll
@@ -109,6 +110,7 @@ export default function App() {
       <main>
         <Hero />
         <TrustBar />
+        <Animations />
         <PainPoints />
         <Solutions />
         <Portfolio />

@@ -15,14 +15,6 @@ export default function Hero() {
             backgroundSize: "cover, 80px 80px, 80px 80px",
           }}
         >
-          {/* SVG Background Container */}
-          <div
-            id="hero-svg-container"
-            className="absolute inset-0 z-0 pointer-events-none flex justify-center items-center"
-          >
-            <img src="/trust-foundation.svg" className="w-full h-full object-contain opacity-70" alt="Trust Foundation Animation" />
-          </div>
-
           <div className="p-8 md:p-16 relative z-10">
             <p className="uppercase tracking-[0.3em] font-bold text-accent text-xs md:text-sm border-l-2 border-accent pl-4 mb-8 animate-slide-left">
               Thiết kế & Thi công trọn gói
