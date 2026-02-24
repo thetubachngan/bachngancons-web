@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <style>
+    /* Compass rotation */
+    @keyframes compass-spin {
+      0% { transform: rotate(0deg); }
+      15% { transform: rotate(720deg); }
+      25% { transform: rotate(675deg); }
+      100% { transform: rotate(675deg); }
+    }
+    /* Compass fade out */
+    @keyframes compass-fade {
+      0%,20% { opacity: 1; }
+      35% { opacity: 0.15; }
+      85% { opacity: 0.15; }
+      100% { opacity: 1; }
+    }
+    /* Floorplan reveal */
+    @keyframes floor-reveal {
+      0%,25% { opacity: 0; transform: scale(0.5); }
+      40% { opacity: 1; transform: scale(1); }
+      85% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+    /* Wind particle flow */
+    @keyframes wind-flow {
+      0%,35% { offset-distance: 0%; opacity: 0; }
+      40% { opacity: 0.7; }
+      65% { opacity: 0.7; }
+      70% { offset-distance: 100%; opacity: 0; }
+      100% { offset-distance: 100%; opacity: 0; }
+    }
+    /* Wind ribbon */
+    @keyframes wind-ribbon {
+      0%,35% { stroke-dashoffset: 300; opacity: 0; }
+      40% { opacity: 0.3; }
+      65% { stroke-dashoffset: 0; opacity: 0.3; }
+      70% { opacity: 0; }
+      100% { opacity: 0; stroke-dashoffset: -300; }
+    }
+    /* Sun rays */
+    @keyframes sun-rays {
+      0%,65% { opacity: 0; transform: rotate(-15deg); }
+      75% { opacity: 0.5; }
+      90% { opacity: 0.3; transform: rotate(10deg); }
+      100% { opacity: 0; transform: rotate(15deg); }
+    }
+    /* Warm glow */
+    @keyframes warm-glow {
+      0%,70% { opacity: 0; }
+      80% { opacity: 0.25; }
+      90% { opacity: 0.15; }
+      100% { opacity: 0; }
+    }
+    /* Scene loop */
+    @keyframes scene {
+      0% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .main-scene { animation: scene 12s ease-in-out infinite; }
+    .compass { transform-origin: 200px 140px; animation: compass-spin 12s cubic-bezier(0.2,0.8,0.3,1) infinite; }
+    .compass-group { animation: compass-fade 12s ease-in-out infinite; }
+    .floorplan { transform-origin: 200px 140px; animation: floor-reveal 12s ease-out infinite; }
+    .wind-p { animation: wind-flow 12s ease-in-out infinite; }
+    .wind-p2 { animation: wind-flow 12s ease-in-out 0.5s infinite; }
+    .wind-p3 { animation: wind-flow 12s ease-in-out 1s infinite; }
+    .wind-r { stroke-dasharray: 300; animation: wind-ribbon 12s ease-in-out infinite; fill: none; }
+    .wind-r2 { stroke-dasharray: 300; animation: wind-ribbon 12s ease-in-out 0.3s infinite; fill: none; }
+    .sun-group { transform-origin: 320px 60px; animation: sun-rays 12s ease-in-out infinite; }
+    .warm { animation: warm-glow 12s ease-in-out infinite; }
+  </style>
+
+  <rect width="400" height="300" fill="#0C0A09"/>
+
+  <g class="main-scene">
+    <!-- COMPASS (Stage 1) -->
+    <g class="compass-group">
+      <g class="compass">
+        <!-- Outer ring -->
+        <circle cx="200" cy="140" r="60" fill="none" stroke="#EAB308" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="200" cy="140" r="50" fill="none" stroke="#44403C" stroke-width="0.5"/>
+        <circle cx="200" cy="140" r="40" fill="none" stroke="#44403C" stroke-width="0.5"/>
+        <!-- Cardinal lines -->
+        <line x1="200" y1="78" x2="200" y2="86" stroke="#EAB308" stroke-width="1.5"/>
+        <line x1="200" y1="194" x2="200" y2="202" stroke="#EAB308" stroke-width="1.5"/>
+        <line x1="138" y1="140" x2="146" y2="140" stroke="#EAB308" stroke-width="1.5"/>
+        <line x1="254" y1="140" x2="262" y2="140" stroke="#EAB308" stroke-width="1.5"/>
+        <!-- Bagua marks (8 directions) -->
+        <line x1="158" y1="98" x2="163" y2="103" stroke="#A8A29E" stroke-width="0.8"/>
+        <line x1="242" y1="98" x2="237" y2="103" stroke="#A8A29E" stroke-width="0.8"/>
+        <line x1="158" y1="182" x2="163" y2="177" stroke="#A8A29E" stroke-width="0.8"/>
+        <line x1="242" y1="182" x2="237" y2="177" stroke="#A8A29E" stroke-width="0.8"/>
+        <!-- Compass needle -->
+        <polygon points="200,90 196,140 204,140" fill="#EAB308" opacity="0.8"/>
+        <polygon points="200,190 196,140 204,140" fill="#44403C" opacity="0.6"/>
+        <circle cx="200" cy="140" r="4" fill="#EAB308"/>
+        <!-- Direction letters -->
+        <text x="200" y="76" fill="#EAB308" font-family="serif" font-size="8" text-anchor="middle" font-weight="bold">N</text>
+        <text x="200" y="212" fill="#A8A29E" font-family="serif" font-size="7" text-anchor="middle">S</text>
+        <text x="268" y="143" fill="#A8A29E" font-family="serif" font-size="7" text-anchor="middle">E</text>
+        <text x="132" y="143" fill="#A8A29E" font-family="serif" font-size="7" text-anchor="middle">W</text>
+      </g>
+    </g>
+
+    <!-- FLOORPLAN (Stage 1→2 transition) -->
+    <g class="floorplan">
+      <!-- Outer walls -->
+      <rect x="140" y="100" width="120" height="80" fill="none" stroke="#F5F5F4" stroke-width="1" rx="1"/>
+      <!-- Room dividers -->
+      <line x1="200" y1="100" x2="200" y2="155" stroke="#F5F5F4" stroke-width="0.7"/>
+      <line x1="140" y1="155" x2="260" y2="155" stroke="#F5F5F4" stroke-width="0.7"/>
+      <!-- Door openings -->
+      <line x1="195" y1="155" x2="195" y2="165" stroke="#EAB308" stroke-width="0.8"/>
+      <path d="M195,155 Q185,155 185,165" fill="none" stroke="#EAB308" stroke-width="0.5" opacity="0.5"/>
+      <!-- Windows  -->
+      <rect x="155" y="99" width="15" height="2" fill="#EAB308" opacity="0.6"/>
+      <rect x="225" y="99" width="15" height="2" fill="#EAB308" opacity="0.6"/>
+      <rect x="259" y="120" width="2" height="15" fill="#EAB308" opacity="0.6"/>
+      <!-- Furniture hints -->
+      <rect x="150" y="110" width="16" height="10" rx="2" fill="none" stroke="#A8A29E" stroke-width="0.4"/>
+      <rect x="210" y="110" width="20" height="14" rx="2" fill="none" stroke="#A8A29E" stroke-width="0.4"/>
+      <rect x="155" y="160" width="30" height="12" rx="1" fill="none" stroke="#A8A29E" stroke-width="0.4"/>
+      <!-- Room labels -->
+      <text x="165" y="132" fill="#A8A29E" font-family="sans-serif" font-size="5" text-anchor="middle">Phòng khách</text>
+      <text x="230" y="132" fill="#A8A29E" font-family="sans-serif" font-size="5" text-anchor="middle">Phòng ngủ</text>
+      <text x="180" y="175" fill="#A8A29E" font-family="sans-serif" font-size="5" text-anchor="middle">Bếp</text>
+    </g>
+
+    <!-- WIND FLOW (Stage 2) -->
+    <!-- Wind ribbons through the floorplan -->
+    <path class="wind-r" d="M130,125 C160,115 180,135 200,120 S240,130 270,118"
+          stroke="#22D3EE" stroke-width="1.5" opacity="0.3"/>
+    <path class="wind-r2" d="M130,140 C165,130 185,150 210,138 S250,145 270,135"
+          stroke="#22D3EE" stroke-width="1" opacity="0.2"/>
+    <!-- Wind particles -->
+    <circle r="2" fill="#22D3EE" opacity="0" class="wind-p">
+      <animateMotion dur="12s" repeatCount="indefinite" path="M130,125 C160,115 180,135 200,120 S240,130 270,118" keyTimes="0;0.35;0.4;0.65;0.7;1" keyPoints="0;0;0;1;1;1"/>
+    </circle>
+    <circle r="1.5" fill="#22D3EE" opacity="0" class="wind-p2">
+      <animateMotion dur="12s" repeatCount="indefinite" path="M130,140 C165,130 185,150 210,138 S250,145 270,135"/>
+    </circle>
+    <circle r="1" fill="#67E8F9" opacity="0" class="wind-p3">
+      <animateMotion dur="12s" repeatCount="indefinite" path="M135,132 C170,122 190,142 205,130 S245,138 265,128"/>
+    </circle>
+
+    <!-- SUNLIGHT (Stage 3) -->
+    <g class="sun-group">
+      <!-- Sun position -->
+      <circle cx="320" cy="60" r="8" fill="#EAB308" opacity="0.4"/>
+      <!-- God rays -->
+      <polygon points="300,70 180,140 190,155 310,75" fill="#EAB308" opacity="0.08"/>
+      <polygon points="310,68 200,130 210,142 318,73" fill="#EAB308" opacity="0.06"/>
+      <polygon points="320,64 220,120 228,130 325,68" fill="#EAB308" opacity="0.05"/>
+    </g>
+
+    <!-- Warm glow on surfaces -->
+    <rect class="warm" x="150" y="110" width="40" height="25" rx="2" fill="#EAB308" opacity="0"/>
+    <rect class="warm" x="210" y="115" width="35" height="20" rx="2" fill="#EAB308" opacity="0"/>
+  </g>
+</svg>

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <style>
+    /* Grid fade-in */
+    @keyframes grid-fade { 0% { opacity: 0; } 100% { opacity: 0.15; } }
+    /* Axis draw */
+    @keyframes axis-draw { 0% { stroke-dashoffset: 400; } 100% { stroke-dashoffset: 0; } }
+    /* Blueprint line draw */
+    @keyframes line-draw { 0% { stroke-dashoffset: 200; } 100% { stroke-dashoffset: 0; } }
+    /* Dimension text fade */
+    @keyframes dim-fade { 0%,30% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 1; } }
+    /* Number counting flicker */
+    @keyframes num-flicker {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      25% { opacity: 0.3; }
+      30% { opacity: 1; }
+      35% { opacity: 0.5; }
+      40% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+    /* 2D to Isometric transform */
+    @keyframes iso-transform {
+      0%,55% { transform: rotateX(0deg) rotateZ(0deg) scale(1); }
+      75% { transform: rotateX(55deg) rotateZ(-25deg) scale(0.8); }
+      100% { transform: rotateX(55deg) rotateZ(-25deg) scale(0.8); }
+    }
+    /* Extrude up */
+    @keyframes extrude-up {
+      0%,70% { transform: scaleY(0); opacity: 0; }
+      85% { transform: scaleY(1.05); opacity: 1; }
+      100% { transform: scaleY(1); opacity: 1; }
+    }
+    /* Light sweep */
+    @keyframes light-sweep {
+      0%,80% { transform: translateX(-100px); opacity: 0; }
+      90% { opacity: 0.6; }
+      100% { transform: translateX(200px); opacity: 0; }
+    }
+    /* Text reveal */
+    @keyframes text-reveal {
+      0%,85% { opacity: 0; transform: translateY(8px); }
+      95% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    /* Whole scene loop reset */
+    @keyframes scene-loop {
+      0% { opacity: 1; }
+      92% { opacity: 1; }
+      97% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .scene { animation: scene-loop 10s ease-in-out infinite; transform-origin: center center; }
+    .grid-lines { animation: grid-fade 1.5s ease-out 0.3s both; }
+    .axis-x { stroke-dasharray: 400; animation: axis-draw 1.2s ease-out 0s both; }
+    .axis-y { stroke-dasharray: 400; animation: axis-draw 1.2s ease-out 0.2s both; }
+    .bp-line { stroke-dasharray: 200; fill: none; }
+    .bp-l1 { animation: line-draw 1s ease-out 1.5s both; }
+    .bp-l2 { animation: line-draw 1s ease-out 1.7s both; }
+    .bp-l3 { animation: line-draw 1s ease-out 1.9s both; }
+    .bp-l4 { animation: line-draw 1s ease-out 2.1s both; }
+    .bp-l5 { animation: line-draw 1s ease-out 2.3s both; }
+    .bp-l6 { animation: line-draw 1s ease-out 2.5s both; }
+    .dim-text { font-family: monospace; font-size: 7px; animation: dim-fade 3s ease-out 2.8s both; }
+    .num-text { font-family: monospace; font-size: 7px; animation: num-flicker 2s ease-out 3s both; }
+    .iso-group { transform-origin: 200px 150px; animation: iso-transform 10s ease-in-out infinite; }
+    .ext-block { transform-origin: center bottom; animation: extrude-up 10s ease-out infinite; }
+    .ext-block2 { transform-origin: center bottom; animation: extrude-up 10s ease-out 0.3s infinite; }
+    .sweep { animation: light-sweep 10s ease-in-out infinite; }
+    .brand-text { animation: text-reveal 10s ease-out infinite; font-family: sans-serif; font-weight: 900; font-size: 16px; letter-spacing: 4px; }
+  </style>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0C0A09"/>
+
+  <g class="scene">
+    <g class="iso-group">
+      <!-- Grid -->
+      <g class="grid-lines">
+        <line x1="80" y1="50" x2="80" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="120" y1="50" x2="120" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="160" y1="50" x2="160" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="200" y1="50" x2="200" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="240" y1="50" x2="240" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="280" y1="50" x2="280" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="320" y1="50" x2="320" y2="250" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="60" y1="80" x2="340" y2="80" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="60" y1="110" x2="340" y2="110" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="60" y1="140" x2="340" y2="140" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="60" y1="170" x2="340" y2="170" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="60" y1="200" x2="340" y2="200" stroke="#44403C" stroke-width="0.3"/>
+        <line x1="60" y1="230" x2="340" y2="230" stroke="#44403C" stroke-width="0.3"/>
+      </g>
+
+      <!-- Axes -->
+      <line class="axis-x" x1="60" y1="150" x2="340" y2="150" stroke="#A8A29E" stroke-width="1"/>
+      <line class="axis-y" x1="200" y1="40" x2="200" y2="260" stroke="#A8A29E" stroke-width="1"/>
+
+      <!-- Blueprint lines (house outline) -->
+      <rect class="bp-line bp-l1" x="130" y="100" width="140" height="100" stroke="#EAB308" stroke-width="1.2"/>
+      <line class="bp-line bp-l2" x1="130" y1="150" x2="270" y2="150" stroke="#EAB308" stroke-width="0.8"/>
+      <line class="bp-line bp-l3" x1="200" y1="100" x2="200" y2="200" stroke="#EAB308" stroke-width="0.8"/>
+      <!-- Door -->
+      <rect class="bp-line bp-l4" x="185" y="170" width="30" height="30" stroke="#EAB308" stroke-width="0.8"/>
+      <!-- Windows -->
+      <rect class="bp-line bp-l5" x="145" y="115" width="20" height="20" stroke="#F5F5F4" stroke-width="0.5"/>
+      <rect class="bp-line bp-l6" x="235" y="115" width="20" height="20" stroke="#F5F5F4" stroke-width="0.5"/>
+
+      <!-- Dimension lines -->
+      <line x1="130" y1="210" x2="270" y2="210" stroke="#A8A29E" stroke-width="0.5" stroke-dasharray="3,2" class="bp-line bp-l4"/>
+      <line x1="130" y1="208" x2="130" y2="215" stroke="#A8A29E" stroke-width="0.5" class="bp-line bp-l4"/>
+      <line x1="270" y1="208" x2="270" y2="215" stroke="#A8A29E" stroke-width="0.5" class="bp-line bp-l4"/>
+      <text x="190" y="220" fill="#EAB308" class="num-text">8500 mm</text>
+
+      <line x1="120" y1="100" x2="120" y2="200" stroke="#A8A29E" stroke-width="0.5" stroke-dasharray="3,2" class="bp-line bp-l5"/>
+      <text x="100" y="155" fill="#EAB308" class="dim-text" transform="rotate(-90, 100, 155)">5000 mm</text>
+
+      <!-- 3D Extrusion blocks -->
+      <g class="ext-block">
+        <polygon points="130,100 270,100 285,85 145,85" fill="#EAB308" opacity="0.4"/>
+        <polygon points="270,100 270,200 285,185 285,85" fill="#EAB308" opacity="0.25"/>
+      </g>
+      <g class="ext-block2">
+        <polygon points="130,100 270,100 285,80 145,80" fill="#EAB308" opacity="0.15"/>
+        <polygon points="270,100 270,150 285,135 285,80" fill="#EAB308" opacity="0.1"/>
+        <!-- Roof triangle -->
+        <polygon points="130,100 200,65 270,100" fill="#EAB308" opacity="0.3"/>
+        <polygon points="270,100 200,65 285,50 285,85" fill="#EAB308" opacity="0.2"/>
+      </g>
+
+      <!-- Light sweep -->
+      <rect class="sweep" x="100" y="60" width="40" height="180" fill="url(#sweepGrad)" opacity="0"/>
+    </g>
+
+    <!-- Brand text -->
+    <text class="brand-text" x="200" y="280" fill="#F5F5F4" text-anchor="middle">BÁCH NGÂN</text>
+    <line class="brand-text" x1="145" y1="285" x2="255" y2="285" stroke="#EAB308" stroke-width="1.5"/>
+  </g>
+
+  <defs>
+    <linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F5F5F4" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#F5F5F4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#F5F5F4" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
