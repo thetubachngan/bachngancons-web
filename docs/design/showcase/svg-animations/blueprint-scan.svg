@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+    <style>
+        @keyframes scan-reveal {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+                filter: drop-shadow(0 0 1px #EAB308);
+            }
+            45% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: drop-shadow(0 0 6px #EAB308);
+            }
+            55% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: drop-shadow(0 0 6px #EAB308);
+            }
+            100% {
+                clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+                filter: drop-shadow(0 0 1px #EAB308);
+            }
+        }
+
+        @keyframes scanline-move {
+            0% { transform: translateY(-10px); opacity: 0; }
+            5% { opacity: 1; }
+            45% { transform: translateY(100px); opacity: 1; }
+            50% { opacity: 0; }
+            55% { transform: translateY(100px); opacity: 0; }
+            60% { opacity: 1; }
+            95% { transform: translateY(-10px); opacity: 1; }
+            100% { transform: translateY(-10px); opacity: 0; }
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { r: 1.5; opacity: 0.4; }
+            50% { r: 2.5; opacity: 0.8; }
+        }
+
+        .anim-scan {
+            animation: scan-reveal 4s ease-in-out infinite;
+        }
+
+        .anim-scanline {
+            animation: scanline-move 4s ease-in-out infinite;
+        }
+
+        .anim-pulse {
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+    </style>
+
+    <defs>
+        <!-- Grid pattern for blueprint background -->
+        <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#44403C" stroke-width="0.3" opacity="0.4"/>
+        </pattern>
+    </defs>
+
+    <!-- Blueprint grid background -->
+    <rect x="20" y="12" width="80" height="96" rx="3" fill="#292524" stroke="#44403C" stroke-width="1"/>
+    <rect x="20" y="12" width="80" height="96" rx="3" fill="url(#grid)"/>
+
+    <!-- Ghost layer — static faint outline -->
+    <g opacity="0.2" stroke="#F5F5F4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Document folded corner -->
+        <path d="M30 18 h50 a4 4 0 0 1 4 4 v72 a4 4 0 0 1 -4 4 h-56 a4 4 0 0 1 -4 -4 v-66 z"/>
+        <path d="M30 18 v10 a4 4 0 0 1 -4 4 h-2"/>
+        <!-- Title bar -->
+        <line x1="32" y1="38" x2="72" y2="38"/>
+        <!-- Text lines -->
+        <line x1="32" y1="48" x2="88" y2="48"/>
+        <line x1="32" y1="56" x2="80" y2="56"/>
+        <line x1="32" y1="64" x2="85" y2="64"/>
+        <line x1="32" y1="72" x2="70" y2="72"/>
+        <!-- Dimension marks -->
+        <line x1="32" y1="84" x2="50" y2="84"/>
+        <line x1="56" y1="84" x2="88" y2="84"/>
+        <!-- Small checkbox marks -->
+        <rect x="32" y="90" width="6" height="6" rx="1"/>
+        <rect x="44" y="90" width="6" height="6" rx="1"/>
+        <rect x="56" y="90" width="6" height="6" rx="1"/>
+    </g>
+
+    <!-- Scanning highlight layer -->
+    <g class="anim-scan" stroke="#EAB308" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Document folded corner -->
+        <path d="M30 18 h50 a4 4 0 0 1 4 4 v72 a4 4 0 0 1 -4 4 h-56 a4 4 0 0 1 -4 -4 v-66 z" fill="none"/>
+        <path d="M30 18 v10 a4 4 0 0 1 -4 4 h-2" fill="none"/>
+        <!-- Title bar -->
+        <line x1="32" y1="38" x2="72" y2="38" stroke-width="2.5"/>
+        <!-- Text lines -->
+        <line x1="32" y1="48" x2="88" y2="48"/>
+        <line x1="32" y1="56" x2="80" y2="56"/>
+        <line x1="32" y1="64" x2="85" y2="64"/>
+        <line x1="32" y1="72" x2="70" y2="72"/>
+        <!-- Dimension marks -->
+        <line x1="32" y1="84" x2="50" y2="84"/>
+        <line x1="56" y1="84" x2="88" y2="84"/>
+        <!-- Checkbox marks filled -->
+        <rect x="32" y="90" width="6" height="6" rx="1" fill="#EAB308" opacity="0.3"/>
+        <rect x="44" y="90" width="6" height="6" rx="1" fill="#EAB308" opacity="0.3"/>
+        <rect x="56" y="90" width="6" height="6" rx="1" fill="#EAB308" opacity="0.3"/>
+        <!-- Checkmarks -->
+        <polyline points="33,93 35,95.5 37.5,91" fill="none" stroke-width="1.2"/>
+        <polyline points="45,93 47,95.5 49.5,91" fill="none" stroke-width="1.2"/>
+    </g>
+
+    <!-- Scanning beam line -->
+    <line x1="18" y1="16" x2="102" y2="16" stroke="#EAB308" stroke-width="1.5" opacity="0.8" class="anim-scanline"/>
+    <!-- Beam glow -->
+    <line x1="18" y1="16" x2="102" y2="16" stroke="#EAB308" stroke-width="4" opacity="0.15" class="anim-scanline"/>
+
+    <!-- Corner anchor dots -->
+    <circle cx="22" cy="14" r="1.5" fill="#EAB308" class="anim-pulse" opacity="0.4"/>
+    <circle cx="98" cy="14" r="1.5" fill="#EAB308" class="anim-pulse" opacity="0.4" style="animation-delay: 0.5s"/>
+    <circle cx="22" cy="106" r="1.5" fill="#EAB308" class="anim-pulse" opacity="0.4" style="animation-delay: 1s"/>
+    <circle cx="98" cy="106" r="1.5" fill="#EAB308" class="anim-pulse" opacity="0.4" style="animation-delay: 1.5s"/>
+</svg>
