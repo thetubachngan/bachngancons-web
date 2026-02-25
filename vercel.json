@@ -1,3 +1,9 @@
 {
-    "name": "bachngancons-com"
+    "name": "bachngancons-com",
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ]
 }
