@@ -4,6 +4,7 @@ import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
 import PortfolioList from './pages/PortfolioList';
 import PortfolioPost from './pages/PortfolioPost';
+import FengShuiCompass from './pages/FengShuiCompass';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/portfolio" element={<PortfolioList />} />
           <Route path="/portfolio/:slug" element={<PortfolioPost />} />
+          <Route path="/phong-thuy" element={<FengShuiCompass />} />
         </Routes>
       </div>
     </BrowserRouter>

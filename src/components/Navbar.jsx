@@ -47,6 +47,12 @@ export default function Navbar() {
           >
             Kiến thức
           </Link>
+          <Link
+            to="/phong-thuy"
+            className={`transition-colors duration-300 ${location.pathname === '/phong-thuy' ? 'text-accent' : 'text-textmuted hover:text-textmain'}`}
+          >
+            Phong Thủy
+          </Link>
         </div>
         <Link
           to={isHome ? "#contact" : "/"}
