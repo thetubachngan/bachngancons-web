@@ -22,7 +22,7 @@ const QUERY_POST = `*[_type == "post" && slug.current == $slug][0] {
   category,
   excerpt,
   publishedAt,
-  mainImage,
+  gallery,
   body
 }`;
 
@@ -31,7 +31,7 @@ const QUERY_RELATED = `*[_type == "post" && category == $category && slug.curren
   title,
   slug,
   category,
-  mainImage,
+  gallery,
   publishedAt
 }`;
 
@@ -203,11 +203,11 @@ export default function BlogPost() {
             </section>
 
             {/* Featured Image */}
-            {post.mainImage && (
+            {post.gallery && post.gallery.length > 0 && (
                 <section className="px-6">
                     <div className="max-w-4xl mx-auto -mt-0">
                         <img
-                            src={urlFor(post.mainImage).width(1200).height(600).url()}
+                            src={urlFor(post.gallery[0]).width(1200).height(600).url()}
                             alt={post.title}
                             className="w-full border border-bordercolor"
                         />
@@ -222,6 +222,22 @@ export default function BlogPost() {
                 </div>
             </article>
 
+            {/* Additional Images in Gallery */}
+            {post.gallery && post.gallery.length > 1 && (
+                <section className="py-4 px-6 bg-secondary border-y border-bordercolor">
+                    <div className="max-w-4xl mx-auto flex gap-4 overflow-x-auto pb-4 snap-x">
+                        {post.gallery.slice(1).map((img, idx) => (
+                            <img
+                                key={idx}
+                                src={urlFor(img).width(600).height(400).url()}
+                                alt={`${post.title} - ảnh ${idx + 2}`}
+                                className="h-64 object-cover border border-bordercolor flex-shrink-0 snap-center"
+                            />
+                        ))}
+                    </div>
+                </section>
+            )}
+
             {/* Related posts */}
             {related.length > 0 && (
                 <section className="py-16 px-6 bg-secondary border-t border-bordercolor">
@@ -235,9 +251,9 @@ export default function BlogPost() {
                                     className="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 block"
                                 >
                                     <div className="aspect-video bg-secondary border-b border-bordercolor overflow-hidden">
-                                        {r.mainImage ? (
+                                        {r.gallery && r.gallery.length > 0 ? (
                                             <img
-                                                src={urlFor(r.mainImage).width(400).height(225).url()}
+                                                src={urlFor(r.gallery[0]).width(400).height(225).url()}
                                                 alt={r.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                             />

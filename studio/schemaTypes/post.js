@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'post',
@@ -27,12 +27,12 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          {title: 'Kỹ thuật thi công', value: 'ky-thuat-thi-cong'},
-          {title: 'Vật liệu xây dựng', value: 'vat-lieu-xay-dung'},
-          {title: 'Kiến thức nền móng', value: 'kien-thuc-nen-mong'},
-          {title: 'Thiết kế nội thất', value: 'thiet-ke-noi-that'},
-          {title: 'Phong thủy', value: 'phong-thuy'},
-          {title: 'Tin tức công ty', value: 'tin-tuc-cong-ty'},
+          { title: 'Kỹ thuật thi công', value: 'ky-thuat-thi-cong' },
+          { title: 'Vật liệu xây dựng', value: 'vat-lieu-xay-dung' },
+          { title: 'Kiến thức nền móng', value: 'kien-thuc-nen-mong' },
+          { title: 'Thiết kế nội thất', value: 'thiet-ke-noi-that' },
+          { title: 'Phong thủy', value: 'phong-thuy' },
+          { title: 'Tin tức công ty', value: 'tin-tuc-cong-ty' },
         ],
       },
       validation: (rule) => rule.required(),
@@ -44,12 +44,11 @@ export default defineType({
       rows: 3,
     }),
     defineField({
-      name: 'mainImage',
-      title: 'Ảnh đại diện',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: 'gallery',
+      title: 'Thư viện ảnh',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      description: 'Lấy ảnh đầu tiên làm ảnh đại diện',
     }),
     defineField({
       name: 'publishedAt',
@@ -66,7 +65,7 @@ export default defineType({
         },
         {
           type: 'image',
-          options: {hotspot: true},
+          options: { hotspot: true },
         },
       ],
     }),
@@ -75,13 +74,13 @@ export default defineType({
     {
       title: 'Ngày đăng mới nhất',
       name: 'publishedAtDesc',
-      by: [{field: 'publishedAt', direction: 'desc'}],
+      by: [{ field: 'publishedAt', direction: 'desc' }],
     },
   ],
   preview: {
     select: {
       title: 'title',
-      media: 'mainImage',
+      media: 'gallery.0',
       subtitle: 'category',
     },
   },

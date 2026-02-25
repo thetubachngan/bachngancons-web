@@ -21,7 +21,7 @@ const QUERY_ALL = `*[_type == "post"] | order(publishedAt desc) {
   category,
   excerpt,
   publishedAt,
-  mainImage
+  gallery
 }`;
 
 export default function BlogList() {
@@ -145,9 +145,9 @@ export default function BlogList() {
                                     className="bg-secondary border border-bordercolor hover:border-accent group transition-colors duration-300 block"
                                 >
                                     <div className="aspect-video bg-primary border-b border-bordercolor overflow-hidden">
-                                        {post.mainImage ? (
+                                        {post.gallery && post.gallery.length > 0 ? (
                                             <img
-                                                src={urlFor(post.mainImage).width(600).height(340).url()}
+                                                src={urlFor(post.gallery[0]).width(600).height(340).url()}
                                                 alt={post.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                             />

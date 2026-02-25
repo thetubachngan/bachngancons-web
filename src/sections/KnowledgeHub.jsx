@@ -21,7 +21,7 @@ const QUERY = `*[_type == "post"] | order(publishedAt desc) [0...3] {
   category,
   excerpt,
   publishedAt,
-  mainImage
+  gallery
 }`;
 
 // Fallback static articles when no Sanity posts exist
@@ -93,9 +93,9 @@ export default function KnowledgeHub() {
                 className="bg-primary border border-bordercolor hover:border-accent group transition-colors duration-300 card-item block"
               >
                 <div className="aspect-video bg-secondary border-b border-bordercolor flex items-center justify-center overflow-hidden relative">
-                  {usingSanity && article.mainImage ? (
+                  {usingSanity && article.gallery && article.gallery.length > 0 ? (
                     <img
-                      src={urlFor(article.mainImage).width(600).height(340).url()}
+                      src={urlFor(article.gallery[0]).width(600).height(340).url()}
                       alt={article.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
