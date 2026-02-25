@@ -42,6 +42,12 @@ export default function Navbar() {
             </>
           )}
           <Link
+            to="/portfolio"
+            className={`transition-colors duration-300 ${location.pathname.startsWith('/portfolio') ? 'text-accent' : 'text-textmuted hover:text-textmain'}`}
+          >
+            Công trình
+          </Link>
+          <Link
             to="/blog"
             className={`transition-colors duration-300 ${location.pathname.startsWith('/blog') ? 'text-accent' : 'text-textmuted hover:text-textmain'}`}
           >
