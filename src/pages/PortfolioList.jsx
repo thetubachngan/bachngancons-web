@@ -55,7 +55,7 @@ export default function PortfolioList() {
                         <ArrowLeft className="w-4 h-4" /> Về trang chủ
                     </Link>
                     <h1 className="font-heading text-4xl md:text-6xl font-black mb-4">
-                        Dự Án <span className="text-accent">Tiêu Biểu</span>
+                        Công Trình <span className="text-accent">Đã Thực Hiện</span>
                     </h1>
                     <p className="text-textmuted text-base md:text-lg font-light max-w-2xl mx-auto md:mx-0">
                         Khám phá các công trình kiến trúc, thi công xây dựng và nội thất do đội ngũ Bách Ngân thực hiện.

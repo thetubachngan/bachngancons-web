@@ -53,7 +53,6 @@ export default function Portfolio() {
     <section className="py-24 bg-primary px-6 border-b border-bordercolor" id="portfolio">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 text-center max-w-2xl mx-auto section-header">
-          <p className="text-accent text-sm font-bold uppercase tracking-widest mb-4">Các Dự Án Tiêu Biểu</p>
           <h2 className="font-heading text-4xl md:text-5xl font-black text-textmain mb-6">Công Trình Đã Thực Hiện</h2>
           <div className="h-px w-24 bg-bordercolor mx-auto"></div>
         </div>

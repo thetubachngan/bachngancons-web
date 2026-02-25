@@ -24,12 +24,6 @@ export default function Navbar() {
               >
                 Dịch vụ
               </a>
-              <a
-                href="#portfolio"
-                className="text-textmuted hover:text-textmain transition-colors duration-300"
-              >
-                Công trình
-              </a>
             </>
           ) : (
             <>
