@@ -5,11 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
 import Hero from '../sections/Hero';
 import TrustBar from '../sections/TrustBar';
-import Animations from '../sections/Animations';
-import PainPoints from '../sections/PainPoints';
-import Solutions from '../sections/Solutions';
+import Services from '../sections/Services';
 import Portfolio from '../sections/Portfolio';
-import Process from '../sections/Process';
 import KnowledgeHub from '../sections/KnowledgeHub';
 import Testimonials from '../sections/Testimonials';
 import FAQ from '../sections/FAQ';
@@ -109,11 +106,8 @@ export default function HomePage() {
             <main>
                 <Hero />
                 <TrustBar />
-                <Animations />
-                <PainPoints />
-                <Solutions />
+                <Services />
                 <Portfolio />
-                <Process />
                 <KnowledgeHub />
                 <Testimonials />
                 <FAQ />

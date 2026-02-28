@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0c0a09;
-  --color-secondary: #292524;
-  --color-accent: #eab308;
-  --color-slatebg: #0c0a09;
-  --color-textmain: #f5f5f4;
-  --color-textmuted: #a8a29e;
-  --color-bordercolor: #44403c;
+  --color-primary: #0f172a;
+  /* Slate 900 - Lighter Navy */
+  --color-secondary: #1e293b;
+  /* Slate 800 - Lighter Slate Dark */
+  --color-accent: #34d399;
+  /* Emerald Glow - Keep Accent */
+  --color-slatebg: #0f172a;
+  --color-textmain: #f8fafc;
+  /* Slate 50 - Brighter text */
+  --color-textmuted: #cbd5e1;
+  /* Slate 300 - Brighter muted text */
+  --color-bordercolor: #334155;
+  /* Slate 700 - Lighter Border */
 
   --font-heading: "Cormorant Garamond", serif;
   --font-body: "Be Vietnam Pro", sans-serif;
@@ -41,9 +47,11 @@ h6,
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
+
   100% {
     transform: translateY(0px);
   }
@@ -56,11 +64,13 @@ h6,
 }
 
 @keyframes pulse-glow {
+
   0%,
   100% {
     opacity: 1;
     filter: drop-shadow(0 0 2px #eab308);
   }
+
   50% {
     opacity: 0.5;
     filter: drop-shadow(0 0 10px #eab308);
@@ -72,6 +82,7 @@ h6,
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -83,6 +94,7 @@ h6,
     opacity: 0;
     transform: translateX(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -94,6 +106,7 @@ h6,
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -104,6 +117,7 @@ h6,
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -112,20 +126,25 @@ h6,
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
 .animate-draw {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: draw 2s ease-in-out forwards;
 }
+
 .animate-pulse-glow {
   animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
 .animate-count {
   animation: countUp 0.6s ease-out both;
 }
+
 .animate-slide-left {
   animation: slideInLeft 0.5s ease-out both;
 }
+
 .animate-fade-up {
   animation: fadeInUp 0.5s ease-out both;
 }
@@ -134,6 +153,7 @@ h6,
   display: inline-flex;
   animation: marquee 30s linear infinite;
 }
+
 .animate-marquee:hover {
   animation-play-state: paused;
 }
@@ -153,12 +173,15 @@ h6,
   overflow: hidden;
   transition: max-height 0.3s ease-out;
 }
+
 .faq-item.open .faq-answer {
   max-height: 200px;
 }
+
 .faq-item.open .faq-chevron {
   transform: rotate(180deg);
 }
+
 .faq-chevron {
   transition: transform 0.3s ease;
 }

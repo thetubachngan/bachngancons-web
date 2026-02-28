@@ -20,7 +20,7 @@ export default function Animations() {
                             Từ bản vẽ kỹ thuật AutoCAD 2D chính xác đến công trình 3D hoàn chỉnh — mỗi nét vẽ đều mang giá trị niềm tin.
                         </p>
                     </div>
-                    <div className="bg-primary border border-bordercolor p-4 md:p-8">
+                    <div className="bg-primary border border-bordercolor p-4 md:p-8 rounded-xl shadow-2xl overflow-hidden">
                         <object
                             type="image/svg+xml"
                             data={`/trust-foundation.svg?v=${v}`}
@@ -43,7 +43,7 @@ export default function Animations() {
                             5 bánh răng đồng bộ: Thiết kế → Xin phép → Thi công → Nghiệm thu → Bảo hành — vận hành khép kín, chất lượng trường tồn.
                         </p>
                     </div>
-                    <div className="bg-secondary border border-bordercolor p-4 md:p-8">
+                    <div className="bg-secondary border border-bordercolor p-4 md:p-8 rounded-xl shadow-2xl overflow-hidden">
                         <object
                             type="image/svg+xml"
                             data={`/operation-system.svg?v=${v}`}
@@ -58,7 +58,7 @@ export default function Animations() {
             </section>
 
             {/* Animation 3: Space Harmony */}
-            <section className="py-16 bg-secondary px-6">
+            <section className="py-16 bg-secondary px-6 md:pb-24">
                 <div className="max-w-6xl mx-auto">
                     <div className="mb-8 text-center">
                         <h3 className="font-heading text-2xl md:text-3xl font-bold text-textmain mb-3">Giao Thoa Không Gian</h3>
@@ -66,7 +66,7 @@ export default function Animations() {
                             La kinh định vị phong thủy, luồng gió đối lưu tự nhiên, ánh sáng tràn ngập — thiết kế vì sức khỏe và vận khí.
                         </p>
                     </div>
-                    <div className="bg-primary border border-bordercolor p-4 md:p-8">
+                    <div className="bg-primary border border-bordercolor p-4 md:p-8 rounded-xl shadow-2xl overflow-hidden">
                         <object
                             type="image/svg+xml"
                             data={`/space-harmony.svg?v=${v}`}
