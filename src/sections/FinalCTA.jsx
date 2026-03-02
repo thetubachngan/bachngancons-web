@@ -176,8 +176,7 @@ export default function FinalCTA() {
                   <Mail className="w-6 h-6 text-accent mt-0.5 shrink-0" />
                   <div>
                     <div className="font-bold text-sm uppercase tracking-widest mb-1">Email</div>
-                    <div className="text-textmuted text-sm">bachngancons@gmail.com</div>
-                    <div className="text-textmuted text-sm mt-1">bachngan.design@gmail.com</div>
+                    <div className="text-textmuted text-sm">bachngan.design@gmail.com</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

@@ -575,7 +575,9 @@
 
             <div class="bg-secondary border border-bordercolor p-8 md:p-12 feature-grid relative overflow-hidden">
                 <!-- SVG Background Container -->
-                <div id="process-svg-container" class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center mix-blend-screen opacity-50"></div>
+                <div id="process-svg-container"
+                    class="absolute inset-0 z-0 pointer-events-none flex justify-center items-center mix-blend-screen opacity-50">
+                </div>
                 <div class="relative space-y-0 z-10">
                     <div
                         class="timeline-line absolute left-[23px] top-[48px] bottom-0 w-[2px] bg-bordercolor hidden md:block z-0">
@@ -854,22 +856,33 @@
                             <!-- Custom Dropdown -->
                             <div class="relative w-full custom-dropdown group/dropdown">
                                 <input type="hidden" id="project_type" name="project_type" value="">
-                                <button type="button" class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmuted hover:border-accent focus:border-accent focus:outline-none transition-all duration-300 flex justify-between items-center dropdown-toggle">
+                                <button type="button"
+                                    class="w-full bg-primary border border-bordercolor px-4 py-4 text-sm text-textmuted hover:border-accent focus:border-accent focus:outline-none transition-all duration-300 flex justify-between items-center dropdown-toggle">
                                     <span class="dropdown-selected transition-colors">Loại công trình dự kiến</span>
-                                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 dropdown-icon"></i>
+                                    <i data-lucide="chevron-down"
+                                        class="w-4 h-4 transition-transform duration-300 dropdown-icon"></i>
                                 </button>
-                                <ul class="absolute z-50 w-full left-0 bg-secondary border-x border-b border-bordercolor mt-0 hidden dropdown-menu shadow-2xl opacity-0 translate-y-2 transition-all duration-300">
-                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
-                                        Xây mới nhà phố <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                <ul
+                                    class="absolute z-50 w-full left-0 bg-secondary border-x border-b border-bordercolor mt-0 hidden dropdown-menu shadow-2xl opacity-0 translate-y-2 transition-all duration-300">
+                                    <li
+                                        class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Xây mới nhà phố <i data-lucide="check"
+                                            class="w-4 h-4 opacity-0 text-accent"></i>
                                     </li>
-                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
-                                        Xây mới biệt thự <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    <li
+                                        class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Xây mới biệt thự <i data-lucide="check"
+                                            class="w-4 h-4 opacity-0 text-accent"></i>
                                     </li>
-                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
-                                        Cải tạo & Nội thất <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    <li
+                                        class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer border-b border-bordercolor transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Cải tạo & Nội thất <i data-lucide="check"
+                                            class="w-4 h-4 opacity-0 text-accent"></i>
                                     </li>
-                                    <li class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer transition-colors duration-200 dropdown-item flex justify-between items-center">
-                                        Công trình thương mại <i data-lucide="check" class="w-4 h-4 opacity-0 text-accent"></i>
+                                    <li
+                                        class="px-4 py-3 text-sm text-textmain hover:bg-primary hover:text-accent cursor-pointer transition-colors duration-200 dropdown-item flex justify-between items-center">
+                                        Công trình thương mại <i data-lucide="check"
+                                            class="w-4 h-4 opacity-0 text-accent"></i>
                                     </li>
                                 </ul>
                             </div>
@@ -899,8 +912,7 @@
                                     class="w-6 h-6 text-accent mt-0.5 shrink-0"></i>
                                 <div>
                                     <div class="font-bold text-sm uppercase tracking-widest mb-1">Email</div>
-                                    <div class="text-textmuted text-sm">bachngancons@gmail.com</div>
-                                    <div class="text-textmuted text-sm mt-1">bachngan.design@gmail.com</div>
+                                    <div class="text-textmuted text-sm">bachngan.design@gmail.com</div>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4"><i data-lucide="map-pin"
@@ -1021,10 +1033,10 @@
                 console.warn("SVG loading error:", e);
             }
         }
-        
+
         // Custom Dropdown Logic
         const dropdown = document.querySelector('.custom-dropdown');
-        if(dropdown) {
+        if (dropdown) {
             const toggle = dropdown.querySelector('.dropdown-toggle');
             const menu = dropdown.querySelector('.dropdown-menu');
             const items = dropdown.querySelectorAll('.dropdown-item');
@@ -1034,7 +1046,7 @@
 
             toggle.addEventListener('click', (e) => {
                 const isOpen = !menu.classList.contains('hidden');
-                
+
                 if (isOpen) {
                     menu.style.opacity = '0';
                     menu.style.transform = 'translateY(8px)';
@@ -1057,7 +1069,7 @@
                     selectedText.classList.remove('text-textmuted');
                     selectedText.classList.add('text-textmain');
                     hiddenInput.value = value;
-                    
+
                     // Reset checks
                     items.forEach(i => i.querySelector('i').style.opacity = '0');
                     item.querySelector('i').style.opacity = '1';

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, MapPin, Maximize, Calendar } from 'lucide-react';
+import { ArrowLeft, MapPin, Maximize, Calendar, Image, ArrowRight, CheckCircle, HardHat, Award, Clock, ShieldCheck } from 'lucide-react';
 import { sanityClient, urlFor } from '../lib/sanityClient';
 import Navbar from '../components/Navbar';
+import FinalCTA from '../sections/FinalCTA';
 import Footer from '../sections/Footer';
 
 const CATEGORIES = {
@@ -20,8 +21,106 @@ const QUERY_ALL = `*[_type == "project"] | order(completionYear desc, publishedA
   location,
   area,
   completionYear,
-  mainImage
+  mainImage,
+  status
 }`;
+
+const FALLBACK_PROJECTS = [
+    {
+        _id: "f-1",
+        title: "Nhà Phố Tây Tựu",
+        slug: null,
+        category: "xay-moi-tron-goi",
+        location: "Bắc Từ Liêm, Hà Nội",
+        area: "400m²",
+        completionYear: 2024,
+        status: "completed",
+        description: "Công trình nhà phố 3 tầng thiết kế hiện đại, tối ưu ánh sáng tự nhiên và không gian sống cho gia đình 3 thế hệ.",
+    },
+    {
+        _id: "f-2",
+        title: "Biệt Thự Việt Hưng",
+        slug: null,
+        category: "xay-moi-tron-goi",
+        location: "Long Biên, Hà Nội",
+        area: "320m²",
+        completionYear: 2024,
+        status: "completed",
+        description: "Biệt thự song lập phong cách tân cổ điển, hệ thống smarthome tích hợp toàn bộ.",
+    },
+    {
+        _id: "f-3",
+        title: "Nội Thất Ngô Quyền",
+        slug: null,
+        category: "thiet-ke-noi-that",
+        location: "Hải Phòng",
+        area: "180m²",
+        completionYear: 2023,
+        status: "completed",
+        description: "Thiết kế và thi công nội thất trọn gói căn hộ phong cách Scandinavian hiện đại.",
+    },
+    {
+        _id: "f-4",
+        title: "Cafe Phúc – Thương Mại",
+        slug: null,
+        category: "thi-cong-thuong-mai",
+        location: "Hà Nội",
+        area: "150m²",
+        completionYear: 2023,
+        status: "completed",
+        description: "Thi công quán cafe phong cách công nghiệp, tối ưu không gian kinh doanh và trải nghiệm khách hàng.",
+    },
+    {
+        _id: "f-5",
+        title: "Nhà Phố Đông Anh",
+        slug: null,
+        category: "xay-moi-tron-goi",
+        location: "Đông Anh, Hà Nội",
+        area: "280m²",
+        completionYear: 2025,
+        status: "in-progress",
+        description: "Nhà phố 4 tầng kết hợp văn phòng cho thuê tầng 1, tối ưu thu nhập thụ động.",
+    },
+    {
+        _id: "f-6",
+        title: "Nội Thất Căn Hộ Vinhomes",
+        slug: null,
+        category: "thiet-ke-noi-that",
+        location: "Ocean Park, Hà Nội",
+        area: "95m²",
+        completionYear: 2024,
+        status: "completed",
+        description: "Nội thất căn hộ 3 phòng ngủ phong cách tối giản Nhật Bản, tận dụng tối đa diện tích.",
+    },
+    {
+        _id: "f-7",
+        title: "Showroom Hải Dương",
+        slug: null,
+        category: "thi-cong-thuong-mai",
+        location: "TP. Hải Dương",
+        area: "200m²",
+        completionYear: 2024,
+        status: "completed",
+        description: "Showroom trưng bày vật liệu xây dựng với hệ thống kệ công nghiệp và chiếu sáng đồng bộ.",
+    },
+    {
+        _id: "f-8",
+        title: "Cải Tạo Nhà Cũ Thanh Xuân",
+        slug: null,
+        category: "cai-tao-sua-chua",
+        location: "Thanh Xuân, Hà Nội",
+        area: "120m²",
+        completionYear: 2025,
+        status: "in-progress",
+        description: "Cải tạo toàn bộ nhà cấp 4 thành 3 tầng hiện đại, giữ nguyên phần móng kết cấu.",
+    },
+];
+
+const stats = [
+    { icon: Award, value: '50+', label: 'Dự án hoàn thành' },
+    { icon: Clock, value: '10+', label: 'Năm kinh nghiệm' },
+    { icon: ShieldCheck, value: '5 năm', label: 'Bảo hành' },
+];
 
 export default function PortfolioList() {
     const [projects, setProjects] = useState([]);
@@ -31,14 +130,26 @@ export default function PortfolioList() {
     useEffect(() => {
         window.scrollTo(0, 0);
         sanityClient.fetch(QUERY_ALL).then((data) => {
-            setProjects(data);
+            setProjects(data && data.length > 0 ? data : []);
             setLoading(false);
         }).catch(() => setLoading(false));
     }, []);
 
+    const usingSanity = !loading && projects.length > 0;
+    const allItems = usingSanity ? projects : FALLBACK_PROJECTS;
+
     const filteredProjects = activeCategory
-        ? projects.filter((p) => p.category === activeCategory)
-        : projects;
+        ? allItems.filter((p) => p.category === activeCategory)
+        : allItems;
+
+    // Count projects per category
+    const categoryCounts = Object.keys(CATEGORIES).reduce((acc, key) => {
+        acc[key] = allItems.filter(p => p.category === key).length;
+        return acc;
+    }, {});
+
+    const featured = filteredProjects[0];
+    const restProjects = filteredProjects.slice(1);
 
     return (
         <div className="antialiased min-h-screen flex flex-col bg-primary text-textmain selection:bg-accent selection:text-primary">
@@ -46,8 +157,9 @@ export default function PortfolioList() {
             <Navbar />
 
             {/* Hero header */}
-            <section className="pt-32 pb-16 px-6 bg-secondary border-b border-bordercolor">
-                <div className="max-w-7xl mx-auto text-center md:text-left">
+            <section className="pt-32 pb-16 px-6 bg-gradient-to-b from-secondary to-primary border-b border-bordercolor relative overflow-hidden">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-accent opacity-5 blur-[100px] rounded-[100%] pointer-events-none"></div>
+                <div className="max-w-7xl mx-auto text-center md:text-left relative z-10">
                     <Link
                         to="/"
                         className="inline-flex items-center gap-2 text-sm text-textmuted hover:text-accent transition-colors mb-8"
@@ -55,125 +167,290 @@ export default function PortfolioList() {
                         <ArrowLeft className="w-4 h-4" /> Về trang chủ
                     </Link>
                     <h1 className="font-heading text-4xl md:text-6xl font-black mb-4">
-                        Công Trình <span className="text-accent">Đã Thực Hiện</span>
+                        Công Trình <span className="text-accent italic">Tiêu Biểu</span>
                     </h1>
                     <p className="text-textmuted text-base md:text-lg font-light max-w-2xl mx-auto md:mx-0">
-                        Khám phá các công trình kiến trúc, thi công xây dựng và nội thất do đội ngũ Bách Ngân thực hiện.
+                        Mỗi công trình là một câu chuyện — từ bản vẽ ý tưởng đến ngày bàn giao chìa khóa.
+                        Khám phá hành trình chúng tôi kiến tạo không gian sống cho hàng trăm gia đình.
                     </p>
                 </div>
             </section>
 
-            {/* Filters */}
-            <section className="py-8 px-6 border-b border-bordercolor">
-                <div className="max-w-7xl mx-auto flex flex-wrap gap-3 justify-center md:justify-start">
+            {/* Stats Strip */}
+            <section className="py-6 px-6 bg-secondary border-b border-bordercolor">
+                <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-start gap-8 md:gap-16">
+                    {stats.map((stat, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center border border-accent/20">
+                                <stat.icon className="w-5 h-5" />
+                            </div>
+                            <div>
+                                <span className="font-heading text-xl font-black text-accent">{stat.value}</span>
+                                <p className="text-textmuted text-xs font-light">{stat.label}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Tab Filters with counts */}
+            <section className="py-6 px-6 border-b border-bordercolor sticky top-0 bg-primary/95 backdrop-blur-md z-30">
+                <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center md:justify-start">
                     <button
                         onClick={() => setActiveCategory(null)}
-                        className={`px-6 py-3 text-xs font-bold uppercase tracking-widest border transition-colors duration-300 ${!activeCategory
-                            ? 'bg-accent text-primary border-accent'
+                        className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest border transition-all duration-300 flex items-center gap-2 ${!activeCategory
+                            ? 'bg-accent text-primary border-accent shadow-[0_0_15px_rgba(52,211,153,0.2)]'
                             : 'border-bordercolor text-textmuted hover:border-textmain hover:text-textmain'
                             }`}
                     >
                         Tất cả
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded-sm ${!activeCategory ? 'bg-primary/20' : 'bg-secondary'}`}>
+                            {allItems.length}
+                        </span>
                     </button>
                     {Object.entries(CATEGORIES).map(([value, label]) => (
                         <button
                             key={value}
                             onClick={() => setActiveCategory(value)}
-                            className={`px-6 py-3 text-xs font-bold uppercase tracking-widest border transition-colors duration-300 ${activeCategory === value
-                                ? 'bg-accent text-primary border-accent'
+                            className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest border transition-all duration-300 flex items-center gap-2 ${activeCategory === value
+                                ? 'bg-accent text-primary border-accent shadow-[0_0_15px_rgba(52,211,153,0.2)]'
                                 : 'border-bordercolor text-textmuted hover:border-textmain hover:text-textmain'
                                 }`}
                         >
                             {label}
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-sm ${activeCategory === value ? 'bg-primary/20' : 'bg-secondary'}`}>
+                                {categoryCounts[value] || 0}
+                            </span>
                         </button>
                     ))}
                 </div>
             </section>
 
-            {/* Projects Grid Formatted for Visual Showcase */}
-            <section className="py-16 px-6 flex-1">
+            {/* Projects Grid */}
+            <section className="py-12 md:py-16 px-6 flex-1">
                 <div className="max-w-7xl mx-auto">
                     {loading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className="animate-pulse">
+                        /* Loading skeleton */
+                        <div className="space-y-8">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                <div className="md:col-span-2 animate-pulse">
+                                    <div className="aspect-[16/9] bg-secondary border border-bordercolor mb-4" />
+                                    <div className="h-6 bg-secondary w-3/4 mb-2" />
+                                    <div className="h-4 bg-secondary w-1/2" />
+                                </div>
+                                <div className="animate-pulse">
                                     <div className="aspect-[4/3] bg-secondary border border-bordercolor mb-4" />
                                     <div className="h-6 bg-secondary w-3/4 mb-2" />
                                     <div className="h-4 bg-secondary w-1/2" />
                                 </div>
-                            ))}
+                            </div>
                         </div>
                     ) : filteredProjects.length === 0 ? (
+                        /* Empty state — professional */
                         <div className="text-center py-24">
-                            <p className="text-textmuted text-lg mb-2">Chưa có dự án nào.</p>
-                            <p className="text-textmuted text-sm">Hãy đăng dự án đầu tiên qua Sanity Studio!</p>
+                            <div className="w-20 h-20 bg-secondary border border-bordercolor rounded-full flex items-center justify-center mx-auto mb-6">
+                                <Image className="w-8 h-8 text-bordercolor" />
+                            </div>
+                            <h3 className="font-heading text-2xl font-bold text-textmain mb-3">Chưa có dự án nào trong danh mục này</h3>
+                            <p className="text-textmuted text-sm font-light mb-8 max-w-md mx-auto">
+                                Chúng tôi đang cập nhật thêm công trình. Liên hệ ngay để được tư vấn về các dự án tương tự.
+                            </p>
+                            <Link
+                                to="/#contact"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-primary font-bold text-sm uppercase tracking-wider hover:bg-white transition-colors"
+                            >
+                                Liên hệ tư vấn <ArrowRight className="w-4 h-4" />
+                            </Link>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                            {filteredProjects.map((project) => (
-                                <Link
-                                    to={`/portfolio/${project.slug?.current}`}
-                                    key={project._id}
-                                    className="group block"
-                                >
-                                    <div className="relative overflow-hidden border border-bordercolor aspect-[4/3] bg-secondary mb-6">
-                                        <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500 z-10 w-full h-full pointer-events-none"></div>
-                                        {project.mainImage ? (
-                                            <img
-                                                src={urlFor(project.mainImage).width(800).height(600).url()}
-                                                alt={project.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-bordercolor group-hover:scale-105 transition-transform duration-700">
-                                                Sanity Image Missing
-                                            </div>
-                                        )}
+                        <div className="space-y-8 md:space-y-12">
+                            {/* Featured project — full width on top */}
+                            {featured && (
+                                <ProjectCardLarge project={featured} usingSanity={usingSanity} />
+                            )}
 
-                                        {/* Hover text overlay */}
-                                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-primary/90 to-transparent translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                                            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent">
-                                                Xem chi tiết công trình
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                                        <div>
-                                            <div className="text-xs text-textmuted uppercase tracking-widest font-bold mb-2">
-                                                {CATEGORIES[project.category] || project.category}
-                                            </div>
-                                            <h3 className="font-heading text-2xl md:text-3xl font-bold group-hover:text-accent transition-colors">
-                                                {project.title}
-                                            </h3>
-                                        </div>
-
-                                        <div className="flex flex-wrap md:flex-col gap-3 md:gap-1 text-sm text-textmuted text-left md:text-right font-light">
-                                            {project.location && (
-                                                <div className="flex items-center md:justify-end gap-1.5">
-                                                    <MapPin className="w-3.5 h-3.5" /> {project.location}
-                                                </div>
-                                            )}
-                                            {project.area && (
-                                                <div className="flex items-center md:justify-end gap-1.5">
-                                                    <Maximize className="w-3.5 h-3.5" /> {project.area}
-                                                </div>
-                                            )}
-                                            {project.completionYear && (
-                                                <div className="flex items-center md:justify-end gap-1.5">
-                                                    <Calendar className="w-3.5 h-3.5" /> Năm {project.completionYear}
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
+                            {/* Rest of projects — 3-column grid */}
+                            {restProjects.length > 0 && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {restProjects.map((project) => (
+                                        <ProjectCardSmall key={project._id} project={project} usingSanity={usingSanity} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
             </section>
 
+            <FinalCTA />
             <Footer />
         </div>
+    );
+}
+
+/* ─── Featured Project Card (Large) ─── */
+function ProjectCardLarge({ project, usingSanity }) {
+    const isLink = usingSanity && project.slug?.current;
+    const Wrapper = isLink ? Link : "div";
+    const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
+    const catLabel = CATEGORIES[project.category] || project.category;
+    const isCompleted = project.status !== 'in-progress';
+
+    return (
+        <Wrapper {...wrapperProps} className="group block">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 bg-secondary border border-bordercolor hover:border-accent/50 transition-colors duration-300 overflow-hidden">
+                {/* Image — 3 cols */}
+                <div className="md:col-span-3 relative overflow-hidden aspect-[16/10] md:aspect-auto">
+                    {usingSanity && project.mainImage ? (
+                        <img
+                            src={urlFor(project.mainImage).width(900).height(600).url()}
+                            alt={project.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                    ) : (
+                        <div className="w-full h-full min-h-[280px] bg-gradient-to-br from-secondary via-primary to-secondary flex items-center justify-center">
+                            <Image className="w-16 h-16 text-bordercolor" />
+                        </div>
+                    )}
+
+                    {/* Status badge */}
+                    <div className="absolute top-4 left-4 z-10">
+                        <span className={`inline-flex items-center gap-1 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm border ${isCompleted
+                            ? 'bg-accent/10 border-accent/30 text-accent'
+                            : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                            }`}>
+                            {isCompleted
+                                ? <><CheckCircle className="w-3 h-3" /> Hoàn thành</>
+                                : <><HardHat className="w-3 h-3" /> Đang thi công</>
+                            }
+                        </span>
+                    </div>
+                </div>
+
+                {/* Info — 2 cols */}
+                <div className="md:col-span-2 p-6 md:p-8 flex flex-col justify-center">
+                    {catLabel && (
+                        <span className="text-accent text-xs font-bold uppercase tracking-widest mb-3">{catLabel}</span>
+                    )}
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold text-textmain group-hover:text-accent transition-colors mb-4">
+                        {project.title}
+                    </h2>
+                    {project.description && (
+                        <p className="text-textmuted text-sm font-light leading-relaxed mb-6 line-clamp-3">
+                            {project.description}
+                        </p>
+                    )}
+
+                    <div className="flex flex-wrap gap-4 text-sm text-textmuted font-light mb-6">
+                        {project.location && (
+                            <div className="flex items-center gap-1.5">
+                                <MapPin className="w-3.5 h-3.5 text-accent" /> {project.location}
+                            </div>
+                        )}
+                        {project.area && (
+                            <div className="flex items-center gap-1.5">
+                                <Maximize className="w-3.5 h-3.5 text-accent" /> {project.area}
+                            </div>
+                        )}
+                        {project.completionYear && (
+                            <div className="flex items-center gap-1.5">
+                                <Calendar className="w-3.5 h-3.5 text-accent" /> {project.completionYear}
+                            </div>
+                        )}
+                    </div>
+
+                    <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent group-hover:gap-3 transition-all">
+                        Xem chi tiết công trình <ArrowRight className="w-4 h-4" />
+                    </span>
+                </div>
+            </div>
+        </Wrapper>
+    );
+}
+
+/* ─── Standard Project Card (Small) ─── */
+function ProjectCardSmall({ project, usingSanity }) {
+    const isLink = usingSanity && project.slug?.current;
+    const Wrapper = isLink ? Link : "div";
+    const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
+    const catLabel = CATEGORIES[project.category] || project.category;
+    const isCompleted = project.status !== 'in-progress';
+
+    return (
+        <Wrapper {...wrapperProps} className="group cursor-pointer block">
+            <div className="relative overflow-hidden border border-bordercolor aspect-[4/3] bg-secondary mb-5">
+                {/* Image */}
+                {usingSanity && project.mainImage ? (
+                    <img
+                        src={urlFor(project.mainImage).width(600).height(450).url()}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-secondary via-primary to-secondary flex items-center justify-center">
+                        <Image className="w-12 h-12 text-bordercolor" />
+                    </div>
+                )}
+
+                {/* Category badge */}
+                {catLabel && (
+                    <div className="absolute top-3 left-3 z-20">
+                        <span className="px-2.5 py-1 bg-primary/80 backdrop-blur-sm border border-bordercolor text-accent text-[10px] font-bold uppercase tracking-widest">
+                            {catLabel}
+                        </span>
+                    </div>
+                )}
+
+                {/* Status badge */}
+                <div className="absolute top-3 right-3 z-20">
+                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm border ${isCompleted
+                        ? 'bg-accent/10 border-accent/30 text-accent'
+                        : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                        }`}>
+                        {isCompleted ? <CheckCircle className="w-3 h-3" /> : <HardHat className="w-3 h-3" />}
+                        {isCompleted ? 'Xong' : 'Đang TC'}
+                    </span>
+                </div>
+
+                {/* Hover overlay — slide-up info */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 flex flex-col justify-end p-5">
+                    {project.description && (
+                        <p className="text-textmuted text-xs font-light mb-2 line-clamp-2">{project.description}</p>
+                    )}
+                    <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent">
+                        Xem chi tiết <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                </div>
+
+                {/* Default overlay */}
+                <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500 z-[5] pointer-events-none"></div>
+            </div>
+
+            {/* Info below */}
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
+                <div>
+                    <h3 className="font-heading text-xl font-bold group-hover:text-accent transition-colors line-clamp-1">
+                        {project.title}
+                    </h3>
+                </div>
+                <div className="flex flex-wrap md:flex-col gap-2 md:gap-1 text-xs text-textmuted text-left md:text-right font-light shrink-0">
+                    {project.location && (
+                        <div className="flex items-center md:justify-end gap-1">
+                            <MapPin className="w-3 h-3" /> {project.location}
+                        </div>
+                    )}
+                    {project.area && (
+                        <div className="flex items-center md:justify-end gap-1">
+                            <Maximize className="w-3 h-3" /> {project.area}
+                        </div>
+                    )}
+                    {project.completionYear && (
+                        <div className="flex items-center md:justify-end gap-1">
+                            <Calendar className="w-3 h-3" /> {project.completionYear}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </Wrapper>
     );
 }

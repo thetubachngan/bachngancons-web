@@ -56,7 +56,7 @@ export default function Navbar() {
               </div>
               <div>
                 <p className="text-textmain text-xs">Khách hàng liên hệ</p>
-                <p className="text-textmuted text-xs">bachngancons@gmail.com</p>
+                <p className="text-textmuted text-xs">bachngan.design@gmail.com</p>
               </div>
             </div>
 
@@ -103,17 +103,17 @@ export default function Navbar() {
             </Link>
 
             {/* Tin tức */}
-            <Link to="/news" className="px-6 border-r border-bordercolor hover:text-accent transition-colors flex items-center h-full">
+            <Link to="/news" className={`px-6 border-r border-bordercolor hover:text-accent transition-colors flex items-center h-full ${location.pathname.startsWith('/news') ? 'text-accent' : ''}`}>
               Tin tức
             </Link>
 
             {/* Hợp tác */}
-            <Link to="/partners" className="px-6 border-r border-bordercolor hover:text-accent transition-colors flex items-center h-full">
+            <Link to="/partners" className={`px-6 border-r border-bordercolor hover:text-accent transition-colors flex items-center h-full ${location.pathname.startsWith('/partners') ? 'text-accent' : ''}`}>
               Hợp tác
             </Link>
 
             {/* Tuyển dụng */}
-            <Link to="/careers" className="px-6 border-r border-bordercolor hover:text-accent transition-colors flex items-center h-full">
+            <Link to="/careers" className={`px-6 border-r border-bordercolor hover:text-accent transition-colors flex items-center h-full ${location.pathname.startsWith('/careers') ? 'text-accent' : ''}`}>
               Tuyển dụng
             </Link>
           </div>

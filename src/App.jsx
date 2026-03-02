@@ -13,6 +13,9 @@ import ServicesPage from './pages/ServicesPage';
 import ConstructionPage from './pages/ConstructionPage';
 import InteriorPage from './pages/InteriorPage';
 import RenovationPage from './pages/RenovationPage';
+import NewsPage from './pages/NewsPage';
+import PartnersPage from './pages/PartnersPage';
+import CareersPage from './pages/CareersPage';
 
 export default function App() {
   return (
@@ -28,6 +31,9 @@ export default function App() {
           <Route path="/cai-tao" element={<RenovationPage />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/partners" element={<PartnersPage />} />
+          <Route path="/careers" element={<CareersPage />} />
           <Route path="/portfolio" element={<PortfolioList />} />
           <Route path="/portfolio/:slug" element={<PortfolioPost />} />
           <Route path="/phong-thuy" element={<FengShuiCompass />} />
