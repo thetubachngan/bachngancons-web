@@ -201,7 +201,7 @@ export default function ConstructionPage() {
                                         <span><strong>Sơn:</strong> Maxilite/Jotaplast</span>
                                     </li>
                                 </ul>
-                                <button className="w-full py-3 bg-secondary border border-bordercolor hover:border-accent text-white uppercase text-sm font-bold transition-colors">Tư Vấn Gói Này</button>
+                                <a href="tel:0858651818" className="w-full py-3 bg-secondary border border-bordercolor hover:border-accent text-white uppercase text-sm font-bold transition-colors block text-center">Tư Vấn Gói Này</a>
                             </div>
 
                             {/* Gói Cao Cấp */}
@@ -235,7 +235,7 @@ export default function ConstructionPage() {
                                         <span><strong>Sơn:</strong> DULUX Lau chùi hiệu quả / JOTUN Majestic.</span>
                                     </li>
                                 </ul>
-                                <button className="w-full py-4 bg-accent hover:bg-white text-primary uppercase text-sm font-bold transition-colors">Xem Form Vật Tư Chi Tiết</button>
+                                <a href="tel:0858651818" className="w-full py-4 bg-accent hover:bg-white text-primary uppercase text-sm font-bold transition-colors block text-center">Xem Form Vật Tư Chi Tiết</a>
                             </div>
 
                             {/* Gói Luxury */}
@@ -266,7 +266,7 @@ export default function ConstructionPage() {
                                         <span><strong>Sơn:</strong> DULUX WeatherShield / Sơn hiệu ứng.</span>
                                     </li>
                                 </ul>
-                                <button className="w-full py-3 bg-secondary border border-bordercolor hover:border-accent text-white uppercase text-sm font-bold transition-colors">Tư Vấn Giải Pháp VIP</button>
+                                <a href="mailto:bachngan.design@gmail.com?subject=Tư vấn Gói Luxury — Thi Công Trọn Gói&body=Xin chào Bách Ngân,%0D%0ATôi quan tâm đến Gói Luxury (7.0+ tr/m²).%0D%0AXin hãy liên hệ lại.%0D%0A%0D%0AHọ tên:%0D%0ASĐT:" className="w-full py-3 bg-secondary border border-bordercolor hover:border-accent text-white uppercase text-sm font-bold transition-colors block text-center">Tư Vấn Giải Pháp VIP</a>
                             </div>
                         </div>
                     </div>

@@ -74,9 +74,9 @@ export default function ServicesPage() {
                                 </li>
                             </ul>
 
-                            <button className="w-full py-4 bg-primary border-2 border-bordercolor hover:border-accent text-textmain font-bold uppercase tracking-wider text-sm transition-colors duration-300">
+                            <a href="https://zalo.me/0858651818" target="_blank" rel="noopener noreferrer" className="w-full py-4 bg-primary border-2 border-bordercolor hover:border-accent text-textmain font-bold uppercase tracking-wider text-sm transition-colors duration-300 block text-center">
                                 Nhận Tư Vấn
-                            </button>
+                            </a>
                         </div>
 
                         {/* Package 2: Tiêu chuẩn (Highlight) */}
@@ -112,9 +112,9 @@ export default function ServicesPage() {
                                 </li>
                             </ul>
 
-                            <button className="w-full py-4 bg-accent text-primary font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors duration-300">
+                            <a href="tel:0858651818" className="w-full py-4 bg-accent text-primary font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors duration-300 block text-center">
                                 Đăng Ký Gói Này
-                            </button>
+                            </a>
                         </div>
 
                         {/* Package 3: Cao cấp */}
@@ -146,9 +146,9 @@ export default function ServicesPage() {
                                 </li>
                             </ul>
 
-                            <button className="w-full py-4 bg-primary border-2 border-bordercolor hover:border-accent text-textmain font-bold uppercase tracking-wider text-sm transition-colors duration-300">
+                            <a href="mailto:bachngan.design@gmail.com?subject=Đăng ký Gói Cao Cấp — Thiết Kế Kiến Trúc&body=Xin chào Bách Ngân,%0D%0ATôi quan tâm đến Gói Cao Cấp (250k/m²).%0D%0AXin hãy liên hệ lại với tôi.%0D%0A%0D%0AHọ tên:%0D%0ASố điện thoại:%0D%0AĐịa chỉ công trình:" className="w-full py-4 bg-primary border-2 border-bordercolor hover:border-accent text-textmain font-bold uppercase tracking-wider text-sm transition-colors duration-300 block text-center">
                                 Nhận Tư Vấn VIP
-                            </button>
+                            </a>
                         </div>
 
                     </div>

@@ -33,9 +33,9 @@ export default function InteriorPage() {
                         Sản xuất trực tiếp tại xưởng — cắt bỏ trung gian. Thiết kế 3D trước khi thi công,
                         vật liệu rõ nguồn gốc, <span className="text-white font-bold border-b border-accent">lắp đặt tận nơi — bảo hành rõ ràng theo từng hạng mục.</span>
                     </p>
-                    <button className="px-8 py-4 bg-accent text-primary font-bold text-lg uppercase tracking-wider hover:bg-white hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.4)]">
+                    <a href="https://zalo.me/0858651818" target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-4 bg-accent text-primary font-bold text-lg uppercase tracking-wider hover:bg-white hover:text-primary transition-all duration-300 shadow-[0_0_20px_rgba(52,211,153,0.4)]">
                         Nhận Tư Vấn Miễn Phí
-                    </button>
+                    </a>
                 </div>
             </section>
 
