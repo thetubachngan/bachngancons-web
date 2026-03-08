@@ -14,21 +14,21 @@ const PROJECT_GROUPS = [
 const CATEGORIES = {
     'thiet-ke-kien-truc': { group: 'thiet-ke', label: 'Thiết kế kiến trúc' },
     'thiet-ke-noi-that': { group: 'thiet-ke', label: 'Thiết kế nội thất' },
-    'thi-cong-tron-goi': { group: 'thi-cong', label: 'Thi công trọn gói' },
-    'thi-cong-noi-that': { group: 'thi-cong', label: 'Thi công nội thất' },
-    'thi-cong-cai-tao-sua-chua': { group: 'thi-cong', label: 'Cải tạo & Sửa chữa' },
+    'xay-moi-tron-goi': { group: 'thi-cong', label: 'Xây mới trọn gói' },
+    'cai-tao-sua-chua': { group: 'thi-cong', label: 'Cải tạo & Sửa chữa' },
 };
 
-const QUERY_ALL = `*[_type == "project"] | order(completionYear desc, publishedAt desc) {
+const QUERY_ALL = `*[_type in ["project", "design"]] | order(completionYear desc, publishedAt desc) {
   _id,
+  _type,
   title,
   slug,
-  projectGroup,
   category,
   location,
   area,
   completionYear,
   mainImage,
+  "galleryCover": gallery[0],
   status
 }`;
 
@@ -37,7 +37,7 @@ const FALLBACK_PROJECTS = [
         _id: "f-1",
         title: "Nhà Phố Hiện Đại Cầu Giấy",
         slug: null,
-        projectGroup: "thiet-ke",
+        _type: "design",
         category: "thiet-ke-kien-truc",
         location: "Cầu Giấy, Hà Nội",
         area: "350m²",
@@ -49,7 +49,7 @@ const FALLBACK_PROJECTS = [
         _id: "f-2",
         title: "Biệt Thự Vườn Ecopark",
         slug: null,
-        projectGroup: "thiet-ke",
+        _type: "design",
         category: "thiet-ke-kien-truc",
         location: "Ecopark, Hưng Yên",
         area: "500m²",
@@ -61,8 +61,8 @@ const FALLBACK_PROJECTS = [
         _id: "f-3",
         title: "Nhà Phố Tây Tựu",
         slug: null,
-        projectGroup: "thi-cong",
-        category: "thi-cong-tron-goi",
+        _type: "project",
+        category: "xay-moi-tron-goi",
         location: "Bắc Từ Liêm, Hà Nội",
         area: "400m²",
         completionYear: 2024,
@@ -73,8 +73,8 @@ const FALLBACK_PROJECTS = [
         _id: "f-4",
         title: "Biệt Thự Việt Hưng",
         slug: null,
-        projectGroup: "thi-cong",
-        category: "thi-cong-tron-goi",
+        _type: "project",
+        category: "xay-moi-tron-goi",
         location: "Long Biên, Hà Nội",
         area: "320m²",
         completionYear: 2024,
@@ -85,8 +85,8 @@ const FALLBACK_PROJECTS = [
         _id: "f-5",
         title: "Nhà Phố Đông Anh",
         slug: null,
-        projectGroup: "thi-cong",
-        category: "thi-cong-tron-goi",
+        _type: "project",
+        category: "xay-moi-tron-goi",
         location: "Đông Anh, Hà Nội",
         area: "280m²",
         completionYear: 2025,
@@ -97,7 +97,7 @@ const FALLBACK_PROJECTS = [
         _id: "f-6",
         title: "Nội Thất Ngô Quyền",
         slug: null,
-        projectGroup: "thiet-ke",
+        _type: "design",
         category: "thiet-ke-noi-that",
         location: "Hải Phòng",
         area: "180m²",
@@ -109,7 +109,7 @@ const FALLBACK_PROJECTS = [
         _id: "f-7",
         title: "Nội Thất Căn Hộ Vinhomes",
         slug: null,
-        projectGroup: "thiet-ke",
+        _type: "design",
         category: "thiet-ke-noi-that",
         location: "Ocean Park, Hà Nội",
         area: "95m²",
@@ -121,8 +121,8 @@ const FALLBACK_PROJECTS = [
         _id: "f-8",
         title: "Cải Tạo Nhà Cũ Thanh Xuân",
         slug: null,
-        projectGroup: "thi-cong",
-        category: "thi-cong-cai-tao-sua-chua",
+        _type: "project",
+        category: "cai-tao-sua-chua",
         location: "Thanh Xuân, Hà Nội",
         area: "120m²",
         completionYear: 2025,
@@ -156,12 +156,12 @@ export default function PortfolioList() {
 
     const filteredProjects = allItems.filter((p) => {
         if (activeCategory) return p.category === activeCategory;
-        if (activeGroup) return p.projectGroup === activeGroup || CATEGORIES[p.category]?.group === activeGroup;
+        if (activeGroup) return CATEGORIES[p.category]?.group === activeGroup;
         return true;
     });
 
     const groupCounts = PROJECT_GROUPS.reduce((acc, group) => {
-        acc[group.id] = allItems.filter(p => p.projectGroup === group.id || CATEGORIES[p.category]?.group === group.id).length;
+        acc[group.id] = allItems.filter(p => CATEGORIES[p.category]?.group === group.id).length;
         return acc;
     }, {});
 
@@ -350,15 +350,16 @@ function ProjectCardLarge({ project, usingSanity }) {
     const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
     const catLabel = CATEGORIES[project.category]?.label || project.category;
     const isCompleted = project.status !== 'in-progress';
+    const imageSource = project.mainImage || project.galleryCover;
 
     return (
         <Wrapper {...wrapperProps} className="group block">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 bg-secondary border border-bordercolor hover:border-accent/50 transition-colors duration-300 overflow-hidden">
                 {/* Image — 3 cols */}
                 <div className="md:col-span-3 relative overflow-hidden aspect-[16/10] md:aspect-auto">
-                    {usingSanity && project.mainImage ? (
+                    {usingSanity && imageSource ? (
                         <img
-                            src={urlFor(project.mainImage).width(900).height(600).url()}
+                            src={urlFor(imageSource).width(900).height(600).url()}
                             alt={project.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
@@ -430,14 +431,15 @@ function ProjectCardSmall({ project, usingSanity }) {
     const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
     const catLabel = CATEGORIES[project.category]?.label || project.category;
     const isCompleted = project.status !== 'in-progress';
+    const imageSource = project.mainImage || project.galleryCover;
 
     return (
         <Wrapper {...wrapperProps} className="group cursor-pointer block">
             <div className="relative overflow-hidden border border-bordercolor aspect-[4/3] bg-secondary mb-5">
                 {/* Image */}
-                {usingSanity && project.mainImage ? (
+                {usingSanity && imageSource ? (
                     <img
-                        src={urlFor(project.mainImage).width(600).height(450).url()}
+                        src={urlFor(imageSource).width(600).height(450).url()}
                         alt={project.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />

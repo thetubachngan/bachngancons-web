@@ -3,32 +3,31 @@ import { Link } from "react-router-dom";
 import { Image, ArrowRight, MapPin, Maximize, Calendar, CheckCircle, HardHat } from "lucide-react";
 import { sanityClient, urlFor } from "../lib/sanityClient";
 
-const QUERY = `*[_type == "project"] | order(completionYear desc, publishedAt desc) [0...6] {
+const QUERY = `*[_type in ["project", "design"]] | order(completionYear desc, publishedAt desc) [0...6] {
   _id,
+  _type,
   title,
   slug,
-  projectGroup,
   category,
   location,
   area,
   completionYear,
   mainImage,
+  "galleryCover": gallery[0],
   status
 }`;
 
 const CATEGORIES = {
   'thiet-ke-kien-truc': 'Kiến trúc',
   'thiet-ke-noi-that': 'Nội thất',
-  'thi-cong-tron-goi': 'Thi công trọn gói',
-  'thi-cong-noi-that': 'TC Nội thất',
-  'thi-cong-cai-tao-sua-chua': 'Cải tạo',
+  'xay-moi-tron-goi': 'Xây mới',
+  'cai-tao-sua-chua': 'Cải tạo',
 };
 
 const FALLBACK_PROJECTS = [
   {
     _id: "f-1",
     title: "Nhà Phố Hiện Đại Cầu Giấy",
-    projectGroup: "thiet-ke",
     category: "thiet-ke-kien-truc",
     location: "Cầu Giấy, Hà Nội",
     area: "350m²",
@@ -39,8 +38,7 @@ const FALLBACK_PROJECTS = [
   {
     _id: "f-2",
     title: "Nhà Phố Tây Tựu",
-    projectGroup: "thi-cong",
-    category: "thi-cong-tron-goi",
+    category: "xay-moi-tron-goi",
     location: "Bắc Từ Liêm, Hà Nội",
     area: "400m²",
     completionYear: 2024,
@@ -50,8 +48,7 @@ const FALLBACK_PROJECTS = [
   {
     _id: "f-3",
     title: "Biệt Thự Việt Hưng",
-    projectGroup: "thi-cong",
-    category: "thi-cong-tron-goi",
+    category: "xay-moi-tron-goi",
     location: "Long Biên, Hà Nội",
     area: "320m²",
     completionYear: 2024,
@@ -61,7 +58,6 @@ const FALLBACK_PROJECTS = [
   {
     _id: "f-4",
     title: "Nội Thất Ngô Quyền",
-    projectGroup: "thiet-ke",
     category: "thiet-ke-noi-that",
     location: "Hải Phòng",
     area: "180m²",
@@ -71,8 +67,7 @@ const FALLBACK_PROJECTS = [
   {
     _id: "f-5",
     title: "Cải Tạo Quán Cafe",
-    projectGroup: "thi-cong",
-    category: "thi-cong-cai-tao-sua-chua",
+    category: "cai-tao-sua-chua",
     location: "Hà Nội",
     area: "150m²",
     completionYear: 2023,
@@ -81,8 +76,7 @@ const FALLBACK_PROJECTS = [
   {
     _id: "f-6",
     title: "Nhà Phố Đông Anh",
-    projectGroup: "thi-cong",
-    category: "thi-cong-tron-goi",
+    category: "xay-moi-tron-goi",
     location: "Đông Anh, Hà Nội",
     area: "280m²",
     completionYear: 2025,
@@ -96,6 +90,7 @@ function ProjectCard({ project, usingSanity, isFeatured = false }) {
   const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
   const catLabel = CATEGORIES[project.category] || project.category || '';
   const isCompleted = project.status !== 'in-progress';
+  const imageSource = project.mainImage || project.galleryCover;
 
   return (
     <Wrapper
@@ -104,9 +99,9 @@ function ProjectCard({ project, usingSanity, isFeatured = false }) {
     >
       <div className={`relative overflow-hidden border border-bordercolor bg-secondary ${isFeatured ? 'aspect-[16/10] md:aspect-[16/9]' : 'aspect-[4/3]'}`}>
         {/* Image or placeholder */}
-        {usingSanity && project.mainImage ? (
+        {usingSanity && imageSource ? (
           <img
-            src={urlFor(project.mainImage).width(isFeatured ? 1200 : 600).height(isFeatured ? 675 : 450).url()}
+            src={urlFor(imageSource).width(isFeatured ? 1200 : 600).height(isFeatured ? 675 : 450).url()}
             alt={project.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />

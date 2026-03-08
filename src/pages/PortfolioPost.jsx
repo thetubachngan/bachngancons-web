@@ -7,14 +7,15 @@ import Navbar from '../components/Navbar';
 import Footer from '../sections/Footer';
 
 const CATEGORIES = {
-    'xay-moi-tron-goi': 'Xây mới trọn gói',
+    'thiet-ke-kien-truc': 'Thiết kế kiến trúc',
     'thiet-ke-noi-that': 'Thiết kế nội thất',
-    'thi-cong-thuong-mai': 'Thi công thương mại',
+    'xay-moi-tron-goi': 'Xây mới trọn gói',
     'cai-tao-sua-chua': 'Cải tạo & Sửa chữa',
 };
 
-const QUERY_PROJECT = `*[_type == "project" && slug.current == $slug][0] {
+const QUERY_PROJECT = `*[_type in ["project", "design"] && slug.current == $slug][0] {
   _id,
+  _type,
   title,
   slug,
   category,
@@ -148,11 +149,11 @@ export default function PortfolioPost() {
             </section>
 
             {/* Main Image */}
-            {project.mainImage && (
+            {(project.mainImage || (project.gallery && project.gallery.length > 0)) && (
                 <section className="px-6 py-12">
                     <div className="max-w-7xl mx-auto">
                         <img
-                            src={urlFor(project.mainImage).width(1600).height(900).url()}
+                            src={urlFor(project.mainImage || project.gallery[0]).width(1600).height(900).url()}
                             alt={project.title}
                             className="w-full border border-bordercolor"
                         />
