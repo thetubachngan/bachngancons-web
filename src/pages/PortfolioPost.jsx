@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ChevronLeft, MapPin, Maximize, Calendar } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MapPin, Maximize, Calendar } from 'lucide-react';
 import { PortableText } from '@portabletext/react';
 import { sanityClient, urlFor } from '../lib/sanityClient';
 import Navbar from '../components/Navbar';
@@ -22,6 +22,9 @@ const QUERY_PROJECT = `*[_type in ["project", "design"] && slug.current == $slug
   location,
   area,
   completionYear,
+  clientName,
+  designStyle,
+  architecturalType,
   mainImage,
   gallery,
   body
@@ -46,6 +49,118 @@ const ptComponents = {
         ),
     },
 };
+
+/* ─── Image Carousel with auto-slide ─── */
+function ImageCarousel({ images, title }) {
+    const [current, setCurrent] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const total = images.length;
+
+    const goTo = useCallback((idx) => {
+        if (isTransitioning || idx === current) return;
+        setIsTransitioning(true);
+        setCurrent(idx);
+        setTimeout(() => setIsTransitioning(false), 700);
+    }, [current, isTransitioning]);
+
+    const next = useCallback(() => goTo((current + 1) % total), [current, total, goTo]);
+    const prev = useCallback(() => goTo((current - 1 + total) % total), [current, total, goTo]);
+
+    // Auto-slide every 4s
+    useEffect(() => {
+        if (total <= 1) return;
+        const timer = setInterval(next, 4000);
+        return () => clearInterval(timer);
+    }, [next, total]);
+
+    if (total === 0) return null;
+
+    return (
+        <div className="relative group">
+            {/* Main image area */}
+            <div className="relative aspect-[16/9] overflow-hidden border border-bordercolor bg-secondary">
+                {images.map((img, idx) => (
+                    <img
+                        key={idx}
+                        src={urlFor(img).width(1600).height(900).url()}
+                        alt={`${title} - Ảnh ${idx + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${idx === current ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                            }`}
+                        loading={idx < 2 ? 'eager' : 'lazy'}
+                    />
+                ))}
+
+                {/* Counter badge */}
+                <div className="absolute top-4 right-4 z-20 bg-primary/70 backdrop-blur-sm border border-bordercolor px-3 py-1.5 text-xs font-bold text-textmain tracking-wider">
+                    {current + 1} / {total}
+                </div>
+
+                {/* Prev / Next arrows */}
+                {total > 1 && (
+                    <>
+                        <button
+                            onClick={prev}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-primary/60 backdrop-blur-sm border border-bordercolor text-textmain flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-accent hover:text-primary hover:border-accent"
+                            aria-label="Ảnh trước"
+                        >
+                            <ChevronLeft className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={next}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-primary/60 backdrop-blur-sm border border-bordercolor text-textmain flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-accent hover:text-primary hover:border-accent"
+                            aria-label="Ảnh tiếp"
+                        >
+                            <ChevronRight className="w-5 h-5" />
+                        </button>
+                    </>
+                )}
+
+                {/* Bottom gradient overlay */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-primary/50 to-transparent pointer-events-none z-10"></div>
+            </div>
+
+            {/* Dot indicators */}
+            {total > 1 && (
+                <div className="flex justify-center gap-2 mt-4 flex-wrap">
+                    {images.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => goTo(idx)}
+                            className={`transition-all duration-300 rounded-full ${idx === current
+                                    ? 'w-8 h-2 bg-accent'
+                                    : 'w-2 h-2 bg-bordercolor hover:bg-textmuted'
+                                }`}
+                            aria-label={`Xem ảnh ${idx + 1}`}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Thumbnail strip */}
+            {total > 1 && (
+                <div className="mt-4 flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+                    {images.map((img, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => goTo(idx)}
+                            className={`shrink-0 w-20 h-14 md:w-24 md:h-16 overflow-hidden border-2 transition-all duration-300 ${idx === current
+                                    ? 'border-accent opacity-100 scale-105'
+                                    : 'border-bordercolor opacity-50 hover:opacity-80'
+                                }`}
+                        >
+                            <img
+                                src={urlFor(img).width(200).height(140).url()}
+                                alt={`Thumbnail ${idx + 1}`}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                            />
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
 
 export default function PortfolioPost() {
     const { slug } = useParams();
@@ -95,6 +210,20 @@ export default function PortfolioPost() {
         );
     }
 
+    // Merge mainImage + gallery into one array
+    const allImages = [];
+    if (project.mainImage) allImages.push(project.mainImage);
+    if (project.gallery && project.gallery.length > 0) {
+        project.gallery.forEach((img) => {
+            // Avoid duplicate if mainImage is already the first gallery item
+            if (!project.mainImage || img._key !== project.mainImage._key) {
+                allImages.push(img);
+            }
+        });
+    }
+
+    const isDesign = project._type === 'design';
+
     return (
         <div className="antialiased min-h-screen flex flex-col bg-primary text-textmain selection:bg-accent selection:text-primary">
             <div className="noise-overlay"></div>
@@ -108,7 +237,7 @@ export default function PortfolioPost() {
                             to="/portfolio"
                             className="inline-flex items-center gap-2 text-sm text-textmuted hover:text-accent transition-colors mb-6"
                         >
-                            <ChevronLeft className="w-4 h-4" /> Toàn bộ công trình
+                            <ChevronLeft className="w-4 h-4" /> Toàn bộ dự án
                         </Link>
                         <div className="text-xs text-accent uppercase tracking-widest font-bold mb-3">
                             {CATEGORIES[project.category] || project.category}
@@ -120,6 +249,14 @@ export default function PortfolioPost() {
 
                     {/* Project Meta Info */}
                     <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-6 bg-primary p-6 md:p-8 border border-bordercolor md:min-w-[300px]">
+                        {project.clientName && (
+                            <div>
+                                <div className="text-xs text-textmuted uppercase tracking-widest font-bold mb-1">
+                                    Chủ đầu tư
+                                </div>
+                                <div className="font-medium text-lg">{project.clientName}</div>
+                            </div>
+                        )}
                         {project.location && (
                             <div>
                                 <div className="text-xs text-textmuted uppercase tracking-widest font-bold mb-1 flex items-center gap-1.5">
@@ -131,7 +268,7 @@ export default function PortfolioPost() {
                         {project.area && (
                             <div>
                                 <div className="text-xs text-textmuted uppercase tracking-widest font-bold mb-1 flex items-center gap-1.5">
-                                    <Maximize className="w-3.5 h-3.5" /> Quy mô
+                                    <Maximize className="w-3.5 h-3.5" /> Diện tích
                                 </div>
                                 <div className="font-medium text-lg">{project.area}</div>
                             </div>
@@ -144,24 +281,28 @@ export default function PortfolioPost() {
                                 <div className="font-medium text-lg">{project.completionYear}</div>
                             </div>
                         )}
+                        {project.designStyle && (
+                            <div>
+                                <div className="text-xs text-textmuted uppercase tracking-widest font-bold mb-1">
+                                    Phong cách
+                                </div>
+                                <div className="font-medium text-lg">{project.designStyle}</div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
 
-            {/* Main Image */}
-            {(project.mainImage || (project.gallery && project.gallery.length > 0)) && (
+            {/* Image Carousel — all images in one auto-sliding carousel */}
+            {allImages.length > 0 && (
                 <section className="px-6 py-12">
                     <div className="max-w-7xl mx-auto">
-                        <img
-                            src={urlFor(project.mainImage || project.gallery[0]).width(1600).height(900).url()}
-                            alt={project.title}
-                            className="w-full border border-bordercolor"
-                        />
+                        <ImageCarousel images={allImages} title={project.title} />
                     </div>
                 </section>
             )}
 
-            {/* Description */}
+            {/* Description / Body */}
             {project.body && (
                 <article className="py-8 px-6">
                     <div className="max-w-3xl mx-auto prose-custom">
@@ -170,33 +311,12 @@ export default function PortfolioPost() {
                 </article>
             )}
 
-            {/* Image Gallery */}
-            {project.gallery && project.gallery.length > 0 && (
-                <section className="py-16 px-6 bg-secondary border-t border-bordercolor">
-                    <div className="max-w-7xl mx-auto">
-                        <h2 className="font-heading text-3xl font-bold mb-12 text-center">Thư Viện Ảnh Thực Tế</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {project.gallery.map((img, idx) => (
-                                <div key={idx} className="aspect-[4/3] border border-bordercolor bg-primary overflow-hidden">
-                                    <img
-                                        src={urlFor(img).width(800).height(600).url()}
-                                        alt={`${project.title} - Ảnh ${idx + 1}`}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
-
             {/* CTA */}
             <section className="py-24 px-6 bg-primary border-t border-bordercolor">
                 <div className="max-w-3xl mx-auto text-center">
                     <p className="text-accent text-sm font-bold uppercase tracking-widest mb-4">Bắt Đầu Dự Án Mới</p>
                     <h2 className="font-heading text-4xl md:text-5xl font-black text-textmain mb-8">
-                        Bạn cần tư vấn thiết kế thi công?
+                        {isDesign ? 'Bạn cần tư vấn thiết kế?' : 'Bạn cần tư vấn thiết kế thi công?'}
                     </h2>
                     <Link
                         to="/#contact"
