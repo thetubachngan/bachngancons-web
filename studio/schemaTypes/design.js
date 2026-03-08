@@ -1,13 +1,13 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-    name: 'project',
-    title: 'Công trình',
+    name: 'design',
+    title: 'Thiết kế',
     type: 'document',
     fields: [
         defineField({
             name: 'title',
-            title: 'Tên công trình',
+            title: 'Tên thiết kế / Dự án',
             type: 'string',
             validation: (rule) => rule.required(),
         }),
@@ -23,29 +23,44 @@ export default defineType({
         }),
         defineField({
             name: 'category',
-            title: 'Loại hình',
+            title: 'Loại hình thiết kế',
             type: 'string',
             options: {
                 list: [
-                    { title: 'Thiết kế kiến trúc', value: 'thiet-ke-kien-truc' },
                     { title: 'Thiết kế nội thất', value: 'thiet-ke-noi-that' },
-                    { title: 'Xây mới trọn gói', value: 'xay-moi-tron-goi' },
-                    { title: 'Cải tạo & Sửa chữa', value: 'cai-tao-sua-chua' },
+                    { title: 'Thiết kế kiến trúc', value: 'thiet-ke-kien-truc' },
                 ],
             },
             validation: (rule) => rule.required(),
         }),
         defineField({
-            name: 'location',
-            title: 'Địa điểm',
+            name: 'architecturalType',
+            title: 'Loại hình kiến trúc',
             type: 'string',
-            description: 'Ví dụ: Hà Nội, Hải Phòng...',
+            options: {
+                list: [
+                    { title: 'Nhà phố', value: 'nha-pho' },
+                    { title: 'Biệt thự', value: 'biet-thu' },
+                    { title: 'Căn hộ chung cư', value: 'can-ho' },
+                    { title: 'Văn phòng', value: 'van-phong' },
+                    { title: 'Nhà cấp 4 / Cấp 4 mái Thái', value: 'nha-cap-4' },
+                    { title: 'Nhà trọ / Chung cư mini', value: 'nha-tro' },
+                    { title: 'Quán Cafe / Nhà hàng', value: 'fnb' },
+                ],
+            },
+            description: 'Phân loại công trình (ví dụ: Nhà phố, Biệt thự...)',
         }),
         defineField({
             name: 'clientName',
-            title: 'Chủ công trình (Investors)',
+            title: 'Tên chủ đầu tư',
             type: 'string',
-            description: 'Tên chủ đầu tư dự án',
+            description: 'Tên khách hàng hoặc chủ đầu tư',
+        }),
+        defineField({
+            name: 'location',
+            title: 'Địa chỉ công trình',
+            type: 'string',
+            description: 'Ví dụ: Quận 9, TP.HCM',
         }),
         defineField({
             name: 'designStyle',
@@ -67,30 +82,23 @@ export default defineType({
         }),
         defineField({
             name: 'area',
-            title: 'Quy mô / Diện tích',
+            title: 'Diện tích (m2)',
             type: 'string',
-            description: 'Ví dụ: 400m2, 3 tầng...',
+            description: 'Ví dụ: 120m2, 350m2...',
         }),
         defineField({
             name: 'completionYear',
             title: 'Năm hoàn thành',
             type: 'number',
         }),
-        defineField({
-            name: 'mainImage',
-            title: 'Ảnh đại diện',
-            type: 'image',
-            options: {
-                hotspot: true,
-            },
-            validation: (rule) => rule.required(),
-        }),
+
         defineField({
             name: 'gallery',
-            title: 'Thư viện ảnh',
+            title: 'Hình ảnh thiết kế',
             type: 'array',
             of: [{ type: 'image', options: { hotspot: true } }],
-            description: 'Thêm các hình ảnh thực tế của công trình',
+            description: 'Thêm toàn bộ hình ảnh. Hình đầu tiên sẽ tự động được chọn làm ảnh đại diện.',
+            validation: (rule) => rule.required().min(1).error('Cần ít nhất 1 hình ảnh để làm ảnh đại diện.'),
         }),
         defineField({
             name: 'body',
@@ -110,11 +118,6 @@ export default defineType({
     ],
     orderings: [
         {
-            title: 'Năm hoàn thành mới nhất',
-            name: 'completionYearDesc',
-            by: [{ field: 'completionYear', direction: 'desc' }],
-        },
-        {
             title: 'Ngày đăng mới nhất',
             name: 'publishedAtDesc',
             by: [{ field: 'publishedAt', direction: 'desc' }],
@@ -123,8 +126,8 @@ export default defineType({
     preview: {
         select: {
             title: 'title',
-            media: 'mainImage',
-            subtitle: 'location',
+            media: 'gallery.0',
+            subtitle: 'category',
         },
     },
 })

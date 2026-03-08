@@ -6,17 +6,24 @@ import Navbar from '../components/Navbar';
 import FinalCTA from '../sections/FinalCTA';
 import Footer from '../sections/Footer';
 
+const PROJECT_GROUPS = [
+    { id: 'thiet-ke', label: 'Thiết kế' },
+    { id: 'thi-cong', label: 'Thi công' }
+];
+
 const CATEGORIES = {
-    'xay-moi-tron-goi': 'Xây mới trọn gói',
-    'thiet-ke-noi-that': 'Thiết kế nội thất',
-    'thi-cong-thuong-mai': 'Thi công thương mại',
-    'cai-tao-sua-chua': 'Cải tạo & Sửa chữa',
+    'thiet-ke-kien-truc': { group: 'thiet-ke', label: 'Thiết kế kiến trúc' },
+    'thiet-ke-noi-that': { group: 'thiet-ke', label: 'Thiết kế nội thất' },
+    'thi-cong-tron-goi': { group: 'thi-cong', label: 'Thi công trọn gói' },
+    'thi-cong-noi-that': { group: 'thi-cong', label: 'Thi công nội thất' },
+    'thi-cong-cai-tao-sua-chua': { group: 'thi-cong', label: 'Cải tạo & Sửa chữa' },
 };
 
 const QUERY_ALL = `*[_type == "project"] | order(completionYear desc, publishedAt desc) {
   _id,
   title,
   slug,
+  projectGroup,
   category,
   location,
   area,
@@ -28,9 +35,34 @@ const QUERY_ALL = `*[_type == "project"] | order(completionYear desc, publishedA
 const FALLBACK_PROJECTS = [
     {
         _id: "f-1",
+        title: "Nhà Phố Hiện Đại Cầu Giấy",
+        slug: null,
+        projectGroup: "thiet-ke",
+        category: "thiet-ke-kien-truc",
+        location: "Cầu Giấy, Hà Nội",
+        area: "350m²",
+        completionYear: 2024,
+        status: "completed",
+        description: "Thiết kế kiến trúc nhà phố 4 tầng phong cách hiện đại tối giản, tối ưu thông gió và chiếu sáng tự nhiên.",
+    },
+    {
+        _id: "f-2",
+        title: "Biệt Thự Vườn Ecopark",
+        slug: null,
+        projectGroup: "thiet-ke",
+        category: "thiet-ke-kien-truc",
+        location: "Ecopark, Hưng Yên",
+        area: "500m²",
+        completionYear: 2025,
+        status: "in-progress",
+        description: "Thiết kế kiến trúc biệt thự vườn phong cách nhiệt đới, hài hòa cảnh quan xanh và không gian sống.",
+    },
+    {
+        _id: "f-3",
         title: "Nhà Phố Tây Tựu",
         slug: null,
-        category: "xay-moi-tron-goi",
+        projectGroup: "thi-cong",
+        category: "thi-cong-tron-goi",
         location: "Bắc Từ Liêm, Hà Nội",
         area: "400m²",
         completionYear: 2024,
@@ -38,10 +70,11 @@ const FALLBACK_PROJECTS = [
         description: "Công trình nhà phố 3 tầng thiết kế hiện đại, tối ưu ánh sáng tự nhiên và không gian sống cho gia đình 3 thế hệ.",
     },
     {
-        _id: "f-2",
+        _id: "f-4",
         title: "Biệt Thự Việt Hưng",
         slug: null,
-        category: "xay-moi-tron-goi",
+        projectGroup: "thi-cong",
+        category: "thi-cong-tron-goi",
         location: "Long Biên, Hà Nội",
         area: "320m²",
         completionYear: 2024,
@@ -49,32 +82,11 @@ const FALLBACK_PROJECTS = [
         description: "Biệt thự song lập phong cách tân cổ điển, hệ thống smarthome tích hợp toàn bộ.",
     },
     {
-        _id: "f-3",
-        title: "Nội Thất Ngô Quyền",
-        slug: null,
-        category: "thiet-ke-noi-that",
-        location: "Hải Phòng",
-        area: "180m²",
-        completionYear: 2023,
-        status: "completed",
-        description: "Thiết kế và thi công nội thất trọn gói căn hộ phong cách Scandinavian hiện đại.",
-    },
-    {
-        _id: "f-4",
-        title: "Cafe Phúc – Thương Mại",
-        slug: null,
-        category: "thi-cong-thuong-mai",
-        location: "Hà Nội",
-        area: "150m²",
-        completionYear: 2023,
-        status: "completed",
-        description: "Thi công quán cafe phong cách công nghiệp, tối ưu không gian kinh doanh và trải nghiệm khách hàng.",
-    },
-    {
         _id: "f-5",
         title: "Nhà Phố Đông Anh",
         slug: null,
-        category: "xay-moi-tron-goi",
+        projectGroup: "thi-cong",
+        category: "thi-cong-tron-goi",
         location: "Đông Anh, Hà Nội",
         area: "280m²",
         completionYear: 2025,
@@ -83,8 +95,21 @@ const FALLBACK_PROJECTS = [
     },
     {
         _id: "f-6",
+        title: "Nội Thất Ngô Quyền",
+        slug: null,
+        projectGroup: "thiet-ke",
+        category: "thiet-ke-noi-that",
+        location: "Hải Phòng",
+        area: "180m²",
+        completionYear: 2023,
+        status: "completed",
+        description: "Thiết kế và thi công nội thất trọn gói căn hộ phong cách Scandinavian hiện đại.",
+    },
+    {
+        _id: "f-7",
         title: "Nội Thất Căn Hộ Vinhomes",
         slug: null,
+        projectGroup: "thiet-ke",
         category: "thiet-ke-noi-that",
         location: "Ocean Park, Hà Nội",
         area: "95m²",
@@ -93,21 +118,11 @@ const FALLBACK_PROJECTS = [
         description: "Nội thất căn hộ 3 phòng ngủ phong cách tối giản Nhật Bản, tận dụng tối đa diện tích.",
     },
     {
-        _id: "f-7",
-        title: "Showroom Hải Dương",
-        slug: null,
-        category: "thi-cong-thuong-mai",
-        location: "TP. Hải Dương",
-        area: "200m²",
-        completionYear: 2024,
-        status: "completed",
-        description: "Showroom trưng bày vật liệu xây dựng với hệ thống kệ công nghiệp và chiếu sáng đồng bộ.",
-    },
-    {
         _id: "f-8",
         title: "Cải Tạo Nhà Cũ Thanh Xuân",
         slug: null,
-        category: "cai-tao-sua-chua",
+        projectGroup: "thi-cong",
+        category: "thi-cong-cai-tao-sua-chua",
         location: "Thanh Xuân, Hà Nội",
         area: "120m²",
         completionYear: 2025,
@@ -125,6 +140,7 @@ const stats = [
 export default function PortfolioList() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [activeGroup, setActiveGroup] = useState(null);
     const [activeCategory, setActiveCategory] = useState(null);
 
     useEffect(() => {
@@ -138,11 +154,17 @@ export default function PortfolioList() {
     const usingSanity = !loading && projects.length > 0;
     const allItems = usingSanity ? projects : FALLBACK_PROJECTS;
 
-    const filteredProjects = activeCategory
-        ? allItems.filter((p) => p.category === activeCategory)
-        : allItems;
+    const filteredProjects = allItems.filter((p) => {
+        if (activeCategory) return p.category === activeCategory;
+        if (activeGroup) return p.projectGroup === activeGroup || CATEGORIES[p.category]?.group === activeGroup;
+        return true;
+    });
 
-    // Count projects per category
+    const groupCounts = PROJECT_GROUPS.reduce((acc, group) => {
+        acc[group.id] = allItems.filter(p => p.projectGroup === group.id || CATEGORIES[p.category]?.group === group.id).length;
+        return acc;
+    }, {});
+
     const categoryCounts = Object.keys(CATEGORIES).reduce((acc, key) => {
         acc[key] = allItems.filter(p => p.category === key).length;
         return acc;
@@ -195,34 +217,67 @@ export default function PortfolioList() {
 
             {/* Tab Filters with counts */}
             <section className="py-6 px-6 border-b border-bordercolor sticky top-0 bg-primary/95 backdrop-blur-md z-30">
-                <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center md:justify-start">
-                    <button
-                        onClick={() => setActiveCategory(null)}
-                        className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest border transition-all duration-300 flex items-center gap-2 ${!activeCategory
-                            ? 'bg-accent text-primary border-accent shadow-[0_0_15px_rgba(52,211,153,0.2)]'
-                            : 'border-bordercolor text-textmuted hover:border-textmain hover:text-textmain'
-                            }`}
-                    >
-                        Tất cả
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded-sm ${!activeCategory ? 'bg-primary/20' : 'bg-secondary'}`}>
-                            {allItems.length}
-                        </span>
-                    </button>
-                    {Object.entries(CATEGORIES).map(([value, label]) => (
+                <div className="max-w-7xl mx-auto flex flex-col gap-4">
+                    {/* Primary Groups */}
+                    <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                         <button
-                            key={value}
-                            onClick={() => setActiveCategory(value)}
-                            className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest border transition-all duration-300 flex items-center gap-2 ${activeCategory === value
+                            onClick={() => { setActiveGroup(null); setActiveCategory(null); }}
+                            className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest border transition-all duration-300 flex items-center gap-2 ${!activeGroup
                                 ? 'bg-accent text-primary border-accent shadow-[0_0_15px_rgba(52,211,153,0.2)]'
                                 : 'border-bordercolor text-textmuted hover:border-textmain hover:text-textmain'
                                 }`}
                         >
-                            {label}
-                            <span className={`text-[10px] px-1.5 py-0.5 rounded-sm ${activeCategory === value ? 'bg-primary/20' : 'bg-secondary'}`}>
-                                {categoryCounts[value] || 0}
+                            Tất cả
+                            <span className={`text-[10px] px-1.5 py-0.5 rounded-sm ${!activeGroup ? 'bg-primary/20' : 'bg-secondary'}`}>
+                                {allItems.length}
                             </span>
                         </button>
-                    ))}
+                        {PROJECT_GROUPS.map((group) => (
+                            <button
+                                key={group.id}
+                                onClick={() => { setActiveGroup(group.id); setActiveCategory(null); }}
+                                className={`px-5 py-2.5 text-xs font-bold uppercase tracking-widest border transition-all duration-300 flex items-center gap-2 ${activeGroup === group.id
+                                    ? 'bg-accent text-primary border-accent shadow-[0_0_15px_rgba(52,211,153,0.2)]'
+                                    : 'border-bordercolor text-textmuted hover:border-textmain hover:text-textmain'
+                                    }`}
+                            >
+                                {group.label}
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded-sm ${activeGroup === group.id ? 'bg-primary/20' : 'bg-secondary'}`}>
+                                    {groupCounts[group.id] || 0}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Secondary Categories (only show when a group is active) */}
+                    {activeGroup && (
+                        <div className="flex flex-wrap gap-2 justify-center md:justify-start pt-4 border-t border-bordercolor/50">
+                            <button
+                                onClick={() => setActiveCategory(null)}
+                                className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 rounded-full ${!activeCategory
+                                    ? 'bg-textmain text-primary'
+                                    : 'bg-secondary text-textmuted hover:text-textmain hover:bg-bordercolor'
+                                    }`}
+                            >
+                                Tất cả {PROJECT_GROUPS.find(g => g.id === activeGroup)?.label}
+                            </button>
+                            {Object.entries(CATEGORIES)
+                                .filter(([_, cat]) => cat.group === activeGroup)
+                                .map(([value, cat]) => (
+                                    <button
+                                        key={value}
+                                        onClick={() => setActiveCategory(value)}
+                                        className={`px-4 py-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 rounded-full ${activeCategory === value
+                                            ? 'bg-textmain text-primary'
+                                            : 'bg-secondary text-textmuted hover:text-textmain hover:bg-bordercolor'
+                                            }`}
+                                    >
+                                        {cat.label}
+                                        <span className={`text-[10px] opacity-70`}>({categoryCounts[value] || 0})</span>
+                                    </button>
+                                ))}
+                        </div>
+                    )}
                 </div>
             </section>
 
@@ -293,7 +348,7 @@ function ProjectCardLarge({ project, usingSanity }) {
     const isLink = usingSanity && project.slug?.current;
     const Wrapper = isLink ? Link : "div";
     const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
-    const catLabel = CATEGORIES[project.category] || project.category;
+    const catLabel = CATEGORIES[project.category]?.label || project.category;
     const isCompleted = project.status !== 'in-progress';
 
     return (
@@ -373,7 +428,7 @@ function ProjectCardSmall({ project, usingSanity }) {
     const isLink = usingSanity && project.slug?.current;
     const Wrapper = isLink ? Link : "div";
     const wrapperProps = isLink ? { to: `/portfolio/${project.slug.current}` } : {};
-    const catLabel = CATEGORIES[project.category] || project.category;
+    const catLabel = CATEGORIES[project.category]?.label || project.category;
     const isCompleted = project.status !== 'in-progress';
 
     return (

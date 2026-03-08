@@ -1,4 +1,5 @@
 import { Zap, Facebook, Youtube, Map } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -8,17 +9,17 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <img src="/logo_light.png" alt="Bách Ngân Construction" className="h-14 md:h-16 w-auto" />
-              <span className="font-heading font-black text-2xl md:text-3xl tracking-wide text-textmain">Cty Bách Ngân</span>
+              <span className="font-heading font-black text-2xl md:text-3xl tracking-wide text-textmain">Bách Ngân D&B</span>
             </div>
             <p className="text-textmuted text-sm font-light leading-relaxed mb-6">
               Công ty Cổ phần Giải pháp Cơ điện và Xây dựng Bách Ngân. <br />
               Kiến tạo không gian, dựng xây niềm tin bền vững.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-bordercolor flex items-center justify-center text-textmuted hover:text-accent hover:border-accent transition-colors">
                 <Youtube className="w-4 h-4" />
               </a>
             </div>
@@ -27,7 +28,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Liên kết nhanh</h4>
             <ul className="space-y-4">
-              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Trang chủ</a></li>
+              <li><Link to="/" className="text-textmuted text-sm hover:text-accent transition-colors">Trang chủ</Link></li>
               <li><a href="#services" className="text-textmuted text-sm hover:text-accent transition-colors">Dịch vụ</a></li>
               <li><a href="#portfolio" className="text-textmuted text-sm hover:text-accent transition-colors">Công trình</a></li>
               <li><a href="#knowledge" className="text-textmuted text-sm hover:text-accent transition-colors">Kiến thức</a></li>
@@ -38,10 +39,10 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-sm uppercase tracking-widest text-textmain mb-6">Dịch vụ</h4>
             <ul className="space-y-4">
-              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Xây nhà trọn gói</a></li>
-              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Thiết kế kiến trúc</a></li>
-              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Thi công nội thất</a></li>
-              <li><a href="#" className="text-textmuted text-sm hover:text-accent transition-colors">Thi công nhà xưởng</a></li>
+              <li><Link to="/thi-cong" className="text-textmuted text-sm hover:text-accent transition-colors">Xây nhà trọn gói</Link></li>
+              <li><Link to="/services" className="text-textmuted text-sm hover:text-accent transition-colors">Thiết kế kiến trúc</Link></li>
+              <li><Link to="/noi-that" className="text-textmuted text-sm hover:text-accent transition-colors">Thi công nội thất</Link></li>
+              <li><Link to="/thi-cong" className="text-textmuted text-sm hover:text-accent transition-colors">Thi công nhà xưởng</Link></li>
             </ul>
           </div>
 
@@ -65,8 +66,8 @@ export default function Footer() {
         <div className="pt-8 border-t border-bordercolor flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-textmuted font-bold tracking-widest uppercase">
           <p>&copy; 2026 Bách Ngân Construction. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-textmain transition-colors duration-300">Privacy</a>
-            <a href="#" className="hover:text-textmain transition-colors duration-300">Terms</a>
+            <Link to="/" className="hover:text-textmain transition-colors duration-300">Privacy</Link>
+            <Link to="/" className="hover:text-textmain transition-colors duration-300">Terms</Link>
           </div>
         </div>
       </div>
